@@ -1,0 +1,1187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ReadyEnough</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Public+Sans:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: calm household manual. Hero with two entrances, a laminated big-print card, "help now" action cards, then one reading column where every topic uses the same five-part format. */
+:root{
+  --bg:#f2f4f4;
+  --surface:#ffffff;
+  --ink:#16222b;
+  --muted:#4f5e68;
+  --line:#d2d9dc;
+  --accent:#1d5c57;      /* calm deep teal */
+  --accent-soft:#e1eeec;
+  --warn:#8a5a10;
+  --warn-soft:#fbf0d9;
+  --ok:#2c6a3c;
+  --font-display:"Archivo","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Public Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1519;--surface:#172128;--ink:#e9eef0;--muted:#a5b3bb;--line:#2c3a42;
+  --accent:#78c4bb;--accent-soft:#16302e;--warn:#e9b65c;--warn-soft:#2d2414;--ok:#7fc890;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1519;--surface:#172128;--ink:#e9eef0;--muted:#a5b3bb;--line:#2c3a42;
+  --accent:#78c4bb;--accent-soft:#16302e;--warn:#e9b65c;--warn-soft:#2d2414;--ok:#7fc890;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.08;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--accent);text-underline-offset:2px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--font-display);font-weight:700;font-size:14px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+
+/* Masthead */
+.mast{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 24px;padding-block:22px 16px;border-bottom:2px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.mark{width:38px;height:38px;flex:none;border:3px solid var(--ink);display:grid;place-items:center;background:var(--accent-soft)}
+.mark i{width:12px;height:12px;background:var(--accent);transform:rotate(45deg)}
+.brand b{font-family:var(--font-display);font-size:30px;font-weight:900;font-stretch:112%;letter-spacing:-.01em}
+.brand small{font-weight:600;color:var(--muted);font-size:15px}
+.mast p{font-family:var(--font-display);font-weight:700;font-stretch:90%;font-size:17px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* Hero */
+.hero{padding-block:40px 28px;display:grid;gap:22px}
+.hero h1{font-size:clamp(36px,6.4vw,64px);font-weight:900;font-stretch:104%;letter-spacing:-.015em;max-width:16ch}
+.hero .sub{font-size:clamp(19px,2.4vw,23px);max-width:58ch;color:var(--muted)}
+.promise{font-size:16px;color:var(--muted);max-width:62ch}
+.promise strong{color:var(--ink)}
+.doors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:6px}
+.door{display:grid;gap:4px;text-decoration:none;color:var(--ink);background:var(--surface);border:2px solid var(--ink);padding:20px 22px;min-height:120px;align-content:center}
+.door span{font-family:var(--font-display);font-weight:900;font-size:clamp(24px,3.4vw,32px);font-stretch:105%}
+.door small{font-size:16px;color:var(--muted)}
+.door.now{background:var(--ink);color:var(--bg)}
+.door.now small{color:var(--bg);opacity:.8}
+.door:hover{outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:620px){.doors{grid-template-columns:1fr}}
+
+/* Print panel */
+.printbox{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;border:2px dashed var(--line);padding:14px 18px;font-size:16px}
+.printbox h2{font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:.04em}
+.printbox fieldset{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px 18px}
+.printbox label{display:flex;gap:8px;align-items:center;cursor:pointer}
+.printbox input{width:18px;height:18px;accent-color:var(--accent)}
+.printbox p{color:var(--muted);flex-basis:100%}
+
+/* Big print card */
+.bigprint{background:var(--surface);border:4px solid var(--ink);margin-block:10px 40px}
+.bp-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 16px;padding:14px 22px;border-bottom:4px solid var(--ink);background:var(--accent-soft)}
+.bp-head h2{font-size:clamp(26px,4.2vw,40px);font-weight:900;font-stretch:110%;text-transform:uppercase}
+.bp-head p{font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.06em}
+.bp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.bp{padding:18px 20px;border-bottom:3px solid var(--ink);border-right:3px solid var(--ink);min-width:0}
+.bp:nth-child(3n){border-right:0}
+.bp h3{font-size:clamp(22px,2.7vw,28px);font-weight:900;text-transform:uppercase;margin-bottom:8px}
+.bp ul{margin:0;padding-left:1.05em;font-size:clamp(18px,2vw,21px);font-weight:800;line-height:1.32}
+.bp li+li{margin-top:5px}
+.bp .big{font-family:var(--font-display);font-weight:900;font-size:clamp(24px,3vw,32px);line-height:1.1;display:block;margin-bottom:6px}
+.bp-foot{padding:14px 22px;font-size:clamp(18px,2.2vw,22px);font-weight:900;display:flex;flex-wrap:wrap;gap:6px 30px}
+.bp-foot span{white-space:nowrap}
+.bp-note{padding:0 22px 14px;font-size:14px;color:var(--muted);font-weight:600}
+@media (max-width:900px){.bp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.bp:nth-child(3n){border-right:3px solid var(--ink)}.bp:nth-child(2n){border-right:0}}
+@media (max-width:600px){.bp-grid{grid-template-columns:1fr}.bp,.bp:nth-child(3n){border-right:0}}
+
+/* Band headings */
+.band{padding-block:34px 12px;border-top:2px solid var(--ink);display:grid;gap:8px}
+.band h2{font-size:clamp(32px,4.6vw,48px);font-weight:900;font-stretch:106%}
+.band p{max-width:62ch;color:var(--muted)}
+
+/* Help now cards */
+.now-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding-block:14px 40px}
+.now-card{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--ink);padding:18px 20px;display:grid;gap:8px;align-content:start;min-width:0}
+.now-card h3{font-size:24px;font-weight:850}
+.now-card ol{margin:0;padding-left:1.3em;font-size:17px}
+.now-card ol li+li{margin-top:4px}
+.now-card ol strong{font-weight:800}
+.now-card .more{font-size:15px;font-weight:600}
+@media (max-width:700px){.now-grid{grid-template-columns:1fr}}
+
+/* Stages */
+.stages{overflow-x:auto;margin-block:10px 8px}
+.stages table{min-width:560px}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--font-display);font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid var(--ink)}
+td.mono,td .mono{white-space:nowrap}
+.tbl{overflow-x:auto;margin-block:6px 4px}
+
+/* Start-here list */
+.free{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;padding:0;list-style:none;margin:8px 0 0}
+.free li{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line)}
+.free li b{font-family:var(--font-mono);font-size:13px;color:var(--accent);flex:none;padding:1px 6px;border:1px solid var(--accent)}
+@media (max-width:640px){.free{grid-template-columns:1fr}}
+
+/* Index of topics */
+.index{display:flex;flex-wrap:wrap;gap:8px;padding-block:6px 30px;list-style:none;margin:0;padding-left:0}
+.index a{display:block;padding:6px 12px;border:2px solid var(--line);text-decoration:none;color:var(--ink);font-weight:600;font-size:16px;background:var(--surface)}
+.index a:hover{border-color:var(--accent)}
+
+/* Topic format */
+.topic{padding-block:34px;border-top:1px solid var(--line);scroll-margin-top:12px;display:grid;gap:16px}
+.topic > header{display:grid;gap:6px}
+.topic h2{font-size:clamp(30px,4vw,40px);font-weight:900;font-stretch:104%}
+.first{background:var(--accent-soft);border-left:6px solid var(--accent);padding:12px 16px;font-size:19px;font-weight:600;max-width:66ch}
+.first b{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.05em;font-size:15px;color:var(--accent);margin-right:6px}
+.fmt{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 34px}
+.fmt > div{min-width:0}
+.fmt h3{font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+.fmt ul,.fmt ol{margin:0;padding-left:1.15em;font-size:17px}
+.fmt li+li{margin-top:5px}
+.fmt p{font-size:17px;margin-bottom:6px}
+.fmt .wide{grid-column:1/-1}
+.watch{background:var(--warn-soft);border:1px solid var(--warn);padding:12px 16px}
+.watch h3{color:var(--warn);border-bottom-color:var(--warn)}
+@media (max-width:720px){.fmt{grid-template-columns:1fr}}
+.have{font-size:17px;max-width:70ch}
+.have b{font-weight:800}
+.check{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:5px 6px;cursor:pointer;font-size:17px}
+.check label:hover{background:var(--surface)}
+.check input{width:20px;height:20px;margin-top:3px;flex:none;accent-color:var(--ok)}
+.check input:checked + span{color:var(--muted);text-decoration:line-through}
+@media (max-width:640px){.check{grid-template-columns:1fr}}
+.chk-title{font-family:var(--font-display);font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.src{font-size:14px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px}
+.src a{word-break:break-word}
+
+/* Radiation trio */
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:2px solid var(--ink);background:var(--surface)}
+.trio div{padding:14px 16px;border-right:2px solid var(--ink)}
+.trio div:last-child{border-right:0}
+.trio b{display:block;font-family:var(--font-display);font-size:clamp(22px,3vw,30px);font-weight:900;text-transform:uppercase}
+.trio span{font-size:16px;color:var(--muted)}
+@media (max-width:640px){.trio{grid-template-columns:1fr}.trio div{border-right:0;border-bottom:2px solid var(--ink)}.trio div:last-child{border-bottom:0}}
+
+/* Contacts sheet */
+.sheet{background:var(--surface);border:2px solid var(--ink);padding:18px 20px;display:grid;gap:14px}
+.sheet-top{display:flex;flex-wrap:wrap;gap:12px 20px}
+.field{display:grid;gap:4px;font-weight:600;font-size:14px;min-width:0}
+.field input,.field textarea{font:500 17px var(--font-body);padding:9px 10px;border:2px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.field textarea{min-height:76px;resize:vertical}
+.field input:focus,.field textarea:focus{border-color:var(--accent);outline:none}
+.sheet-top .field{flex:1 1 180px}
+.sheet-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 20px}
+.sheet-grid .wide{grid-column:1/-1}
+@media (max-width:600px){.sheet-grid{grid-template-columns:1fr}}
+.privacy{font-size:14px;color:var(--muted)}
+.national td:last-child{font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+.findlinks{columns:2;column-gap:28px;padding-left:1.1em;font-size:17px;margin:0}
+.findlinks li{break-inside:avoid;margin-bottom:6px}
+@media (max-width:640px){.findlinks{columns:1}}
+
+/* Why now */
+.context{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;background:var(--surface);border:1px solid var(--line);padding:20px;max-width:820px}
+.context .ninety{font-family:var(--font-display);font-weight:900;font-stretch:125%;font-size:68px;line-height:.9;color:var(--accent)}
+.context .ninety small{display:block;font-size:13px;font-stretch:100%;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.context p+p{margin-top:10px}
+@media (max-width:520px){.context{grid-template-columns:1fr}}
+
+/* Sources */
+.sources{columns:2;column-gap:32px;font-size:15px;padding-left:1.1em;margin:0}
+.sources li{break-inside:avoid;margin-bottom:6px}
+@media (max-width:700px){.sources{columns:1}}
+
+/* Signup */
+.signup{background:var(--surface);border:1px solid var(--line);padding:22px 24px;margin-block:30px;display:grid;gap:10px}
+.signup h2{font-size:24px;font-weight:850}
+.signup p{color:var(--muted);max-width:64ch;font-size:16px}
+.signup form{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.signup input[type=email]{flex:1 1 240px;min-width:0;font:500 17px var(--font-body);padding:11px 12px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}
+.signup .opt{display:flex;gap:8px;align-items:flex-start;font-size:15px;color:var(--muted);flex-basis:100%}
+.signup .opt input{width:18px;height:18px;margin-top:3px;accent-color:var(--accent)}
+.signup button{font:800 16px var(--font-display);text-transform:uppercase;letter-spacing:.06em;background:var(--ink);color:var(--bg);border:0;padding:12px 22px;cursor:pointer}
+.signup .msg{font-weight:600;color:var(--accent)}
+
+footer{border-top:2px solid var(--ink);padding-block:22px 44px;font-size:15px;color:var(--muted);display:grid;gap:10px}
+footer p{max-width:80ch}
+footer strong{color:var(--ink)}
+.top{font-size:15px;font-weight:600}
+
+/* Print */
+@media print{
+  :root{--bg:#fff;--surface:#fff;--ink:#000;--muted:#222;--line:#999;--accent:#000;--accent-soft:#fff;--warn:#000;--warn-soft:#fff}
+  body{font-size:12pt;padding:0}
+  .printbox,.signup,.doors,.index,.top,.mast p,.hero .sub,.promise{display:none!important}
+  .hero{padding:0 0 8pt}
+  .bigprint{break-after:page;border-width:3pt}
+  .topic,.now-card,.sheet,.fmt > div{break-inside:avoid-page}
+  a{color:#000;text-decoration:none}
+  .field input,.field textarea{border:0;border-bottom:1pt solid #000;background:#fff}
+  .check input{accent-color:#000}
+  /* Essentials only: big print card + help now + contact sheet */
+  body:has(#pr-ess:checked) .guide-only{display:none!important}
+}
+</style>
+</head>
+<body>
+
+
+<div class="wrap" id="top">
+  <header class="mast">
+    <a class="brand" href="#top" aria-label="ReadyEnough home">
+      <span class="mark" aria-hidden="true"><i></i></span>
+      <b>ReadyEnough<small>.org</small></b>
+    </a>
+    <p>No panic. Just in case.</p>
+  </header>
+
+  <div class="hero">
+    <h1>Start where you are. Use what you have.</h1>
+    <p class="sub">A practical household guide for people who have never prepared for anything. Take one step at a time. You don't need everything today.</p>
+    <p class="promise"><strong>Our promise:</strong> we don't predict disasters, sell gear, or try to scare you. Every fact on this page links to the official source it came from.</p>
+
+    <nav class="doors" aria-label="Choose where to start">
+      <a class="door" href="#prepare"><span>I'm preparing ahead</span><small>Build up at your own pace: 3 days, 1 week, 2 weeks.</small></a>
+      <a class="door now" href="#now"><span>I need help now</span><small>Power out, unsafe water, evacuation, radiation, heat or cold.</small></a>
+    </nav>
+
+    <div class="printbox">
+      <h2>Print first</h2>
+      <fieldset>
+        <legend class="eyebrow" style="padding:0;margin-bottom:4px;flex-basis:100%">What to print</legend>
+        <label><input type="radio" name="pr" id="pr-ess" checked> Essentials (card, what-to-do, contacts)</label>
+        <label><input type="radio" name="pr" id="pr-all"> Complete guide</label>
+      </fieldset>
+      <p>Choose, then use your browser's Print command (Ctrl+P, or ⌘P on a Mac). Fill in your local contacts below first so they print too. Keep the copy where everyone in the house can find it.</p>
+    </div>
+  </div>
+
+  <!-- BIG PRINT CARD -->
+  <article class="bigprint" aria-labelledby="bp-title">
+    <div class="bp-head">
+      <h2 id="bp-title">Keep This Handy</h2>
+      <p>ReadyEnough · Big print card</p>
+    </div>
+    <div class="bp-grid">
+      <div class="bp">
+        <h3>Water</h3>
+        <span class="big">1 gallon / person / day</span>
+        <ul>
+          <li>Boil 1 minute.</li>
+          <li>Or 8 drops plain bleach per gallon. Wait 30 min.</li>
+          <li>Chemicals or fuel smell? Don't drink.</li>
+        </ul>
+      </div>
+      <div class="bp">
+        <h3>Food</h3>
+        <ul>
+          <li>Fridge closed: cold ~4 hours.</li>
+          <li>Full freezer: ~48 hours.</li>
+          <li>Eat fridge, then freezer, then pantry.</li>
+          <li>Never taste to test.</li>
+        </ul>
+      </div>
+      <div class="bp">
+        <h3>Power</h3>
+        <ul>
+          <li>Generator OUTSIDE, 20+ ft from doors and windows.</li>
+          <li>No grill or camp stove indoors.</li>
+          <li>Flashlights, not candles.</li>
+        </ul>
+      </div>
+      <div class="bp">
+        <h3>Radiation</h3>
+        <span class="big">Get inside. Stay inside. Stay tuned.</span>
+        <ul>
+          <li>Middle of building or basement.</li>
+          <li>Take off outer clothes. Wash.</li>
+        </ul>
+      </div>
+      <div class="bp">
+        <h3>Heat &amp; Cold</h3>
+        <ul>
+          <li>Hot, dry skin + confusion = call 911.</li>
+          <li>Shivering, slurred speech, confusion = get warm, get help.</li>
+          <li>Check on neighbors.</li>
+        </ul>
+      </div>
+      <div class="bp">
+        <h3>Talk</h3>
+        <ul>
+          <li>Text, don't call.</li>
+          <li>Battery or crank radio.</li>
+          <li>One out-of-state contact for everyone.</li>
+          <li>Follow local officials.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bp-foot">
+      <span>EMERGENCY 911</span>
+      <span>LOCAL HELP 211</span>
+      <span>POISON 1-800-222-1222</span>
+    </div>
+    <p class="bp-note">Bleach = plain unscented household bleach, 6%. If the label says 8.25%, use 6 drops. Double for cloudy or very cold water.</p>
+  </article>
+
+  <!-- HELP NOW -->
+  <div class="band" id="now">
+    <p class="eyebrow">I need help now</p>
+    <h2>Something happened. What now?</h2>
+    <p>Do the first step. Then the next. If anyone is in danger, call 911. Local officials' instructions always come first.</p>
+  </div>
+  <div class="now-grid">
+    <div class="now-card">
+      <h3>The power is out</h3>
+      <ol>
+        <li><strong>Flashlights, not candles.</strong></li>
+        <li>Keep the fridge and freezer <strong>closed</strong>.</li>
+        <li>Unplug electronics so a surge can't damage them.</li>
+        <li>Generator or grill? <strong>Outside only</strong>, 20+ feet from doors, windows, vents.</li>
+        <li>Save phone battery. Text instead of calling.</li>
+      </ol>
+      <a class="more" href="#power">Power &amp; light →</a>
+    </div>
+    <div class="now-card">
+      <h3>The water isn't safe</h3>
+      <ol>
+        <li>Use stored or bottled water first.</li>
+        <li>Follow your water utility's notice exactly.</li>
+        <li><strong>Boil</strong> at a rolling boil for 1 minute, or add plain bleach: <strong>8 drops per gallon</strong>, wait 30 minutes.</li>
+        <li>If it may have <strong>fuel or chemicals</strong> in it, boiling and bleach won't help. Don't drink it.</li>
+      </ol>
+      <a class="more" href="#water">Water →</a>
+    </div>
+    <div class="now-card">
+      <h3>We've been told to leave</h3>
+      <ol>
+        <li><strong>Go.</strong> Use the routes officials name, not shortcuts.</li>
+        <li>Grab: meds, IDs and documents, phone and charger, water, pets.</li>
+        <li>Tell your out-of-state contact where you're going.</li>
+        <li>Don't return until officials say it's safe.</li>
+      </ol>
+      <a class="more" href="#leave">Leaving home →</a>
+    </div>
+    <div class="now-card">
+      <h3>Radiation emergency</h3>
+      <ol>
+        <li><strong>Get inside</strong> the nearest sturdy building. Go to the basement or the middle, away from windows.</li>
+        <li><strong>Stay inside.</strong> Close windows and doors. Turn off fans and A/C that pull in outside air.</li>
+        <li><strong>Stay tuned</strong> to radio, TV, phone alerts.</li>
+        <li>Were you outside? Take off outer clothes, bag them, wash with soap and water.</li>
+      </ol>
+      <a class="more" href="#radiation">Radiation →</a>
+    </div>
+    <div class="now-card">
+      <h3>Too hot</h3>
+      <ol>
+        <li><strong>Hot, red, dry skin, confusion, or passing out:</strong> heat stroke. Call 911.</li>
+        <li>Meanwhile, move them to shade, cool with wet cloths or ice on neck, armpits, groin.</li>
+        <li>Heavy sweating, cramps, dizziness: move somewhere cooler, sip water.</li>
+        <li>No A/C? Find a cooling center (call 211).</li>
+      </ol>
+      <a class="more" href="#shelter">Heat, cold &amp; shelter →</a>
+    </div>
+    <div class="now-card">
+      <h3>Too cold</h3>
+      <ol>
+        <li>Gather everyone in one room. Close off the rest.</li>
+        <li>Layers, hats, blankets. Take off anything damp.</li>
+        <li><strong>Never</strong> heat with a stove, oven, grill or generator.</li>
+        <li>Shivering, confusion, slurred speech, very sleepy: warm them and get medical help.</li>
+      </ol>
+      <a class="more" href="#shelter">Heat, cold &amp; shelter →</a>
+    </div>
+    <div class="now-card">
+      <h3>Headache, dizzy, sick, and a fuel-burning device is running</h3>
+      <ol>
+        <li>Could be <strong>carbon monoxide</strong>. Get everyone outside to fresh air now.</li>
+        <li>Call 911 from outside.</li>
+        <li>Don't go back in until responders say it's safe.</li>
+      </ol>
+      <a class="more" href="#power">Carbon monoxide →</a>
+    </div>
+    <div class="now-card">
+      <h3>Someone is hurt</h3>
+      <ol>
+        <li>Call 911.</li>
+        <li><strong>Bleeding:</strong> press hard on the wound with a clean cloth. Keep pressing.</li>
+        <li>Possible poisoning: call 1-800-222-1222.</li>
+        <li>Stay with them until help arrives.</li>
+      </ol>
+      <a class="more" href="#health">First aid &amp; health →</a>
+    </div>
+  </div>
+
+  <!-- PREPARE -->
+  <div class="guide-only">
+  <div class="band" id="prepare">
+    <p class="eyebrow">I'm preparing ahead</p>
+    <h2>Start here</h2>
+    <p>Preparing starts with checking the cupboard, not opening a shopping cart. These cost nothing and can be done today.</p>
+  </div>
+  <ul class="free">
+    <li><b>FREE</b><span>Write important phone numbers on paper. Use the <a href="#contacts">contact sheet</a>.</span></li>
+    <li><b>FREE</b><span>Fill clean, food-grade bottles or jugs with tap water. Date them.</span></li>
+    <li><b>FREE</b><span>Find your water shut-off, electrical panel, and gas meter.</span></li>
+    <li><b>FREE</b><span>Turn on emergency alerts on your phone and sign up for your county's alerts.</span></li>
+    <li><b>FREE</b><span>Pick an out-of-state contact and two meeting spots. Tell everyone.</span></li>
+    <li><b>FREE</b><span>Gather flashlights, batteries, and a first aid kit into one bin.</span></li>
+    <li><b>FREE</b><span>Charge your power banks. Put a phone charger in the car.</span></li>
+    <li><b>FREE</b><span>Ask your pharmacist about keeping a few extra days of prescriptions.</span></li>
+  </ul>
+
+  <h3 class="eyebrow" style="margin-top:34px">Build in stages, at your own pace</h3>
+  <div class="stages">
+    <table>
+      <thead><tr><th>Stage</th><th>Water per person</th><th>Food</th><th>Add this</th></tr></thead>
+      <tbody>
+        <tr><td><strong>72 hours</strong></td><td class="mono">3 gallons</td><td>3 days of no-cook food</td><td>Flashlights, radio, first aid kit, meds, cash, paper contacts</td></tr>
+        <tr><td><strong>1 week</strong></td><td class="mono">7 gallons</td><td>7 days, some that need only hot water</td><td>Power bank or battery station, emergency toilet supplies, a way to treat water</td></tr>
+        <tr><td><strong>2 weeks</strong></td><td class="mono">14 gallons</td><td>14 days, rotated into normal meals</td><td>Warm bedding, backup heat or cooling plan, document copies, extra prescriptions</td></tr>
+        <tr><td><strong>Longer</strong></td><td>A way to collect and treat water</td><td>Pantry staples you already cook with</td><td>Neighbors who know each other, basic skills: first aid, CPR</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src" style="border:0;padding-top:4px">One gallon per person per day is Ready.gov's guidance. The stages are our way of breaking it into manageable steps.</p>
+
+  <ul class="index" aria-label="Topics">
+    <li><a href="#water">Water</a></li>
+    <li><a href="#food">Food</a></li>
+    <li><a href="#health">First aid &amp; health</a></li>
+    <li><a href="#comms">Communication</a></li>
+    <li><a href="#power">Power &amp; light</a></li>
+    <li><a href="#kit">Kit &amp; tools</a></li>
+    <li><a href="#shelter">Heat, cold &amp; shelter</a></li>
+    <li><a href="#sanitation">Sanitation</a></li>
+    <li><a href="#docs">Documents &amp; money</a></li>
+    <li><a href="#leave">Leaving home</a></li>
+    <li><a href="#radiation">Radiation</a></li>
+    <li><a href="#contacts">Local contacts</a></li>
+  </ul>
+
+  <!-- WATER -->
+  <section class="topic" id="water">
+    <header><p class="eyebrow">Water</p><h2>Water</h2></header>
+    <p class="first"><b>Do this first</b>Fill a few clean jugs with tap water today and write the date on them.</p>
+    <div class="fmt">
+      <div>
+        <h3>What you need</h3>
+        <ul>
+          <li>Stored drinking water</li>
+          <li>A pot and a way to heat it, or plain unscented bleach (6% or 8.25%) and a dropper</li>
+          <li>Clean cloth or coffee filters for cloudy water</li>
+        </ul>
+      </div>
+      <div>
+        <h3>How much</h3>
+        <p><strong>1 gallon per person per day</strong>, for drinking and basic hygiene. Children, nursing mothers, sick people, and hot weather need more. Pets need water too.</p>
+        <p>Replace water you bottled yourself every 6 months. Keep store-bought water sealed until its date.</p>
+      </div>
+      <div class="wide">
+        <h3>How to use it</h3>
+        <ol>
+          <li><strong>Cloudy?</strong> Let it settle, then pour it through a clean cloth, paper towel, or coffee filter.</li>
+          <li><strong>Boil</strong> at a rolling boil for 1 minute (3 minutes above 5,000 feet). Let it cool. This is the most reliable method.</li>
+          <li><strong>Or use bleach.</strong> Stir in the amount below. Wait 30 minutes. It should smell slightly of chlorine. If not, add the same amount again and wait 15 more minutes.</li>
+        </ol>
+        <div class="tbl" style="max-width:520px"><table>
+          <thead><tr><th>Bleach on label</th><th>Per gallon</th><th>Cloudy or very cold</th></tr></thead>
+          <tbody>
+            <tr><td>6%</td><td class="mono">8 drops</td><td class="mono">16 drops</td></tr>
+            <tr><td>8.25%</td><td class="mono">6 drops</td><td class="mono">12 drops</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="wide watch">
+        <h3>What can go wrong</h3>
+        <ul>
+          <li><strong>Germs vs. chemicals.</strong> Boiling and bleach kill germs. They do <em>not</em> remove fuel, heavy metals, salts, or most chemicals. Water that smells of fuel or chemicals, is dark, or has things floating in it: don't drink it.</li>
+          <li>Never use scented, "splash-less," or color-safe bleach.</li>
+          <li>When your utility issues a boil or "do not drink" notice, follow it exactly. They know what's in the water; this page doesn't.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="have"><b>Already have this? Use it.</b> Clean soda bottles and juice jugs work for storage (not milk jugs, which break down). Your water heater tank holds clean water: turn off its power or gas first, then drain from the bottom valve. The back tank of a toilet works for washing if you don't use cleaning tablets.</p>
+    <p class="chk-title">Checklist</p>
+    <ul class="check">
+      <li><label><input type="checkbox" id="w1"><span>3 days of water per person stored</span></label></li>
+      <li><label><input type="checkbox" id="w2"><span>Containers dated</span></label></li>
+      <li><label><input type="checkbox" id="w3"><span>Plain unscented bleach + dropper</span></label></li>
+      <li><label><input type="checkbox" id="w4"><span>Coffee filters or clean cloth</span></label></li>
+      <li><label><input type="checkbox" id="w5"><span>Know where the water shut-off is</span></label></li>
+      <li><label><input type="checkbox" id="w6"><span>Water for pets</span></label></li>
+    </ul>
+    <p class="src">Reviewed October 2026 · Sources: <a href="https://www.ready.gov/water" target="_blank" rel="noopener">Ready.gov: Water</a> · <a href="https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water" target="_blank" rel="noopener">EPA: Emergency Disinfection of Drinking Water</a></p>
+  </section>
+
+  <!-- FOOD -->
+  <section class="topic" id="food">
+    <header><p class="eyebrow">Food</p><h2>Food</h2></header>
+    <p class="first"><b>Do this first</b>Look in your pantry. Count how many days of meals you could make without a fridge or stove.</p>
+    <div class="fmt">
+      <div>
+        <h3>What you need</h3>
+        <ul>
+          <li>Food your household already eats that needs no fridge and little or no cooking</li>
+          <li>Manual can opener</li>
+          <li>Paper plates, cups, utensils</li>
+          <li>An appliance thermometer for fridge and freezer</li>
+        </ul>
+      </div>
+      <div>
+        <h3>How much</h3>
+        <p>Start with <strong>3 days</strong> per person. Build toward 2 weeks over time. Include baby food, special diets, and pet food.</p>
+        <p>Good choices: canned meat, fish, beans, soup, fruit, vegetables; peanut butter; nuts; crackers; cereal; granola bars; shelf-stable milk; comfort food.</p>
+      </div>
+      <div>
+        <h3>How to use it</h3>
+        <ol>
+          <li>When the power goes out, keep fridge and freezer doors closed.</li>
+          <li>Eat from the fridge first, then the freezer, then the pantry.</li>
+          <li>Put new groceries behind old ones, and use the oldest first.</li>
+        </ol>
+        <div class="tbl"><table>
+          <thead><tr><th>Doors closed</th><th>Stays cold</th></tr></thead>
+          <tbody>
+            <tr><td>Refrigerator</td><td class="mono">about 4 hours</td></tr>
+            <tr><td>Full freezer</td><td class="mono">about 48 hours</td></tr>
+            <tr><td>Half-full freezer</td><td class="mono">about 24 hours</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="watch">
+        <h3>What can go wrong</h3>
+        <ul>
+          <li>Power out more than 4 hours: throw out fridge meat, poultry, fish, eggs, and milk.</li>
+          <li>Frozen food can be refrozen if it still has ice crystals or is 40°F or below.</li>
+          <li>Throw out anything that smells, looks, or feels off, or feels warm. <strong>Never taste food to test it.</strong></li>
+          <li>Never cook on a grill or camp stove indoors.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="have"><b>Already have this? Use it.</b> Most kitchens hold several days of food. Rice, pasta, and oats keep for a long time if you can boil water. A cooler with ice buys the fridge extra hours.</p>
+    <p class="chk-title">Checklist</p>
+    <ul class="check">
+      <li><label><input type="checkbox" id="f1"><span>3 days of no-cook food per person</span></label></li>
+      <li><label><input type="checkbox" id="f2"><span>Manual can opener</span></label></li>
+      <li><label><input type="checkbox" id="f3"><span>Fridge/freezer thermometer</span></label></li>
+      <li><label><input type="checkbox" id="f4"><span>Baby food, special diet, pet food</span></label></li>
+      <li><label><input type="checkbox" id="f5"><span>Cooler and ice packs</span></label></li>
+      <li><label><input type="checkbox" id="f6"><span>Paper plates and utensils</span></label></li>
+    </ul>
+    <p class="src">Reviewed October 2026 · Sources: <a href="https://www.foodsafety.gov/blog/three-ways-keep-food-safe-when-you-lose-power" target="_blank" rel="noopener">FoodSafety.gov: Keep Food Safe When You Lose Power</a> · <a href="https://www.ready.gov/kit" target="_blank" rel="noopener">Ready.gov: Build a Kit</a></p>
+  </section>
+
+  <!-- HEALTH -->
+  <section class="topic" id="health">
+    <header><p class="eyebrow">First aid, medicines &amp; access needs</p><h2>First aid &amp; health</h2></header>
+    <p class="first"><b>Do this first</b>Write down every household member's medicines, doses, allergies, and doctors. Put the list in your kit.</p>
+    <div class="fmt">
+      <div>
+        <h3>What you need</h3>
+        <ul>
+          <li>First aid kit</li>
+          <li>Prescription and everyday medicines (pain, allergy, stomach)</li>
+          <li>Glasses, contact solution, hearing aid batteries</li>
+          <li>Backup for powered medical equipment</li>
+          <li>Cooler and ice packs for refrigerated medicine</li>
+        </ul>
+      </div>
+      <div>
+        <h3>How much</h3>
+        <p>Enough medicine to last through your largest stage. Ask your doctor or pharmacist whether you can keep a small extra supply.</p>
+        <p>For powered equipment (oxygen, CPAP, a power wheelchair), know how many hours your backup battery lasts.</p>
+      </div>
+      <div class="wide">
+        <h3>How to use it</h3>
+        <ul>
+          <li><strong>Bleeding:</strong> press hard with a clean cloth and keep pressing. Call 911.</li>
+          <li><strong>Learn the basics once:</strong> a Red Cross first aid and CPR class or a Stop the Bleed course takes a few hours.</li>
+          <li><strong>Plan around people:</strong> infants, older relatives, and anyone with a disability or mobility needs. Who checks on them? How would they leave?</li>
+          <li>If someone relies on powered medical equipment, tell your electric company. Many keep a list.</li>
+        </ul>
+      </div>
+      <div class="wide watch">
+        <h3>What can go wrong</h3>
+        <ul>
+          <li>Medicine that touched flood water should be thrown out, even in a closed bottle. Exception: a lifesaving medicine with no replacement, if it looks unchanged, until you can replace it.</li>
+          <li>Insulin or other refrigerated medicine got warm: check the label or call a pharmacist. If it is life-sustaining and you have no replacement, the FDA says you may keep using it until you get more.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="have"><b>Already have this? Use it.</b> A clean T-shirt makes a pressure bandage. A cooler from the garage keeps insulin cool. Your phone can store photos of prescription labels.</p>
+    <p class="chk-title">Checklist</p>
+    <ul class="check">
+      <li><label><input type="checkbox" id="h1"><span>First aid kit</span></label></li>
+      <li><label><input type="checkbox" id="h2"><span>Written medicine and allergy list</span></label></li>
+      <li><label><input type="checkbox" id="h3"><span>Extra prescription supply</span></label></li>
+      <li><label><input type="checkbox" id="h4"><span>Glasses, hearing aid batteries</span></label></li>
+      <li><label><input type="checkbox" id="h5"><span>Backup power for medical devices</span></label></li>
+      <li><label><input type="checkbox" id="h6"><span>Someone took a first aid/CPR class</span></label></li>
+    </ul>
+    <p class="src">Reviewed October 2026 · Sources: <a href="https://www.fda.gov/drugs/emergency-preparedness-drugs/safe-drug-use-after-natural-disaster" target="_blank" rel="noopener">FDA: Safe Drug Use After a Natural Disaster</a> · <a href="https://www.redcross.org/take-a-class" target="_blank" rel="noopener">American Red Cross: Take a Class</a> · <a href="https://www.stopthebleed.org/" target="_blank" rel="noopener">Stop the Bleed</a> · <a href="https://www.ready.gov/disability" target="_blank" rel="noopener">Ready.gov: People with Disabilities</a> · <a href="https://www.ready.gov/sites/default/files/2023-09/ready-gov_disaster-preparedness-guide-for-older-adults.pdf" target="_blank" rel="noopener">Ready.gov: Guide for Older Adults (PDF)</a> · <a href="https://acl.gov/emergencypreparedness" target="_blank" rel="noopener">ACL: Emergency Preparedness</a></p>
+  </section>
+
+  <!-- COMMS -->
+  <section class="topic" id="comms">
+    <header><p class="eyebrow">Communication</p><h2>Communication</h2></header>
+    <p class="first"><b>Do this first</b>Agree on one out-of-state person everyone in the household will check in with.</p>
+    <div class="fmt">
+      <div>
+        <h3>What you need</h3>
+        <ul>
+          <li>Battery-powered or hand-crank radio, ideally a NOAA Weather Radio with tone alert</li>
+          <li>Phone, charger, charged power bank</li>
+          <li>Printed contact sheet</li>
+          <li>Whistle to signal for help</li>
+        </ul>
+      </div>
+      <div>
+        <h3>How much</h3>
+        <p>One radio per household. One power bank per phone, kept charged. Two meeting places: one right outside your home, one outside your neighborhood.</p>
+      </div>
+      <div>
+        <h3>How to use it</h3>
+        <ul>
+          <li><strong>Text instead of calling.</strong> Texts often get through when calls don't.</li>
+          <li>Keep emergency alerts turned on in your phone settings.</li>
+          <li>Save battery: low power mode, dim screen, close apps.</li>
+          <li>Use 911 for life-threatening emergencies only. Use 211 for shelters, food, and local help.</li>
+        </ul>
+      </div>
+      <div class="watch">
+        <h3>What can go wrong</h3>
+        <ul>
+          <li>A dead phone means lost numbers. Keep them on paper.</li>
+          <li>Rumors spread fast. Trust local officials, the National Weather Service, and your utility.</li>
+          <li>This site is not an alert service. Sign up for official alerts.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="have"><b>Already have this? Use it.</b> Your car radio works when the power is out. Most phones already receive Wireless Emergency Alerts.</p>
+    <p class="chk-title">Checklist</p>
+    <ul class="check">
+      <li><label><input type="checkbox" id="c1"><span>Battery or crank radio</span></label></li>
+      <li><label><input type="checkbox" id="c2"><span>Out-of-state contact chosen</span></label></li>
+      <li><label><input type="checkbox" id="c3"><span>Two meeting spots agreed</span></label></li>
+      <li><label><input type="checkbox" id="c4"><span>Phone alerts on, county alerts signed up</span></label></li>
+      <li><label><input type="checkbox" id="c5"><span>Contact sheet printed</span></label></li>
+      <li><label><input type="checkbox" id="c6"><span>Whistle in the kit</span></label></li>
+    </ul>
+    <p class="src">Reviewed October 2026 · Sources: <a href="https://www.ready.gov/plan" target="_blank" rel="noopener">Ready.gov: Make a Plan</a> · <a href="https://www.ready.gov/alerts" target="_blank" rel="noopener">Ready.gov: Emergency Alerts</a> · <a href="https://www.weather.gov/nwr/" target="_blank" rel="noopener">NOAA Weather Radio</a> · <a href="https://www.211.org/" target="_blank" rel="noopener">211.org</a></p>
+  </section>
+
+  <!-- POWER -->
+  <section class="topic" id="power">
+    <header><p class="eyebrow">Power &amp; light</p><h2>Power &amp; light</h2></header>
+    <p class="first"><b>Do this first</b>Charge every power bank in the house and put flashlights where you can find them in the dark.</p>
+    <div class="fmt">
+      <div>
+        <h3>What you need</h3>
+        <ul>
+          <li>A flashlight per person, extra batteries</li>
+          <li>Power banks for phones</li>
+          <li>Battery-powered or battery-backup <strong>carbon monoxide alarms</strong> near sleeping areas</li>
+        </ul>
+      </div>
+      <div>
+        <h3>How much</h3>
+        <p>Enough to charge each phone once a day for your stage. Compare the power bank's capacity (mAh) to your phone's battery size; the bank should be at least as big for one full charge.</p>
+      </div>
+      <div class="wide">
+        <h3>How to use it: compare your options</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Option</th><th>Good for</th><th>Keep in mind</th></tr></thead>
+          <tbody>
+            <tr><td>Power banks</td><td>Phones, radios, small lights</td><td>Cheapest start. Recharge every few months.</td></tr>
+            <tr><td>Your car</td><td>Charging phones</td><td>Run it outdoors only, never in a garage, even with the door open.</td></tr>
+            <tr><td>Portable battery station</td><td>Lights, Wi-Fi, CPAP, short fridge runs</td><td>No fumes, safe indoors. Check its watt-hours against what you need.</td></tr>
+            <tr><td>Solar panel</td><td>Recharging power banks or a station</td><td>Slow when cloudy. Pairs with a battery.</td></tr>
+            <tr><td>Fuel generator</td><td>Larger loads for longer</td><td>Outdoors only, 20+ feet from doors, windows, vents.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="wide watch">
+        <h3>What can go wrong: carbon monoxide</h3>
+        <p>CO has no smell or color. Symptoms feel like the flu: <strong>headache, dizziness, weakness, upset stomach, vomiting, chest pain, confusion</strong>. People who are asleep can die before they notice.</p>
+        <ul>
+          <li>Never use a generator, grill, charcoal, or camp stove indoors or in a garage.</li>
+          <li>If you suspect CO, get everyone into fresh air and call 911.</li>
+          <li>Candles cause house fires. Use flashlights.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="have"><b>Already have this? Use it.</b> Headlamps from camping, solar garden lights brought inside at night, the car's USB ports (outdoors).</p>
+    <p class="chk-title">Checklist</p>
+    <ul class="check">
+      <li><label><input type="checkbox" id="p1"><span>Flashlight per person</span></label></li>
+      <li><label><input type="checkbox" id="p2"><span>Extra batteries</span></label></li>
+      <li><label><input type="checkbox" id="p3"><span>Charged power banks</span></label></li>
+      <li><label><input type="checkbox" id="p4"><span>CO alarm with battery</span></label></li>
+      <li><label><input type="checkbox" id="p5"><span>Car charger cable</span></label></li>
+      <li><label><input type="checkbox" id="p6"><span>Know how to reset the breaker panel</span></label></li>
+    </ul>
+    <p class="src">Reviewed October 2026 · Sources: <a href="https://www.cdc.gov/carbon-monoxide/about/index.html" target="_blank" rel="noopener">CDC: Carbon Monoxide Poisoning Basics</a> · <a href="https://www.cdc.gov/natural-disasters/psa-toolkit/use-a-generator-safely.html" target="_blank" rel="noopener">CDC: Use a Generator Safely</a> · <a href="https://www.ready.gov/power-outages" target="_blank" rel="noopener">Ready.gov: Power Outages</a></p>
+  </section>
+
+  <!-- KIT -->
+  <section class="topic" id="kit">
+    <header><p class="eyebrow">Basic kit &amp; tools</p><h2>Basic kit &amp; tools</h2></header>
+    <p class="first"><b>Do this first</b>Pick one bin or bag. Walk through the house and put in what you already own from the list below.</p>
+    <div class="fmt">
+      <div>
+        <h3>What each item is for</h3>
+        <ul>
+          <li><strong>Whistle:</strong> signal for help without shouting.</li>
+          <li><strong>Dust mask, plastic sheeting, duct tape:</strong> keep dust and outside air out when sheltering in place.</li>
+          <li><strong>Wrench or pliers:</strong> turn off utilities.</li>
+          <li><strong>Wet wipes, garbage bags, zip ties:</strong> sanitation.</li>
+          <li><strong>Local paper map:</strong> when phones and GPS don't work.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Where to keep it</h3>
+        <ul>
+          <li><strong>Home:</strong> one place everyone knows.</li>
+          <li><strong>Work:</strong> enough for 24 hours, plus walking shoes.</li>
+          <li><strong>Car:</strong> water, snacks, blanket, flashlight, charger.</li>
+        </ul>
+        <p>Check it once a year and when your household changes.</p>
+      </div>
+    </div>
+    <p class="have"><b>Already have this? Use it.</b> Nearly everything on this list is already in a typical home. Buy only what's missing, and only when it fits your budget.</p>
+    <p class="progress chk-title" id="kit-progress">Kit checklist</p>
+    <ul class="check">
+      <li><label><input type="checkbox" id="k1"><span>Water and food (see above)</span></label></li>
+      <li><label><input type="checkbox" id="k2"><span>Battery or crank radio</span></label></li>
+      <li><label><input type="checkbox" id="k3"><span>Flashlight + extra batteries</span></label></li>
+      <li><label><input type="checkbox" id="k4"><span>First aid kit</span></label></li>
+      <li><label><input type="checkbox" id="k5"><span>Whistle</span></label></li>
+      <li><label><input type="checkbox" id="k6"><span>Dust masks</span></label></li>
+      <li><label><input type="checkbox" id="k7"><span>Plastic sheeting, scissors, duct tape</span></label></li>
+      <li><label><input type="checkbox" id="k8"><span>Wet wipes, garbage bags, zip ties</span></label></li>
+      <li><label><input type="checkbox" id="k9"><span>Wrench or pliers</span></label></li>
+      <li><label><input type="checkbox" id="k10"><span>Manual can opener</span></label></li>
+      <li><label><input type="checkbox" id="k11"><span>Local paper map</span></label></li>
+      <li><label><input type="checkbox" id="k12"><span>Phone charger + backup battery</span></label></li>
+      <li><label><input type="checkbox" id="k13"><span>Soap, hand sanitizer</span></label></li>
+      <li><label><input type="checkbox" id="k14"><span>Sleeping bag or blanket per person</span></label></li>
+      <li><label><input type="checkbox" id="k15"><span>Change of clothes, sturdy shoes</span></label></li>
+      <li><label><input type="checkbox" id="k16"><span>Fire extinguisher</span></label></li>
+      <li><label><input type="checkbox" id="k17"><span>Matches in a waterproof container</span></label></li>
+      <li><label><input type="checkbox" id="k18"><span>Hygiene and feminine supplies</span></label></li>
+      <li><label><input type="checkbox" id="k19"><span>Paper and pencil</span></label></li>
+      <li><label><input type="checkbox" id="k20"><span>Books, cards, games for kids</span></label></li>
+    </ul>
+    <p class="src">Reviewed October 2026 · Source: <a href="https://www.ready.gov/kit" target="_blank" rel="noopener">Ready.gov: Build a Kit</a></p>
+  </section>
+
+  <!-- SHELTER -->
+  <section class="topic" id="shelter">
+    <header><p class="eyebrow">Heat, cold &amp; shelter</p><h2>Heat, cold &amp; shelter</h2></header>
+    <p class="first"><b>Do this first</b>Find your nearest cooling or warming center. Call 211 or check your county's website.</p>
+    <div class="fmt">
+      <div>
+        <h3>Heat: what to do</h3>
+        <ul>
+          <li>Drink plenty of fluids. Wear loose, light clothes.</li>
+          <li>Cool showers, shade, rest in the hottest hours.</li>
+          <li>A fan alone won't cool a body in extreme heat.</li>
+          <li>Never leave people or pets in a closed car.</li>
+          <li>Check on older adults, kids, and neighbors.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Cold: what to do</h3>
+        <ul>
+          <li>Pick one room. Close doors, cover windows, gather everyone.</li>
+          <li>Layers, hats, socks, blankets. Change out of damp clothes.</li>
+          <li>Keep time outdoors short.</li>
+          <li>Let faucets drip to help keep pipes from freezing.</li>
+        </ul>
+      </div>
+      <div class="wide watch">
+        <h3>What can go wrong: know the signs</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Condition</th><th>Signs</th><th>Do this</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Heat stroke</strong></td><td>Hot, red, dry skin; fast strong pulse; confusion; passing out</td><td><strong>Call 911.</strong> Move to shade, cool with wet cloths or ice on neck, armpits, groin.</td></tr>
+            <tr><td>Heat exhaustion</td><td>Heavy sweating, pale, cramps, weak, dizzy, headache, nausea</td><td>Move somewhere cooler, loosen clothes, sip water. Call a doctor if it lasts over an hour.</td></tr>
+            <tr><td><strong>Hypothermia</strong></td><td>Shivering, exhaustion, confusion, fumbling hands, slurred speech, drowsiness</td><td>Get them warm and dry. Seek medical help right away.</td></tr>
+            <tr><td>Frostbite</td><td>Numbness; white or grayish-yellow skin; firm or waxy skin</td><td>Get somewhere warm. Seek medical help. Don't rub the area.</td></tr>
+          </tbody>
+        </table></div>
+        <p style="margin-top:8px"><strong>When home isn't safe:</strong> no heat in freezing weather, no cooling in extreme heat for someone at high risk, smoke, flooding, or structural damage. Go to a shelter, cooling center, or someone else's home.</p>
+      </div>
+    </div>
+    <p class="have"><b>Already have this? Use it.</b> Sleeping bags, winter coats, a tent pitched indoors for kids (it holds warmth), damp towels for cooling.</p>
+    <p class="chk-title">Checklist</p>
+    <ul class="check">
+      <li><label><input type="checkbox" id="s1"><span>Warm bedding for everyone</span></label></li>
+      <li><label><input type="checkbox" id="s2"><span>Know nearest cooling/warming center</span></label></li>
+      <li><label><input type="checkbox" id="s3"><span>Picked a "warm room" in the house</span></label></li>
+      <li><label><input type="checkbox" id="s4"><span>List of neighbors to check on</span></label></li>
+    </ul>
+    <p class="src">Reviewed October 2026 · Sources: <a href="https://www.ready.gov/heat" target="_blank" rel="noopener">Ready.gov: Extreme Heat</a> · <a href="https://www.ready.gov/winter-weather" target="_blank" rel="noopener">Ready.gov: Winter Weather</a> · <a href="https://www.cdc.gov/natural-disasters/psa-toolkit/preventing-hypothermia-and-frostbite.html" target="_blank" rel="noopener">CDC: Preventing Hypothermia and Frostbite</a></p>
+  </section>
+
+  <!-- SANITATION -->
+  <section class="topic" id="sanitation">
+    <header><p class="eyebrow">Sanitation</p><h2>Sanitation</h2></header>
+    <p class="first"><b>Do this first</b>Put a box of heavy-duty trash bags and some kitty litter next to your kit.</p>
+    <div class="fmt">
+      <div>
+        <h3>What you need</h3>
+        <ul>
+          <li>Heavy-duty trash bags</li>
+          <li>A 5-gallon bucket with a lid (or your toilet bowl)</li>
+          <li>Kitty litter, sawdust, or another absorbent</li>
+          <li>Soap, hand sanitizer, wet wipes</li>
+          <li>Bleach or disinfectant</li>
+        </ul>
+      </div>
+      <div>
+        <h3>How to use it</h3>
+        <ol>
+          <li>Turn off the toilet's water valve and flush out the water in the bowl.</li>
+          <li>Line the bowl or bucket with two trash bags.</li>
+          <li>Add litter or another absorbent after each use.</li>
+          <li>Tie off full bags. Keep them in a covered can away from kids and pets.</li>
+          <li>Wash hands every time. No running water: wipes and sanitizer.</li>
+        </ol>
+      </div>
+      <div class="wide watch">
+        <h3>What can go wrong</h3>
+        <ul>
+          <li>Sewer lines may be damaged even if water still runs. Follow local instructions before flushing.</li>
+          <li>Never mix bleach with ammonia or other cleaners.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="have"><b>Already have this? Use it.</b> Any bucket, kitchen trash bags, the cat's litter.</p>
+    <p class="src">Reviewed October 2026 · Sources: <a href="https://www.ncdhhs.gov/toilet-use-during-emergency/open" target="_blank" rel="noopener">NC Dept. of Health and Human Services: Toilet Use During an Emergency</a> · <a href="https://www.ready.gov/kit" target="_blank" rel="noopener">Ready.gov: Build a Kit</a></p>
+  </section>
+
+  <!-- DOCS -->
+  <section class="topic" id="docs">
+    <header><p class="eyebrow">Documents &amp; money</p><h2>Documents &amp; money</h2></header>
+    <p class="first"><b>Do this first</b>Take phone photos of your IDs, insurance cards, and policies. Then walk through your home and video your belongings.</p>
+    <div class="fmt">
+      <div>
+        <h3>What you need</h3>
+        <ul>
+          <li>Copies of IDs, insurance policies, deeds or lease, medical records</li>
+          <li>Photos or video of your home and belongings</li>
+          <li>A waterproof bag or container</li>
+          <li>Cash in small bills</li>
+        </ul>
+      </div>
+      <div>
+        <h3>How to use it</h3>
+        <ul>
+          <li>Originals: a safe place away from home, such as a safe deposit box.</li>
+          <li>Copies: in your kit, so you can apply for help faster.</li>
+          <li>Cash: ATMs and card readers may not work during outages.</li>
+        </ul>
+      </div>
+      <div class="wide watch">
+        <h3>What can go wrong</h3>
+        <p>Phones get lost or die. Keep paper copies too, and store digital copies somewhere secure you can reach from another device.</p>
+      </div>
+    </div>
+    <p class="chk-title">Checklist</p>
+    <ul class="check">
+      <li><label><input type="checkbox" id="d1"><span>ID and insurance copies in waterproof bag</span></label></li>
+      <li><label><input type="checkbox" id="d2"><span>Home and belongings video</span></label></li>
+      <li><label><input type="checkbox" id="d3"><span>Small bills set aside</span></label></li>
+      <li><label><input type="checkbox" id="d4"><span>Pet vaccination records</span></label></li>
+    </ul>
+    <p class="src">Reviewed October 2026 · Source: <a href="https://www.ready.gov/financial-preparedness" target="_blank" rel="noopener">Ready.gov: Financial Preparedness</a></p>
+  </section>
+
+  <!-- LEAVE -->
+  <section class="topic" id="leave">
+    <header><p class="eyebrow">Stay or leave</p><h2>Leaving home</h2></header>
+    <p class="first"><b>Do this first</b>Learn whether your area has evacuation zones, and which one you're in.</p>
+    <div class="fmt">
+      <div>
+        <h3>What you need</h3>
+        <ul>
+          <li>A grab-and-go bag per person</li>
+          <li>Meds, documents, phone and charger</li>
+          <li>Pet carrier, leash, food, records</li>
+          <li>A place to go: friends or family outside the area, a hotel, or a public shelter</li>
+        </ul>
+      </div>
+      <div>
+        <h3>How to use it</h3>
+        <ul>
+          <li>Keep the gas tank at least half full when trouble is possible.</li>
+          <li>Know two routes out. Follow the routes officials give.</li>
+          <li>Plan for anyone who can't drive or needs help moving.</li>
+          <li>If told to leave, go. Bring pets.</li>
+          <li>Tell your out-of-state contact where you're headed.</li>
+        </ul>
+      </div>
+      <div class="wide">
+        <h3>Stay or go?</h3>
+        <p><strong>Follow local officials.</strong> If they say evacuate, leave. If they say shelter in place, stay inside, away from windows, with a radio on. If you're not told either way and your home is safe, staying is usually fine.</p>
+      </div>
+      <div class="wide watch">
+        <h3>What can go wrong</h3>
+        <ul>
+          <li>Don't drive through flood water. One foot of moving water can sweep a car away.</li>
+          <li>Don't go back until officials say it's safe.</li>
+          <li>Only turn off gas if you smell it or are told to. A utility worker must turn it back on.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="chk-title">Checklist</p>
+    <ul class="check">
+      <li><label><input type="checkbox" id="l1"><span>Go-bag for each person</span></label></li>
+      <li><label><input type="checkbox" id="l2"><span>Evacuation zone known</span></label></li>
+      <li><label><input type="checkbox" id="l3"><span>Two routes out of town</span></label></li>
+      <li><label><input type="checkbox" id="l4"><span>Place to stay outside the area</span></label></li>
+      <li><label><input type="checkbox" id="l5"><span>Pet go-bag and carrier</span></label></li>
+      <li><label><input type="checkbox" id="l6"><span>Ride arranged for anyone who needs one</span></label></li>
+    </ul>
+    <p class="src">Reviewed October 2026 · Sources: <a href="https://www.ready.gov/evacuation" target="_blank" rel="noopener">Ready.gov: Evacuation</a> · <a href="https://www.ready.gov/pets" target="_blank" rel="noopener">Ready.gov: Pets and Animals</a> · <a href="https://www.redcross.org/get-help/disaster-relief-and-recovery-services/find-an-open-shelter.html" target="_blank" rel="noopener">Red Cross: Find an Open Shelter</a></p>
+  </section>
+
+  <!-- RADIATION -->
+  <section class="topic" id="radiation">
+    <header><p class="eyebrow">Radiation emergencies</p><h2>Radiation</h2></header>
+    <p class="first"><b>Do this first</b>Remember three words: <strong>Get inside. Stay inside. Stay tuned.</strong></p>
+    <div class="trio" role="list">
+      <div role="listitem"><b>Get inside</b><span>The nearest sturdy building. Basement or the middle, away from doors and windows. Brick or concrete is best.</span></div>
+      <div role="listitem"><b>Stay inside</b><span>After a nuclear explosion, at least 24 hours unless officials say otherwise. Radiation levels drop quickly in that time.</span></div>
+      <div role="listitem"><b>Stay tuned</b><span>Radio, TV, phone alerts. Officials will say when to leave and where to get checked.</span></div>
+    </div>
+    <div class="fmt">
+      <div>
+        <h3>What you need</h3>
+        <ul>
+          <li>Battery or crank radio</li>
+          <li>A spare set of clothes per person</li>
+          <li>Trash bags for contaminated clothes</li>
+          <li>Sealed food and bottled water, medicines</li>
+          <li>Wet wipes or cloths for washing</li>
+        </ul>
+      </div>
+      <div>
+        <h3>The basic idea</h3>
+        <p>Three things lower exposure: <strong>less time</strong> near the source, <strong>more distance</strong> from it, and <strong>more shielding</strong> (walls, earth, concrete) between you and it.</p>
+        <p>You may have 10 minutes or more after a nuclear explosion before fallout arrives. Use it to get to the best shelter nearby.</p>
+      </div>
+      <div class="wide">
+        <h3>How to use it</h3>
+        <ol>
+          <li><strong>Close up.</strong> Shut and lock windows and doors, close fireplace dampers, and turn off fans, A/C, and forced-air heat that pull in outside air.</li>
+          <li><strong>Bring pets inside.</strong></li>
+          <li><strong>If you were outside:</strong> carefully take off your outer layer of clothing. That can remove up to 90% of radioactive material. Don't shake it out. Put it in a plastic bag away from people and pets.</li>
+          <li><strong>Wash.</strong> Warm shower with lots of soap, shampoo your hair. Don't scrub or scratch. Keep cuts covered. No shower: wash hands and face at a sink, or wipe exposed skin with a damp cloth. Gently blow your nose and wipe eyelids, eyelashes, and ears.</li>
+          <li><strong>Food and water</strong> inside the building are safe. Sealed containers that were outside are fine after you wipe them. Don't eat garden produce or uncovered outdoor food until officials say so.</li>
+          <li><strong>Pets:</strong> brush their coats, then wash with soap and water if you can.</li>
+        </ol>
+      </div>
+      <div class="wide watch">
+        <h3>What can go wrong</h3>
+        <ul>
+          <li><strong>Potassium iodide (KI) is not a radiation pill.</strong> It only protects the thyroid, and only from radioactive iodine. Take it only when public health officials or your doctor tell you to. CDC says it won't help after a nuclear explosion, so don't leave shelter to look for it.</li>
+          <li>Iodized salt and iodine supplements are not substitutes and can be harmful in large amounts.</li>
+          <li>Don't use household cleaning wipes or hand sanitizer on your skin to remove contamination.</li>
+          <li>Don't leave shelter early to find family. Stay where you are and use your out-of-state contact.</li>
+        </ul>
+      </div>
+      <div class="wide">
+        <h3>Live near a nuclear power plant?</h3>
+        <p>Every U.S. plant has a planning zone of about <strong>10 miles</strong> where people may be told to shelter, evacuate, or take KI, and about <strong>50 miles</strong> where officials may restrict food and water. If you're inside the 10-mile zone, learn your zone or sector name and how your county will alert you.</p>
+      </div>
+    </div>
+    <p class="chk-title">Checklist</p>
+    <ul class="check">
+      <li><label><input type="checkbox" id="r1"><span>Know the safest room in your home</span></label></li>
+      <li><label><input type="checkbox" id="r2"><span>Spare clothes and trash bags in kit</span></label></li>
+      <li><label><input type="checkbox" id="r3"><span>Radio with fresh batteries</span></label></li>
+      <li><label><input type="checkbox" id="r4"><span>Checked distance to nearest nuclear plant</span></label></li>
+    </ul>
+    <p class="src">Reviewed October 2026 · Sources: <a href="https://www.ready.gov/radiation" target="_blank" rel="noopener">Ready.gov: Radiation Emergencies</a> · <a href="https://www.cdc.gov/radiation-emergencies/response/" target="_blank" rel="noopener">CDC: What to Do in Radiation Emergencies</a> · <a href="https://www.cdc.gov/radiation-emergencies/prevention/self-decontaminate.html" target="_blank" rel="noopener">CDC: How to Self-Decontaminate</a> · <a href="https://www.cdc.gov/radiation-emergencies/treatment/potassium-iodide.html" target="_blank" rel="noopener">CDC: Potassium Iodide (KI)</a> · <a href="https://www.nrc.gov/about-nrc/emerg-preparedness/about-emerg-preparedness/planning-zones.html" target="_blank" rel="noopener">NRC: Emergency Planning Zones</a></p>
+  </section>
+  </div><!-- /guide-only -->
+
+  <!-- CONTACTS (prints with essentials) -->
+  <section class="topic" id="contacts">
+    <header><p class="eyebrow">Local information</p><h2>Your contact sheet</h2></header>
+    <p class="first"><b>Do this first</b>Fill this in, print it, and tape it inside a kitchen cabinet.</p>
+    <div class="sheet">
+      <div class="sheet-top">
+        <label class="field" for="c-household">Household<input id="c-household" placeholder="e.g. The Garcia family"></label>
+        <label class="field" for="c-area">ZIP code or county<input id="c-area" placeholder="e.g. 80202 / Denver County"></label>
+        <label class="field" for="c-date">Last updated<input id="c-date" type="date"></label>
+      </div>
+      <div class="sheet-grid">
+        <label class="field" for="c-oos">Out-of-state contact<input id="c-oos" placeholder="Name and number"></label>
+        <label class="field" for="c-meet1">Meeting spot near home<input id="c-meet1" placeholder="e.g. Mailbox at the corner"></label>
+        <label class="field" for="c-meet2">Meeting spot outside neighborhood<input id="c-meet2" placeholder="e.g. Library on Main St"></label>
+        <label class="field" for="c-em">County emergency management<input id="c-em" placeholder="Number or website"></label>
+        <label class="field" for="c-pd">Police (non-emergency)<input id="c-pd" placeholder="Number"></label>
+        <label class="field" for="c-fd">Fire (non-emergency)<input id="c-fd" placeholder="Number"></label>
+        <label class="field" for="c-hosp">Nearest hospital<input id="c-hosp" placeholder="Name and number"></label>
+        <label class="field" for="c-doc">Doctor / pharmacy<input id="c-doc" placeholder="Name and number"></label>
+        <label class="field" for="c-elec">Electric outages<input id="c-elec" placeholder="Number"></label>
+        <label class="field" for="c-gas">Gas leaks<input id="c-gas" placeholder="Number"></label>
+        <label class="field" for="c-water">Water utility<input id="c-water" placeholder="Number"></label>
+        <label class="field" for="c-school">School / daycare / work<input id="c-school" placeholder="Number"></label>
+        <label class="field" for="c-nbr">Neighbor I trust<input id="c-nbr" placeholder="Name and number"></label>
+        <label class="field" for="c-vet">Vet<input id="c-vet" placeholder="Number"></label>
+        <label class="field" for="c-ins">Insurance and policy number<input id="c-ins" placeholder="Company and number"></label>
+        <label class="field" for="c-shelter">Nearest shelter / cooling or warming center<input id="c-shelter" placeholder="Name and address"></label>
+        <label class="field wide" for="c-med">Medical notes (medicines, allergies, devices)<textarea id="c-med" placeholder="e.g. Dad: insulin, keep cool. Maya: peanut allergy."></textarea></label>
+      </div>
+      <p class="privacy">Everything you type stays in this browser on this device. Nothing is sent anywhere. No account needed.</p>
+    </div>
+
+    <div class="fmt">
+      <div>
+        <h3>National numbers</h3>
+        <div class="tbl"><table class="national"><tbody>
+          <tr><td>Emergency</td><td>911</td></tr>
+          <tr><td>Local help: shelter, food, services</td><td>211</td></tr>
+          <tr><td>Poison Control</td><td>1-800-222-1222</td></tr>
+          <tr><td>FEMA helpline</td><td>1-800-621-3362</td></tr>
+          <tr><td>American Red Cross</td><td>1-800-733-2767</td></tr>
+          <tr><td>988 Suicide &amp; Crisis Lifeline</td><td>988</td></tr>
+        </tbody></table></div>
+      </div>
+      <div class="guide-only">
+        <h3>Find your local numbers</h3>
+        <ul class="findlinks" style="columns:1">
+          <li><a href="https://www.usa.gov/state-emergency-management" target="_blank" rel="noopener">Your state's emergency management agency</a> (most link to county offices and alert sign-ups)</li>
+          <li><a href="https://www.211.org/" target="_blank" rel="noopener">211.org</a>: local services by ZIP code</li>
+          <li><a href="https://www.redcross.org/get-help/disaster-relief-and-recovery-services/find-an-open-shelter.html" target="_blank" rel="noopener">Red Cross open shelters map</a></li>
+          <li><a href="https://www.weather.gov/nwr/coverage/station_search.php" target="_blank" rel="noopener">Your NOAA Weather Radio station</a></li>
+          <li><a href="https://www.ready.gov/alerts" target="_blank" rel="noopener">Emergency alerts explained</a></li>
+          <li><a href="https://www.disasterassistance.gov/" target="_blank" rel="noopener">DisasterAssistance.gov</a>: apply for federal help after a declared disaster</li>
+          <li>Your utility bills list outage and leak numbers.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="src">Numbers checked October 2026 · Sources: <a href="https://poisonhelp.hrsa.gov/" target="_blank" rel="noopener">HRSA: Poison Help</a> · <a href="https://www.fema.gov/" target="_blank" rel="noopener">FEMA</a> · <a href="https://www.redcross.org/" target="_blank" rel="noopener">American Red Cross</a> · <a href="https://988lifeline.org/" target="_blank" rel="noopener">988 Lifeline</a></p>
+  </section>
+
+  <div class="guide-only">
+  <!-- WHY NOW -->
+  <section class="topic" id="why">
+    <header><p class="eyebrow">Context, not a prediction</p><h2>Why now?</h2></header>
+    <div class="context">
+      <div class="ninety mono">90<small>days, reported</small></div>
+      <div>
+        <p>On September 30, 2026, the Pentagon issued a memo launching <strong>FORTRESS America</strong>, a program to make major U.S. military bases able to keep running without civilian power, fuel, water, and supply lines. Reporting puts the target at <strong>at least 90 days</strong>. It's a Defense Department initiative, not a law passed by Congress, and it covers military bases, not households.</p>
+        <p>We're not reading anything into it. We just like the logic: if the professionals plan to be self-reliant for 90 days, a household can plan for three, then two weeks.</p>
+      </div>
+    </div>
+    <p style="max-width:66ch">The far more likely reasons to need this page are ordinary: storms, wildfires, ice, floods, a long outage, a water main break. Being ready for those means you're mostly ready for anything.</p>
+    <p class="src">Sources: <a href="https://www.twz.com/nuclear/90-days-no-help-fortress-americas-goal-to-make-bases-resilient-bastions-in-a-crisis" target="_blank" rel="noopener">The War Zone: "90 Days, No Help"</a> · <a href="https://www.thedefensenews.com/Pentagon-Launches-FORTRESS-Initiative-to-Make-Major-US-Bases-Self-Sufficient-for-90-Days/" target="_blank" rel="noopener">Defense News roundup</a> · <a href="https://www.allsides.com/news/2026-10-27-0700/defense-and-security-what-we-know-about-pentagons-fortress-initiative-keep-military-bases-running-grid" target="_blank" rel="noopener">AllSides: What we know about FORTRESS</a></p>
+  </section>
+
+  <!-- ALL SOURCES -->
+  <section class="topic" id="sources">
+    <header><p class="eyebrow">Where this comes from</p><h2>All sources</h2></header>
+    <ol class="sources">
+      <li><a href="https://www.ready.gov/kit" target="_blank" rel="noopener">Ready.gov: Build a Kit</a></li>
+      <li><a href="https://www.ready.gov/water" target="_blank" rel="noopener">Ready.gov: Water</a></li>
+      <li><a href="https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water" target="_blank" rel="noopener">EPA: Emergency Disinfection of Drinking Water</a></li>
+      <li><a href="https://www.foodsafety.gov/blog/three-ways-keep-food-safe-when-you-lose-power" target="_blank" rel="noopener">FoodSafety.gov: Food During Power Loss</a></li>
+      <li><a href="https://www.fda.gov/drugs/emergency-preparedness-drugs/safe-drug-use-after-natural-disaster" target="_blank" rel="noopener">FDA: Safe Drug Use After a Natural Disaster</a></li>
+      <li><a href="https://www.redcross.org/take-a-class" target="_blank" rel="noopener">Red Cross: First Aid and CPR Classes</a></li>
+      <li><a href="https://www.stopthebleed.org/" target="_blank" rel="noopener">Stop the Bleed</a></li>
+      <li><a href="https://www.ready.gov/disability" target="_blank" rel="noopener">Ready.gov: People with Disabilities</a></li>
+      <li><a href="https://www.ready.gov/sites/default/files/2023-09/ready-gov_disaster-preparedness-guide-for-older-adults.pdf" target="_blank" rel="noopener">Ready.gov: Disaster Guide for Older Adults (PDF)</a></li>
+      <li><a href="https://acl.gov/emergencypreparedness" target="_blank" rel="noopener">ACL: Emergency Preparedness</a></li>
+      <li><a href="https://www.ready.gov/plan" target="_blank" rel="noopener">Ready.gov: Make a Plan</a></li>
+      <li><a href="https://www.ready.gov/alerts" target="_blank" rel="noopener">Ready.gov: Emergency Alerts</a></li>
+      <li><a href="https://www.weather.gov/nwr/" target="_blank" rel="noopener">NOAA Weather Radio</a></li>
+      <li><a href="https://www.cdc.gov/carbon-monoxide/about/index.html" target="_blank" rel="noopener">CDC: Carbon Monoxide Basics</a></li>
+      <li><a href="https://www.cdc.gov/natural-disasters/psa-toolkit/use-a-generator-safely.html" target="_blank" rel="noopener">CDC: Use a Generator Safely</a></li>
+      <li><a href="https://www.ready.gov/power-outages" target="_blank" rel="noopener">Ready.gov: Power Outages</a></li>
+      <li><a href="https://www.ready.gov/heat" target="_blank" rel="noopener">Ready.gov: Extreme Heat</a></li>
+      <li><a href="https://www.ready.gov/winter-weather" target="_blank" rel="noopener">Ready.gov: Winter Weather</a></li>
+      <li><a href="https://www.cdc.gov/natural-disasters/psa-toolkit/preventing-hypothermia-and-frostbite.html" target="_blank" rel="noopener">CDC: Hypothermia and Frostbite</a></li>
+      <li><a href="https://www.ncdhhs.gov/toilet-use-during-emergency/open" target="_blank" rel="noopener">NCDHHS: Toilet Use During an Emergency</a></li>
+      <li><a href="https://www.ready.gov/financial-preparedness" target="_blank" rel="noopener">Ready.gov: Financial Preparedness</a></li>
+      <li><a href="https://www.ready.gov/evacuation" target="_blank" rel="noopener">Ready.gov: Evacuation</a></li>
+      <li><a href="https://www.ready.gov/pets" target="_blank" rel="noopener">Ready.gov: Pets</a></li>
+      <li><a href="https://www.ready.gov/radiation" target="_blank" rel="noopener">Ready.gov: Radiation Emergencies</a></li>
+      <li><a href="https://www.cdc.gov/radiation-emergencies/response/" target="_blank" rel="noopener">CDC: What to Do in Radiation Emergencies</a></li>
+      <li><a href="https://www.cdc.gov/radiation-emergencies/prevention/self-decontaminate.html" target="_blank" rel="noopener">CDC: Self-Decontamination</a></li>
+      <li><a href="https://www.cdc.gov/radiation-emergencies/treatment/potassium-iodide.html" target="_blank" rel="noopener">CDC: Potassium Iodide</a></li>
+      <li><a href="https://www.nrc.gov/about-nrc/emerg-preparedness/about-emerg-preparedness/planning-zones.html" target="_blank" rel="noopener">NRC: Emergency Planning Zones</a></li>
+      <li><a href="https://www.usa.gov/state-emergency-management" target="_blank" rel="noopener">USA.gov: State Emergency Management</a></li>
+      <li><a href="https://www.211.org/" target="_blank" rel="noopener">211.org</a></li>
+      <li><a href="https://www.redcross.org/get-help/disaster-relief-and-recovery-services/find-an-open-shelter.html" target="_blank" rel="noopener">Red Cross: Find an Open Shelter</a></li>
+      <li><a href="https://www.disasterassistance.gov/" target="_blank" rel="noopener">DisasterAssistance.gov</a></li>
+      <li><a href="https://poisonhelp.hrsa.gov/" target="_blank" rel="noopener">HRSA: Poison Help</a></li>
+      <li><a href="https://988lifeline.org/" target="_blank" rel="noopener">988 Suicide &amp; Crisis Lifeline</a></li>
+    </ol>
+  </section>
+
+  <aside class="signup" aria-labelledby="su-title">
+    <h2 id="su-title">Occasional guide updates and corrections</h2>
+    <p>A short email when we add or fix something. No marketing, no scares, unsubscribe anytime. This is not an emergency alert service; sign up for your county's alerts for that.</p>
+    <form id="signup">
+      <input id="su-email" type="email" required placeholder="you@example.com" aria-label="Email address">
+      <button type="submit">Sign me up</button>
+      <label class="opt" for="su-ok"><input type="checkbox" id="su-ok" required><span>Yes, send me occasional ReadyEnough updates. I can unsubscribe at any time.</span></label>
+    </form>
+    <p class="msg" id="su-msg" hidden></p>
+  </aside>
+  </div><!-- /guide-only -->
+
+  <footer>
+    <p><strong>Disclaimer.</strong> ReadyEnough is general preparedness information. It is not an emergency alert service, and it does not replace emergency services or professional medical advice. Instructions from local officials always take priority. In an emergency, call 911.</p>
+    <p>We don't predict disasters, sell products, or take money from anyone who does. We aren't affiliated with any government agency. Facts are drawn from the official sources linked in each section, last reviewed October 2026.</p>
+    <a class="top" href="#top">Back to top ↑</a>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var store={
+    get:function(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},
+    set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+  };
+  // Checklists
+  var boxes=[].slice.call(document.querySelectorAll('.check input'));
+  var saved=store.get('re-checks')||{};
+  boxes.forEach(function(b){b.checked=!!saved[b.id];b.addEventListener('change',function(){saved[b.id]=b.checked;store.set('re-checks',saved);kit()})});
+  var kitBoxes=boxes.filter(function(b){return /^k\d+$/.test(b.id)});
+  var kp=document.getElementById('kit-progress');
+  function kit(){var n=kitBoxes.filter(function(b){return b.checked}).length;kp.textContent='Kit checklist · '+n+' of '+kitBoxes.length+' ready'}
+  kit();
+  // Contact sheet
+  var c=store.get('re-contacts')||{};
+  [].forEach.call(document.querySelectorAll('.sheet input, .sheet textarea'),function(i){
+    if(c[i.id]) i.value=c[i.id];
+    i.addEventListener('input',function(){c[i.id]=i.value;store.set('re-contacts',c)});
+  });
+  var d=document.getElementById('c-date');
+  if(!d.value){var t=new Date();d.value=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0')}
+  // Print choice
+  var pr=store.get('re-print');
+  if(pr==='all') document.getElementById('pr-all').checked=true;
+  [].forEach.call(document.querySelectorAll('input[name=pr]'),function(r){r.addEventListener('change',function(){store.set('re-print',r.id==='pr-all'?'all':'ess')})});
+  // Signup (preview only)
+  document.getElementById('signup').addEventListener('submit',function(e){
+    e.preventDefault();
+    var m=document.getElementById('su-msg');
+    m.textContent='Preview: the mailing list opens at launch. Your address was not sent anywhere.';
+    m.hidden=false;
+  });
+})();
+</script>
+
+</body>
+</html>
