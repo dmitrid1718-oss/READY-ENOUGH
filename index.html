@@ -224,6 +224,27 @@ footer strong{color:var(--ink)}
   /* Essentials only: big print card + help now + contact sheet */
   body:has(#pr-ess:checked) .guide-only{display:none!important}
 }
+
+/* Official emergency alert verification */
+.alert-center{border:3px solid var(--ink);background:var(--surface);padding:clamp(16px,3vw,28px);margin:24px 0;display:grid;gap:14px;scroll-margin-top:12px}
+.alert-center h2{font-size:clamp(26px,4vw,38px)}
+.alert-head{display:flex;gap:12px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
+.alert-label{font:700 12px var(--font-mono);padding:7px 10px;background:var(--warn-soft);border:1px solid var(--warn)}
+.alert-form{display:flex;gap:8px;flex-wrap:wrap;align-items:end}
+.alert-form label{flex:1 1 190px;font-size:15px;font-weight:700}
+.alert-form input,.alert-form select{width:100%;display:block;padding:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.alert-form button{padding:12px 16px;background:var(--accent);color:white;border:0;cursor:pointer;font:700 15px var(--font-body)}
+.alert-links{display:flex;gap:12px;flex-wrap:wrap}
+.alert-links a{font-weight:700;font-size:15px}
+.alert-status{background:var(--warn-soft);border-left:5px solid var(--warn);padding:10px 14px}
+.alert-result{border-bottom:1px solid var(--line);padding:10px 0}
+.alert-result strong{display:block}
+.alert-result small{display:block;color:var(--muted)}
+.alert-offline{border-top:2px solid var(--line);padding-top:12px}
+.alert-offline ol{margin:8px 0;padding-left:23px}
+.alert-offline li{margin:5px 0}
+@media print{.alert-form button,.alert-links{display:none!important}.alert-center{border:2px solid #000} }
+
 </style>
 </head>
 <body>
@@ -258,6 +279,46 @@ footer strong{color:var(--ink)}
       <p>Choose, then use your browser's Print command (Ctrl+P, or ⌘P on a Mac). Fill in your local contacts below first so they print too. Keep the copy where everyone in the house can find it.</p>
     </div>
   </div>
+
+
+  <!-- Emergency alerts: official feed online; instructions and saved snapshot offline. -->
+  <section class="alert-center" id="alerts" aria-labelledby="alert-title">
+    <div class="alert-head">
+      <div><p class="eyebrow">Emergency Alert Verification</p><h2 id="alert-title">Is this warning real?</h2></div>
+      <span class="alert-label" id="alert-connection">STATUS NOT YET CHECKED</span>
+    </div>
+    <p>Verify suspicious warnings using independent official sources. <strong>ReadyEnough is not an emergency alert service</strong> and does not replace Wireless Emergency Alerts, NOAA Weather Radio, or local officials.</p>
+    <div class="alert-form">
+      <label>Your town (saved on this device)
+        <input id="alert-town" type="text" maxlength="100" autocomplete="address-level2" placeholder="e.g. Vernon Hills">
+      </label>
+      <label>State for official weather alerts
+        <select id="alert-state" aria-label="State">
+          <option value="">Choose state</option>
+        </select>
+      </label>
+      <button type="button" id="alert-check">Check official alerts</button>
+    </div>
+    <div class="alert-status" id="alert-status" role="status" aria-live="polite">Not checked. A missing warning here never means that an area is safe.</div>
+    <div id="alert-results" aria-live="polite"></div>
+    <p class="privacy" id="alert-coverage">NWS feed covers weather and some other warnings, <strong>not all emergencies</strong>. State-level results may include alerts outside your town. The town name stays on your device and does not filter the state feed.</p>
+    <nav class="alert-links" aria-label="Independent official sources">
+      <a href="https://www.weather.gov/" target="_blank" rel="noopener">National Weather Service ↗</a>
+      <a href="https://www.ready.gov/alerts" target="_blank" rel="noopener">FEMA alert guidance ↗</a>
+      <a href="https://www.usa.gov/state-emergency-management" target="_blank" rel="noopener">Local emergency management ↗</a>
+      <a href="https://www.weather.gov/nwr/" target="_blank" rel="noopener">NOAA Weather Radio ↗</a>
+    </nav>
+    <div class="alert-offline">
+      <h3>If the alert system is hacked or the internet fails</h3>
+      <ol>
+        <li>For an immediate threat, follow protective instructions from trusted officials. Call <strong>911</strong> for an emergency; don't delay urgent action while checking a website.</li>
+        <li>Cross-check via NOAA Weather Radio, local broadcast radio/TV, and your county emergency-management number on your printed contact sheet.</li>
+        <li>Verify the location, issuing authority, time and exact instructions. Treat forwarded screenshots and social media posts as unverified.</li>
+        <li>If offline, any stored feed results are <strong>historical snapshots, not current warnings</strong>. Your printed emergency plan remains available.</li>
+      </ol>
+      <p class="privacy">No account, tracking or server-side storage by ReadyEnough. Live checks contact api.weather.gov, which receives normal network request information. Local town and state preferences stay in your browser.</p>
+    </div>
+  </section>
 
   <!-- BIG PRINT CARD -->
   <article class="bigprint" aria-labelledby="bp-title">
@@ -1181,6 +1242,77 @@ footer strong{color:var(--ink)}
     m.textContent='Preview: the mailing list opens at launch. Your address was not sent anywhere.';
     m.hidden=false;
   });
+
+  // Emergency alert verification: state-wide NWS feed, never "all clear".
+  (function(){
+    var states='AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY DC'.split(' ');
+    var select=document.getElementById('alert-state'),town=document.getElementById('alert-town');
+    var button=document.getElementById('alert-check'),status=document.getElementById('alert-status');
+    var badge=document.getElementById('alert-connection'),results=document.getElementById('alert-results');
+    states.forEach(function(x){var o=document.createElement('option');o.value=x;o.textContent=x;select.appendChild(o)});
+    town.value=store.get('re-alert-town')||'';
+    select.value=store.get('re-alert-state')||'';
+    town.addEventListener('input',function(){store.set('re-alert-town',town.value)});
+    select.addEventListener('change',function(){store.set('re-alert-state',select.value);displaySnapshot()});
+    function stamp(v){if(!v)return 'Not supplied';var d=new Date(v);return isNaN(+d)?'Not supplied':d.toLocaleString()}
+    function clean(){results.replaceChildren()}
+    function node(tag,txt){var n=document.createElement(tag);n.textContent=txt;return n}
+    function displaySnapshot(){
+      clean();
+      var cached=store.get('re-alert-snapshot');
+      if(!cached||cached.state!==select.value)return;
+      status.textContent='OFFLINE / STORED COPY ONLY. Last successful state-feed check: '+stamp(cached.checked)+'. These alerts may have changed. Cannot establish current safety.';
+      badge.textContent='STORED / NOT LIVE';
+      render(cached.alerts,true);
+    }
+    function render(alerts,old){
+      clean();
+      if(!alerts.length){results.appendChild(node('p',old?'The stored feed contained no alerts when last checked. This is NOT an all-clear.':'The NWS state feed returned zero active alerts at the time checked. This is NOT an all-clear.'));return}
+      var label=node('p',(old?'Stored':'Live checked')+' NWS state-feed items: '+alerts.length+'. Some may not apply to your town.');results.appendChild(label);
+      alerts.slice(0,50).forEach(function(a){
+        var block=document.createElement('div');block.className='alert-result';
+        block.appendChild(node('strong',a.event||'NWS alert'));
+        block.appendChild(node('p',(a.headline||'')+' — '+(a.areaDesc||'Area not specified')));
+        block.appendChild(node('small','Issued: '+stamp(a.sent)+' · Expires: '+stamp(a.expires)+' · Source: '+(a.senderName||'National Weather Service')));
+        if(a.url && /^https:\/\/api\.weather\.gov\//.test(a.url)){var link=node('a','Official NWS alert details ↗');link.href=a.url;link.target='_blank';link.rel='noopener';block.appendChild(link)}
+        results.appendChild(block);
+      });
+      if(alerts.length>50)results.appendChild(node('p','Showing first 50 items. Open NWS for the full list.'));
+    }
+    button.addEventListener('click',async function(){
+      var state=select.value;
+      if(!state){status.textContent='Choose a state first. No live check was performed.';return}
+      store.set('re-alert-state',state);store.set('re-alert-town',town.value);
+      button.disabled=true;status.textContent='Contacting National Weather Service...';badge.textContent='CHECKING';
+      try{
+        var controller=new AbortController(),timeout=setTimeout(function(){controller.abort()},12000);
+        var response;
+        try{response=await fetch('https://api.weather.gov/alerts/active?area='+encodeURIComponent(state),{headers:{Accept:'application/geo+json'},signal:controller.signal,cache:'no-store'})}finally{clearTimeout(timeout)}
+        if(!response.ok)throw new Error('HTTP '+response.status);
+        var body=await response.json();
+        if(!Array.isArray(body.features))throw new Error('Unexpected response');
+        var a=body.features.map(function(f){
+          var p=f.properties||{};
+          return {event:p.event,headline:p.headline,areaDesc:p.areaDesc,sent:p.sent,expires:p.expires,senderName:p.senderName,url:p['@id']||p.id||f.id};
+        });
+        var checked=new Date().toISOString();
+        store.set('re-alert-snapshot',{state:state,checked:checked,alerts:a.slice(0,100)});
+        status.textContent='Live NWS state feed checked '+stamp(checked)+' for '+state+'. State-wide weather coverage only; NOT a town-specific all-hazards clearance.';
+        badge.textContent='NWS FEED CHECKED';render(a,false);
+      }catch(err){
+        status.textContent='UNABLE TO VERIFY LIVE ALERTS. The official feed could not be reached. Do not assume safety; use NOAA Weather Radio and local authorities.';
+        badge.textContent='LIVE STATUS UNKNOWN';displaySnapshot();
+        // Keep the unavailable state explicit even after rendering a historical snapshot.
+        if(badge.textContent==='STORED / NOT LIVE')status.textContent='UNABLE TO VERIFY LIVE ALERTS. Showing historical snapshot only. Last checked '+stamp((store.get('re-alert-snapshot')||{}).checked)+'.';
+      }finally{button.disabled=false}
+    });
+    if(select.value)displaySnapshot();
+  })();
+  // Save the site's own emergency instructions for later offline access.
+  if('serviceWorker' in navigator && location.protocol==='https:'){
+    window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){})});
+  }
+
 })();
 </script>
 
