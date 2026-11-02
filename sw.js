@@ -1,6 +1,6 @@
 /* ReadyEnough offline shell. No background tracking or notification service. */
-const CACHE='readyenough-shell-v1';
-const SHELL=['./','./index.html'];
+const CACHE='readyenough-shell-v2';
+const SHELL=['./','./index.html','./logo.svg'];
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting()));
 });
