@@ -272,6 +272,22 @@ html,body{max-width:100%;overflow-x:clip}
  .printbox{padding:12px}
  .context .ninety{font-size:52px}
 }
+
+/* Everyday readiness: compact tool drawer, accessible on phones and in print */
+.everyday .ready-start{background:var(--accent-soft);padding:18px 20px;display:grid;gap:10px}
+.everyday .ready-start h3{font-size:22px}
+.everyday .ready-start p{max-width:70ch}
+.everyday .ready-topics{border-top:1px solid var(--line)}
+.everyday .ready-topics details{border-bottom:1px solid var(--line)}
+.everyday .ready-topics summary{list-style:none;display:flex;align-items:center;gap:16px;padding:15px 8px;cursor:pointer;font-weight:700;font-size:17px}
+.everyday .ready-topics summary::-webkit-details-marker{display:none}
+.everyday .ready-topics summary::after{content:"+";margin-left:auto;font-size:22px;font-weight:500;color:var(--accent)}
+.everyday .ready-topics details[open] summary::after{content:"−"}
+.everyday .ready-num{font:700 13px var(--font-mono);color:var(--accent);min-width:26px}
+.everyday .ready-detail{padding:0 16px 14px 50px;max-width:76ch}
+.everyday .ready-detail p{margin:0 0 8px}
+@media(max-width:600px){.everyday .ready-start{padding:14px}.everyday .ready-detail{padding-left:12px}.everyday .ready-topics summary{font-size:16px;gap:10px}}
+@media print{.everyday details .ready-detail{display:block!important}.everyday .ready-start,.everyday details{break-inside:avoid-page}}
 </style>
 </head>
 <body>
@@ -1161,6 +1177,33 @@ html,body{max-width:100%;overflow-x:clip}
   </section>
 
   <div class="guide-only">
+
+  <!-- Everyday readiness: straightforward, optional tools; core emergency guidance remains above. -->
+  <section class="topic everyday" id="everyday">
+    <header><p class="eyebrow">Small steps. Real life.</p><h2>Everyday readiness</h2><p>More practical tools, without more clutter. Open only what you need.</p></header>
+    <div class="ready-start"><h3>Seven small steps</h3><p>Check off what you've done. Saved in this browser, not on a ReadyEnough server.</p><ul class="check">
+      <li><label><input type="checkbox" id="r1"><span>Store three days of drinking water</span></label></li>
+      <li><label><input type="checkbox" id="r2"><span>Write down essential phone numbers</span></label></li>
+      <li><label><input type="checkbox" id="r3"><span>Get to know two nearby people who can help</span></label></li>
+      <li><label><input type="checkbox" id="r4"><span>Check flashlight and batteries</span></label></li>
+      <li><label><input type="checkbox" id="r5"><span>Save this guide for offline use</span></label></li>
+      <li><label><input type="checkbox" id="r6"><span>Agree on two family meeting places</span></label></li>
+      <li><label><input type="checkbox" id="r7"><span>Put important documents somewhere safe</span></label></li>
+    </ul><p class="privacy">Use the Print First option above for your essentials card and local contact sheet.</p></div>
+    <div class="ready-topics">
+      <details><summary><span class="ready-num">01</span>Neighborhood lifeboat</summary><div class="ready-detail"><p>Talk with two or three neighbors. Exchange phone numbers on paper, agree on a check-in plan, and ask who may need help. Get permission before sharing anyone’s details.</p><p class="src"><a href="https://www.ready.gov/plan" target="_blank" rel="noopener">Ready.gov: Make a Plan ↗</a></p></div></details>
+      <details><summary><span class="ready-num">02</span>Financial lifeboat</summary><div class="ready-detail"><p>List essential expenses: housing, food, utilities, medicine and transportation. Keep customer-service numbers on paper. If income stops, contact lenders and utilities early about hardship options; avoid high-fee loans.</p><p class="src"><a href="https://www.consumerfinance.gov/consumer-tools/disasters-and-emergencies/" target="_blank" rel="noopener">CFPB: Financial preparedness ↗</a></p></div></details>
+      <details><summary><span class="ready-num">03</span>Clear head: the first three minutes</summary><div class="ready-detail"><p>Ask: Am I in immediate danger? What single useful action can I take? Who should I contact? Do that first. In a life-threatening emergency, move to safety and call emergency services.</p><p class="src"><a href="https://www.ready.gov/plan" target="_blank" rel="noopener">Ready.gov: Make a Plan ↗</a></p></div></details>
+      <details><summary><span class="ready-num">04</span>Is this information real?</summary><div class="ready-detail"><p>Check the issuing authority, location, date and instructions before forwarding an alarming warning. Verify through independent official channels or local radio. A screenshot alone is not evidence. Use the alert center above.</p><p class="src"><a href="https://www.ready.gov/alerts" target="_blank" rel="noopener">Ready.gov: Alerts ↗</a></p></div></details>
+      <details><summary><span class="ready-num">05</span>Fix it before replacing it</summary><div class="ready-detail"><p>Know your main water shutoff, electrical panel and utility emergency numbers. Keep basic tools and a working flashlight. Never attempt live-electrical or gas-line repairs; leave suspected gas leaks and call the utility.</p><p class="src"><a href="https://www.ready.gov/power-outages" target="_blank" rel="noopener">Ready.gov: Power Outages ↗</a></p></div></details>
+      <details><summary><span class="ready-num">06</span>Helping someone vulnerable</summary><div class="ready-detail"><p>Ask family and neighbors what support they would actually want. Plan for accessibility, medication, medical devices requiring electricity, backup caregivers and accessible transport.</p><p class="src"><a href="https://www.ready.gov/disability" target="_blank" rel="noopener">Ready.gov: Disability and emergencies ↗</a></p></div></details>
+      <details><summary><span class="ready-num">07</span>When the internet disappears</summary><div class="ready-detail"><p>Keep a battery or hand-crank radio, printed contacts and two family meeting places. Know where to find NOAA Weather Radio broadcasts. Practice using your plan without a network connection.</p><p class="src"><a href="https://www.weather.gov/nwr/" target="_blank" rel="noopener">NOAA Weather Radio ↗</a></p></div></details>
+      <details><summary><span class="ready-num">08</span>Work interrupted</summary><div class="ready-detail"><p>Keep a résumé and employment records accessible offline. Save employer and benefits contacts. If work stops, check official unemployment and workforce resources in your state; document any missed wages.</p><p class="src"><a href="https://www.careeronestop.org/" target="_blank" rel="noopener">CareerOneStop ↗</a></p></div></details>
+      <details><summary><span class="ready-num">09</span>Important papers pack</summary><div class="ready-detail"><p>Prepare an accessible, secure list of IDs, insurance details, prescriptions, contacts and key documents. Keep paper copies protected from fire and water. Do not upload sensitive documents here.</p><p class="src"><a href="https://www.ready.gov/financial-preparedness" target="_blank" rel="noopener">Ready.gov: Financial Preparedness ↗</a></p></div></details>
+      <details><summary><span class="ready-num">10</span>Life goes on</summary><div class="ready-detail"><p>Keep small routines, share clear information with children, and spend more time on useful actions than repeated headline checking. Check in with neighbors and ask for help when needed.</p><p class="src"><a href="https://www.ready.gov/plan" target="_blank" rel="noopener">Ready.gov: Make a Plan ↗</a></p></div></details>
+    </div><p class="privacy">This is general information, not a substitute for official emergency orders, medical care or professional financial advice. Most steps can be done with supplies you already own.</p>
+  </section>
+
   <!-- WHY NOW -->
   <section class="topic" id="why">
     <header><p class="eyebrow">Context, not a prediction</p><h2>Why now?</h2></header>
