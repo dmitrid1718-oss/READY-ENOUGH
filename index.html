@@ -288,6 +288,25 @@ html,body{max-width:100%;overflow-x:clip}
 .everyday .ready-detail p{margin:0 0 8px}
 @media(max-width:600px){.everyday .ready-start{padding:14px}.everyday .ready-detail{padding-left:12px}.everyday .ready-topics summary{font-size:16px;gap:10px}}
 @media print{.everyday details .ready-detail{display:block!important}.everyday .ready-start,.everyday details{break-inside:avoid-page}}
+
+/* Immediate assistance: calm, compact, direct. */
+.hardship{display:grid;gap:13px;border:2px solid var(--ink);background:var(--surface);padding:clamp(16px,2.5vw,24px);margin:20px 0 26px;scroll-margin-top:14px}
+.hardship h2{font-size:clamp(26px,3vw,34px)}
+.hardship-first{background:var(--accent-soft);border-left:5px solid var(--accent);padding:12px 14px;display:grid;gap:4px}
+.hardship-first strong{font-size:19px}
+.hardship-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.hardship-grid details{min-width:0;border:1px solid var(--line)}
+.hardship-grid summary{padding:12px;cursor:pointer;font-weight:750;list-style:none}
+.hardship-grid summary::-webkit-details-marker{display:none}
+.hardship-grid summary:after{content:"+";float:right;color:var(--accent)}
+.hardship-grid details[open] summary:after{content:"−"}
+.hardship-detail{padding:2px 12px 14px;font-size:15px}
+.hardship-detail ol{padding-left:22px;margin:4px 0}
+.hardship-detail li+li{margin-top:7px}
+.hardship-detail p+p{margin-top:8px}
+.hardship-script{border-top:1px solid var(--line);padding-top:10px}
+@media(max-width:680px){.hardship-grid{grid-template-columns:1fr}}
+@media print{.hardship-grid{display:block}.hardship-grid details{break-inside:avoid-page}.hardship-grid .hardship-detail{display:block!important}}
 </style>
 </head>
 <body>
@@ -307,7 +326,7 @@ html,body{max-width:100%;overflow-x:clip}
     <p class="sub">A practical household guide for people who have never prepared for anything. Take one step at a time. You don't need everything today.</p>
     <p class="promise"><strong>Our promise:</strong> we don't predict disasters, sell gear, or try to scare you. Every fact on this page links to the official source it came from.</p>
 
-    <nav class="doors" aria-label="Choose where to start">
+    <nav class="doors" aria-label="Choose where to start">\n      <a class="door" href="#help-with-nothing"><span>I have nothing. I need help.</span><small>Stranded, no money, no food or nowhere to sleep.</small></a>
       <a class="door" href="#prepare"><span>I'm preparing ahead</span><small>Build up at your own pace: 3 days, 1 week, 2 weeks.</small></a>
       <a class="door now" href="#now"><span>I need help now</span><small>Power out, unsafe water, evacuation, radiation, heat or cold.</small></a>
     </nav>
@@ -323,6 +342,59 @@ html,body{max-width:100%;overflow-x:clip}
     </div>
   </div>
 
+
+  <!-- Immediate practical help: no money, stranded, food or housing. -->
+  <section class="hardship" id="help-with-nothing" aria-labelledby="hardship-title">
+    <p class="eyebrow">No money. No one to call. Start here.</p>
+    <h2 id="hardship-title">I need help right now.</h2>
+    <p>You do not need an emergency kit or money to take the first step. Choose what you need. These are free information and referral services; assistance and availability vary locally.</p>
+    <div class="hardship-first">
+      <strong>Start with a real person: <a href="tel:211">Call 211</a></strong>
+      <span>Ask for food, a safe place, transportation help, or emergency assistance near you. If 211 cannot be reached, use <a href="https://www.211.org/" target="_blank" rel="noopener">211.org</a> while online. If there is immediate danger, call <a href="tel:911">911</a>.</span>
+    </div>
+    <div class="hardship-grid">
+      <details>
+        <summary>I'm stranded. My car is out of gas.</summary>
+        <div class="hardship-detail">
+          <ol>
+            <li>Get yourself somewhere safe. If the vehicle is in traffic or in a dangerous location, request roadside or emergency help. For immediate danger, call 911.</li>
+            <li>Call 211 and ask specifically about <strong>emergency transportation, fuel vouchers, or a ride to a safe place</strong>. Programs vary; a voucher is not guaranteed.</li>
+            <li>Ask the gas-station attendant whether a local community assistance program is known. Do not give a stranger your banking credentials or ID photos.</li>
+            <li>If your phone battery is low, make the essential call first and write down the next steps.</li>
+          </ol>
+        </div>
+      </details>
+      <details>
+        <summary>I have no money for food.</summary>
+        <div class="hardship-detail">
+          <p>Call 211 for a nearby food pantry or free meal. Ask if food is available <strong>today</strong> and whether transport or identification is required.</p>
+          <p><a href="https://www.usa.gov/emergency-food-assistance" target="_blank" rel="noopener">USAGov: Immediate food assistance ↗</a></p>
+        </div>
+      </details>
+      <details>
+        <summary>I have nowhere safe to sleep.</summary>
+        <div class="hardship-detail">
+          <p>Call 211 and ask for an <strong>emergency shelter bed tonight</strong>, intake hours, transport options and alternatives if beds are full. If your safety is threatened right now, call 911.</p>
+          <p><a href="https://www.usa.gov/emergency-housing" target="_blank" rel="noopener">USAGov: Emergency housing ↗</a></p>
+        </div>
+      </details>
+      <details>
+        <summary>I can't afford a bill or medicine.</summary>
+        <div class="hardship-detail">
+          <p>Call 211 for local utility assistance, low-cost clinics and medication support. Call your utility or pharmacy directly to ask about hardship programs, payment arrangements or safe prescription alternatives through a clinician. Do not abruptly stop essential medication without medical advice.</p>
+        </div>
+      </details>
+      <details>
+        <summary>I need someone to talk to.</summary>
+        <div class="hardship-detail">
+          <p>Ask 211 for local community support. If you're in emotional crisis, call or text <a href="tel:988"><strong>988</strong></a> for free, confidential support. For immediate physical danger, call 911.</p>
+        </div>
+      </details>
+    </div>
+    <p class="hardship-script"><strong>Not sure what to say?</strong> “I'm in [town]. I have no money and need help today with [food / a place to sleep / transport / medicine]. What is open now, and how do I reach it?”</p>
+    <p class="privacy">Save or print this page before a crisis. The instructions remain in the offline guide; external links and live local availability require a connection. No account or personal details are collected by ReadyEnough.</p>
+    <p class="src">Official references: <a href="https://211.org/about-us" target="_blank" rel="noopener">United Way 211</a> · <a href="https://www.usa.gov/emergency-food-assistance" target="_blank" rel="noopener">USAgov food help</a> · <a href="https://www.usa.gov/emergency-housing" target="_blank" rel="noopener">USAgov shelter help</a> · <a href="https://www.usa.gov/mental-health" target="_blank" rel="noopener">USAgov mental-health resources</a></p>
+  </section>
 
   <!-- Emergency alerts: official feed online; instructions and saved snapshot offline. -->
   <section class="alert-center" id="alerts" aria-labelledby="alert-title">
