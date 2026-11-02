@@ -307,6 +307,20 @@ html,body{max-width:100%;overflow-x:clip}
 .hardship-script{border-top:1px solid var(--line);padding-top:10px}
 @media(max-width:680px){.hardship-grid{grid-template-columns:1fr}}
 @media print{.hardship-grid{display:block}.hardship-grid details{break-inside:avoid-page}.hardship-grid .hardship-detail{display:block!important}}
+
+/* Someone Nearby: two simple paths, no public profiles. */
+.nearby{border:2px solid var(--accent);background:var(--surface);padding:clamp(16px,2.5vw,24px);display:grid;gap:13px;margin:22px 0 26px;scroll-margin-top:14px}
+.nearby h2{font-size:clamp(26px,3vw,34px)}
+.nearby-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.nearby-choice{background:var(--accent-soft);padding:16px;display:grid;align-content:start;gap:10px;min-width:0}
+.nearby-choice h3{font-size:22px}
+.nearby-action{display:inline-block;background:var(--accent);color:white;text-decoration:none;font-weight:750;padding:10px 12px;justify-self:start}
+.nearby-small{font-size:14px;color:var(--muted)}
+.nearby-guide{border-top:1px solid var(--line);padding-top:12px}
+.nearby-guide summary{font-weight:750;cursor:pointer}
+.nearby-guide ul{padding-left:23px}
+@media(max-width:680px){.nearby-choices{grid-template-columns:1fr}}
+@media print{.nearby-guide{display:block!important}}
 </style>
 </head>
 <body>
@@ -395,6 +409,39 @@ html,body{max-width:100%;overflow-x:clip}
     <p class="hardship-script"><strong>Not sure what to say?</strong> “I'm in [town]. I have no money and need help today with [food / a place to sleep / transport / medicine]. What is open now, and how do I reach it?”</p>
     <p class="privacy">Save or print this page before a crisis. The instructions remain in the offline guide; external links and live local availability require a connection. No account or personal details are collected by ReadyEnough.</p>
     <p class="src">Official references: <a href="https://211.org/about-us" target="_blank" rel="noopener">United Way 211</a> · <a href="https://www.usa.gov/emergency-food-assistance" target="_blank" rel="noopener">USAgov food help</a> · <a href="https://www.usa.gov/emergency-housing" target="_blank" rel="noopener">USAgov shelter help</a> · <a href="https://www.usa.gov/mental-health" target="_blank" rel="noopener">USAgov mental-health resources</a></p>
+  </section>
+
+  <!-- Someone Nearby: community help via established organizations, no public profiles. -->
+  <section class="nearby" id="someone-nearby" aria-labelledby="nearby-title">
+    <p class="eyebrow">Free help. Real people. Your community.</p>
+    <h2 id="nearby-title">Someone Nearby</h2>
+    <p>A little time, knowledge, or practical help can make a big difference. Find assistance or find a way to help through established local organizations.</p>
+    <div class="nearby-choices">
+      <div class="nearby-choice">
+        <h3>I need help</h3>
+        <p>Food, transportation, job guidance, housing, or a little practical support.</p>
+        <a class="nearby-action" href="https://www.211.org/" target="_blank" rel="noopener">Find help through 211 ↗</a>
+        <p class="nearby-small">You can also <a href="tel:211">call 211</a>. Assistance varies by community.</p>
+      </div>
+      <div class="nearby-choice">
+        <h3>I can help</h3>
+        <p>Offer time, a skill, mentoring or practical assistance through a local community organization.</p>
+        <a class="nearby-action" href="https://www.americorps.gov/join/find-volunteer-opportunity" target="_blank" rel="noopener">Find volunteer opportunities ↗</a>
+        <p class="nearby-small">Your library, community center or nonprofit may know where help is needed.</p>
+      </div>
+    </div>
+    <details class="nearby-guide">
+      <summary>What kind of help can someone offer?</summary>
+      <ul>
+        <li>Help someone find a job, improve a résumé or practice an interview.</li>
+        <li>Teach a practical skill or share knowledge from a trade.</li>
+        <li>Help troubleshoot a broken motorcycle, bicycle or other everyday equipment, within your competence and with safe arrangements.</li>
+        <li>Volunteer for food distribution, community transportation or checking on neighbors.</li>
+      </ul>
+      <p>For vehicles, safety-critical repairs such as brakes, tires and steering require qualified work and checks before riding. No one should ride an unsafe vehicle.</p>
+    </details>
+    <p class="privacy"><strong>Privacy and safety:</strong> ReadyEnough does not collect requests, publish profiles, directly match strangers, or verify volunteers. Third-party organizations have their own rules. Do not publish addresses, phone numbers or sensitive personal stories. Ask each organization about its safeguarding practices.</p>
+    <p class="privacy"><strong>Offline:</strong> save local organization numbers to your printed contact sheet in advance. These directories need an internet connection.</p>
   </section>
 
   <!-- Emergency alerts: official feed online; instructions and saved snapshot offline. -->
