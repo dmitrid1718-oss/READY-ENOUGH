@@ -33,3 +33,24 @@ Edition: October 30, 2026.
 - User-initiated GPS permission request, editable latitude/longitude, injury/party details, optional contact, copy message and open SMS draft.
 - There is NO automatic SOS dispatch, continuous beacon transmission, background tracking, or guaranteed queuing/retry/delivery. Call 911 first in immediate danger, use native satellite SOS if supported, and verify the recipient has received any message.
 - Test on iOS and Android browsers, offline, with location denied, with a cold GPS fix, and with no texting app available. Verify main navigation and accessibility.
+
+## ReadyEnough Pocket app — November 3, 2026
+
+A separate, mobile-first installable progressive web app is now in `app/`, linked from the main homepage.
+
+**Included**
+- New dedicated rescue-location icon (`app/icon.svg`) and PWA manifest.
+- Large red I NEED HELP button, on-demand browser geolocation, editable GPS coordinates, emergency situation details, optional trusted contact, copy-message and SMS draft.
+- Official NWS weather alert query by user-provided GPS coordinates, on demand only. Failure or no alerts is NEVER an all-clear.
+- Offline compass/GPS and pre-downloaded map guidance, radio-frequency guide and printable PDF, visual rescue-aircraft signaling instructions.
+- Local readiness checklist, offline shell cache, print/save-PDF using browser print.
+- Does NOT send any message on its own, dispatch help, schedule/retry SMS, activate satellite SOS, or transmit radio signals. Explicit receipt confirmation is needed.
+- The ZIP-frequency guide currently links to official lookup sources rather than automatically resolving station data.
+
+**Follow-up testing / deployment**
+- Confirm `https://readyenough.org/app/` serves the directory index and PWA manifest. App may require a manual server/deployment refresh.
+- Test actual Android/iOS installation, SMS composer link, geolocation permission/denial, accuracy, long GPS acquisition, alert request errors, and offline cold start.
+- Confirm `app/sw.js` caches `app/index.html`, icon, manifest and `radio-guide.html`; test with airplane mode. Neither NWS API nor remote lookup sites work offline.
+- SVG icons may need generated 192x192 and 512x512 PNG versions for broader home-screen install support. Current icon uses SVG.
+- Test accessible contrast, tap targets, manual coordinate entry, and all print/export instructions.
+- Do not claim this is a certified beacon or emergency service.
