@@ -882,6 +882,7 @@ html,body{max-width:100%;overflow-x:clip}
     <label class="beacon-field" for="beacon-number">Trusted contact phone number (optional) <input type="tel" id="beacon-number" placeholder="Phone number to text"></label>
     <div class="beacon-actions"><button type="button" id="beacon-copy">Copy Emergency Message</button><a id="beacon-text" href="sms:?body=I%20need%20help" >Open Text Message</a></div>
     <p id="beacon-message-status" role="status" aria-live="polite">Check the text and recipient before sending. Verify delivery; a failed or pending message is not a rescue request received.</p>
+<div class="beacon-warning"><h3>Check active alerts near your location</h3><p>With internet, check official National Weather Service alerts covering your GPS coordinates. This does not include every emergency and is not an all-clear.</p><div class="beacon-actions"><button type="button" id="beacon-alert-check">Check Active Alerts Near Me</button></div><p id="beacon-alert-status" role="status" aria-live="polite">Not checked. In immediate danger, contact 911 first.</p><div id="beacon-alert-results" aria-live="polite"></div><p class="privacy">This sends your coordinates to the National Weather Service only when you tap Check. No monitoring or automatic notifications. Offline? Use NOAA Weather Radio or local officials.</p></div>
     <p class="privacy">Location is requested only when you tap the button. Coordinates and details remain in this page and are not sent to ReadyEnough. The browser may ask for location access; acquisition can be slow or unavailable indoors or offline. On some phones, SMS links may not open without service.</p>
     <p class="src">This page is not a monitored emergency service. If a call fails, follow your phone's emergency SOS instructions. If you can communicate, give exact latitude and longitude, your condition, and the number of people who need help.</p>
   </section>
@@ -1621,6 +1622,33 @@ html,body{max-width:100%;overflow-x:clip}
       if(navigator.clipboard&&navigator.clipboard.writeText){
         navigator.clipboard.writeText(body).then(function(){feedback.textContent='Message copied. Paste into a text or another communication method; verify delivery.';}).catch(function(){feedback.textContent='Copy failed. Select the emergency message in your SMS draft or enter details manually.';});
       }else{feedback.textContent='Clipboard unavailable. Use Open Text Message or copy details manually.';}
+    });
+
+    var alertButton=document.getElementById('beacon-alert-check'),alertStatus=document.getElementById('beacon-alert-status'),alertResults=document.getElementById('beacon-alert-results');
+    if(alertButton)alertButton.addEventListener('click',async function(){
+      alertResults.replaceChildren();
+      if(!validCoords()){alertStatus.textContent='Enter valid coordinates or get GPS location first.';return;}
+      if(!navigator.onLine){alertStatus.textContent='OFFLINE — live alerts cannot be checked. No all-clear can be given. Use NOAA Weather Radio.';return;}
+      alertButton.disabled=true;alertStatus.textContent='Checking official NWS alerts…';
+      var controller=new AbortController(),timer=setTimeout(function(){controller.abort()},12000);
+      try{
+        var point=Number(lat.value.trim()).toFixed(4)+','+Number(lon.value.trim()).toFixed(4);
+        var res=await fetch('https://api.weather.gov/alerts/active?point='+encodeURIComponent(point),{headers:{Accept:'application/geo+json'},signal:controller.signal,cache:'no-store'});
+        if(!res.ok)throw new Error('Feed unavailable');
+        var data=await res.json();
+        if(!Array.isArray(data.features))throw new Error('Invalid feed');
+        var when=new Date().toLocaleString();
+        if(!data.features.length){alertStatus.textContent='Checked '+when+': no active NWS alerts returned for these coordinates. NOT an all-clear; other local hazards may exist.';}
+        else{
+          alertStatus.textContent='Checked '+when+': '+data.features.length+' active NWS alert(s) found. Follow official instructions.';
+          data.features.slice(0,20).forEach(function(f){
+            var p=f.properties||{},item=document.createElement('div'),heading=document.createElement('strong'),body=document.createElement('p');
+            heading.textContent=p.event||'Weather alert';body.textContent=[p.headline,p.areaDesc,p.instruction].filter(Boolean).join(' — ').slice(0,1800);
+            item.appendChild(heading);item.appendChild(body);item.style.padding='10px 0';alertResults.appendChild(item);
+          });
+        }
+      }catch(e){alertStatus.textContent='LIVE ALERT STATUS UNKNOWN — the official feed could not be checked. Do not assume safety; use weather radio or local authorities.';}
+      finally{clearTimeout(timer);alertButton.disabled=false;}
     });
     sms.addEventListener('click',update);update();
   })();
