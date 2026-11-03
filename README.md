@@ -27,3 +27,9 @@ Edition: October 30, 2026.
 - Offline maps must be downloaded while connected. Teach users to locate and record GPS coordinates, test airplane mode, and retain a paper map.
 - Do not promise that browser-based compass controls work across all phones. Prefer instructions for native phone features instead of an unreliable custom compass.
 - When reviewing the app, test offline navigation content, PDF export, and service-worker caching with network disabled.
+
+## App notes — Emergency Location Message (November 3, 2026)
+- Large red “I NEED HELP — LOCATION” button at top of homepage links to emergency-location panel.
+- User-initiated GPS permission request, editable latitude/longitude, injury/party details, optional contact, copy message and open SMS draft.
+- There is NO automatic SOS dispatch, continuous beacon transmission, background tracking, or guaranteed queuing/retry/delivery. Call 911 first in immediate danger, use native satellite SOS if supported, and verify the recipient has received any message.
+- Test on iOS and Android browsers, offline, with location denied, with a cold GPS fix, and with no texting app available. Verify main navigation and accessibility.
