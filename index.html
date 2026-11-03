@@ -321,6 +321,18 @@ html,body{max-width:100%;overflow-x:clip}
 .nearby-guide ul{padding-left:23px}
 @media(max-width:680px){.nearby-choices{grid-template-columns:1fr}}
 @media print{.nearby-guide{display:block!important}}
+
+.beacon-cta{display:block;margin:20px 0;padding:20px 24px;background:#b51c22;color:#fff;border:3px solid #7f1217;border-radius:12px;text-align:center;text-decoration:none}
+.beacon-cta strong{display:block;color:#fff;font-size:clamp(25px,5vw,36px);line-height:1.2}
+.beacon-cta small{display:block;color:#fff;font-size:15px;margin-top:7px}
+.beacon-actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.beacon-actions button,.beacon-actions a{font:inherit;font-weight:800;padding:11px 16px;background:#1d5c57;color:white;border:0;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block}
+.beacon-actions .urgent{background:#b51c22}
+.beacon-field{display:block;margin:14px 0;font-weight:700}
+.beacon-field input,.beacon-field textarea{display:block;width:100%;padding:11px;margin-top:5px;border:1px solid #8898a0;border-radius:5px;font:inherit;box-sizing:border-box}
+.beacon-field textarea{min-height:90px}
+.beacon-warning{background:#fff6ec;border-left:5px solid #ad6322;padding:14px;margin:12px 0}
+@media print{.beacon-cta,.beacon-actions{display:none!important}}
 </style>
 </head>
 <body>
@@ -340,6 +352,7 @@ html,body{max-width:100%;overflow-x:clip}
     <p class="sub">A practical household guide for people who have never prepared for anything. Take one step at a time. You don't need everything today.</p>
     <p class="promise"><strong>Our promise:</strong> we don't predict disasters, sell gear, or try to scare you. Every fact on this page links to the official source it came from.</p>
 
+    <a class="beacon-cta" href="#emergency-beacon"><strong>● I NEED HELP — LOCATION</strong><small>Get GPS coordinates · Prepare emergency text · Copy or send</small></a>
     <nav class="doors" aria-label="Choose where to start">
       <a class="door" href="#someone-nearby"><span>Someone Nearby</span><small>Quiet, useful help from your community.</small></a>
       <a class="door" href="#help-with-nothing"><span>I have nothing. I need help.</span><small>Stranded, no money, no food or nowhere to sleep.</small></a>
@@ -852,6 +865,25 @@ html,body{max-width:100%;overflow-x:clip}
       <li><label><input type="checkbox" id="h6"><span>Someone took a first aid/CPR class</span></label></li>
     </ul>
     <p class="src">Reviewed October 2026 · Sources: <a href="https://www.fda.gov/drugs/emergency-preparedness-drugs/safe-drug-use-after-natural-disaster" target="_blank" rel="noopener">FDA: Safe Drug Use After a Natural Disaster</a> · <a href="https://www.redcross.org/take-a-class" target="_blank" rel="noopener">American Red Cross: Take a Class</a> · <a href="https://www.stopthebleed.org/" target="_blank" rel="noopener">Stop the Bleed</a> · <a href="https://www.ready.gov/disability" target="_blank" rel="noopener">Ready.gov: People with Disabilities</a> · <a href="https://www.ready.gov/sites/default/files/2023-09/ready-gov_disaster-preparedness-guide-for-older-adults.pdf" target="_blank" rel="noopener">Ready.gov: Guide for Older Adults (PDF)</a> · <a href="https://acl.gov/emergencypreparedness" target="_blank" rel="noopener">ACL: Emergency Preparedness</a></p>
+  </section>
+
+
+  <section class="topic" id="emergency-beacon" aria-labelledby="beacon-title">
+    <header><p class="eyebrow">Emergency location message</p><h2 id="beacon-title">I Need Help — Share My Location</h2></header>
+    <p class="first"><b>In immediate danger? Call 911 first.</b> This tool can prepare a location message, but <strong>it is not a real emergency beacon</strong>. It does not alert rescuers, transmit by satellite, or automatically retry when signal returns. Do not assume help has been contacted until someone confirms receipt.</p>
+    <div class="beacon-warning"><strong>No signal?</strong> Your phone may still obtain GPS coordinates outdoors. Record them now, then text or share when a connection is available. On compatible phones, use the phone's built-in satellite SOS feature if available.</div>
+    <div class="beacon-actions"><a class="urgent" href="tel:911">Call 911</a><button type="button" id="beacon-locate">Get GPS Coordinates</button></div>
+    <p id="beacon-status" role="status" aria-live="polite">Location not requested. You may also enter coordinates from your phone's Compass or Maps app.</p>
+    <div class="fmt">
+      <div><label class="beacon-field" for="beacon-lat">Latitude <input type="text" id="beacon-lat" inputmode="decimal" placeholder="40.123456" autocomplete="off"></label></div>
+      <div><label class="beacon-field" for="beacon-lon">Longitude <input type="text" id="beacon-lon" inputmode="decimal" placeholder="-105.123456" autocomplete="off"></label></div>
+    </div>
+    <label class="beacon-field" for="beacon-details">What happened? How many people? Injuries? <textarea id="beacon-details" placeholder="Lost on trail. Two people. One injured ankle. Need assistance."></textarea></label>
+    <label class="beacon-field" for="beacon-number">Trusted contact phone number (optional) <input type="tel" id="beacon-number" placeholder="Phone number to text"></label>
+    <div class="beacon-actions"><button type="button" id="beacon-copy">Copy Emergency Message</button><a id="beacon-text" href="sms:?body=I%20need%20help" >Open Text Message</a></div>
+    <p id="beacon-message-status" role="status" aria-live="polite">Check the text and recipient before sending. Verify delivery; a failed or pending message is not a rescue request received.</p>
+    <p class="privacy">Location is requested only when you tap the button. Coordinates and details remain in this page and are not sent to ReadyEnough. The browser may ask for location access; acquisition can be slow or unavailable indoors or offline. On some phones, SMS links may not open without service.</p>
+    <p class="src">This page is not a monitored emergency service. If a call fails, follow your phone's emergency SOS instructions. If you can communicate, give exact latitude and longitude, your condition, and the number of people who need help.</p>
   </section>
 
   <!-- COMMS -->
@@ -1550,6 +1582,47 @@ html,body{max-width:100%;overflow-x:clip}
       }finally{button.disabled=false}
     });
     if(select.value)displaySnapshot();
+  })();
+
+  // Emergency message tool: user-requested geolocation only; no automatic sending.
+  (function(){
+    var locate=document.getElementById('beacon-locate'),lat=document.getElementById('beacon-lat'),lon=document.getElementById('beacon-lon'),
+        details=document.getElementById('beacon-details'),number=document.getElementById('beacon-number'),
+        status=document.getElementById('beacon-status'),feedback=document.getElementById('beacon-message-status'),
+        copy=document.getElementById('beacon-copy'),sms=document.getElementById('beacon-text');
+    if(!locate)return;
+    function validCoords(){
+      var a=Number(lat.value.trim()),b=Number(lon.value.trim());
+      return lat.value.trim()!==''&&lon.value.trim()!==''&&Number.isFinite(a)&&Number.isFinite(b)&&a>=-90&&a<=90&&b>=-180&&b<=180;
+    }
+    function message(){
+      var coords=validCoords()?lat.value.trim()+', '+lon.value.trim():'UNKNOWN (please help determine location)';
+      return 'EMERGENCY: I need help. GPS coordinates (latitude, longitude): '+coords+'. '+(details.value.trim()||'Condition/details not entered.')+' Please confirm you received this message.';
+    }
+    function update(){
+      var phone=number.value.replace(/[^0-9+]/g,'');
+      sms.href='sms:'+phone+'?body='+encodeURIComponent(message());
+    }
+    [lat,lon,details,number].forEach(function(el){el.addEventListener('input',update)});
+    locate.addEventListener('click',function(){
+      if(!navigator.geolocation){status.textContent='Location unavailable in this browser. Open your phone Compass or Maps app and enter coordinates manually.';return;}
+      locate.disabled=true;status.textContent='Requesting location. Allow permission if prompted; move to an open area if safe.';
+      navigator.geolocation.getCurrentPosition(function(pos){
+        lat.value=pos.coords.latitude.toFixed(6);lon.value=pos.coords.longitude.toFixed(6);
+        status.textContent='Coordinates acquired; estimated accuracy ±'+Math.round(pos.coords.accuracy)+' meters. Confirm your location before sharing.';
+        locate.disabled=false;update();
+      },function(err){
+        status.textContent='Could not get coordinates ('+(err.code===1?'permission denied':'signal unavailable or timed out')+'). Use your native Compass or Maps app to enter them manually.';
+        locate.disabled=false;
+      },{enableHighAccuracy:true,timeout:18000,maximumAge:0});
+    });
+    copy.addEventListener('click',function(){
+      var body=message();update();
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(body).then(function(){feedback.textContent='Message copied. Paste into a text or another communication method; verify delivery.';}).catch(function(){feedback.textContent='Copy failed. Select the emergency message in your SMS draft or enter details manually.';});
+      }else{feedback.textContent='Clipboard unavailable. Use Open Text Message or copy details manually.';}
+    });
+    sms.addEventListener('click',update);update();
   })();
   // Save the site's own emergency instructions for later offline access.
   if('serviceWorker' in navigator && location.protocol==='https:'){
