@@ -1,5 +1,39 @@
 {
+  "edition": "2026-11-08",
+  "edition_title": "Sunday · November 8, 2026",
+  "byline": "UI News Desk",
+  "updated_at": "2026-11-08",
   "items": [
+    {
+      "id": "ready-20261108-01",
+      "title": "Midwestern Winter Awareness Weeks Begin",
+      "category": "WINTER / PRACTICAL",
+      "body": "The National Weather Service lists winter-preparedness awareness periods beginning November 8 in Indiana and Michigan and November 9 in Illinois; Wisconsin follows November 16. This is scheduled education, not evidence of an imminent storm. Check heating, flashlights, medication supplies and travel plans while conditions are calm.",
+      "source": "National Weather Service preparedness calendar · Nov 2026",
+      "url": "https://www.weather.gov/safety/events_calendar",
+      "date": "2026-11-08",
+      "byline": "UI News Desk"
+    },
+    {
+      "id": "ready-20261108-02",
+      "title": "National Weather Service Sees Later-Week Pattern Changes",
+      "category": "WEATHER / OUTLOOK",
+      "body": "The Weather Prediction Center's November 8 extended discussion notes possible Pacific Northwest unsettled weather and a later cold rain or inland snow setup in the Northeast. Forecast uncertainty remains; consult local NWS warnings before taking action.",
+      "source": "NWS Weather Prediction Center · Nov 8, 2026",
+      "url": "https://forecast.weather.gov/product.php?format=txt&glossary=0&issuedby=EPD&product=PRE&site=PUB&version=1",
+      "date": "2026-11-08",
+      "byline": "UI News Desk"
+    },
+    {
+      "id": "ready-20261108-03",
+      "title": "Winter Vehicle Kit: Useful Before the First Breakdown",
+      "category": "SKILLS / PREPAREDNESS",
+      "body": "NWS winter guidance emphasizes risks from slick travel, cold exposure and utility outages. A small vehicle kit can prioritize warm layers, water, a flashlight, charged phone power, medication and a means to alert help. Avoid running a car in an enclosed space. Preparedness is a routine, not a prediction.",
+      "source": "National Weather Service winter preparedness guidance",
+      "url": "https://www.weather.gov/fsd/winter_preparedness",
+      "date": "2026-11-08",
+      "byline": "UI News Desk"
+    },
     {
       "id": "e4b-flight-2026-11-08",
       "title": "Why Was the E-4B 'Doomsday Plane' Flying?",
