@@ -1,4 +1,19 @@
 {
-  "updated_at": null,
-  "items": []
+  "updated_at": "2026-11-09T22:22:17.994025+00:00",
+  "feed": "Google News RSS",
+  "query": "emergency preparedness weather disaster power outage public safety infrastructure resilience",
+  "items": [
+    {
+      "title": "Jersey Ready: What It Takes to Weather a Historic Storm - TD World",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNVE1LSkU4VzJIZGhQT05veDcybW1jelJ0TnRtU3RRSG1zY19hcVVvNGlpYloyODZpa3lxZ01saUIwRDJwTm85VVpCd250T2RLeTQ1VjFrWjJHb1dUamZlMkNHVWNDdnB2RGxlUDRlU1V4QVZHRlRBVUZscUpRbTNxbDRFRktNSEcya0FrZmM1M1RaSUR0TDRkYzNCOVpDWnJaZzZ1anJId1N3dDkzczdOaGkwSU5MUldETkpWbWpwOA?oc=5",
+      "source": "TD World",
+      "published": "2026-11-09T20:44:33+00:00"
+    },
+    {
+      "title": "What happens if the internet goes down? BlackSky - the UK's emergency backup plans - BBC",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5PeXdBblJaMWtDRzFMeXBNcU0wMnRaWVZiZzVSSUdZZW05Y1pLZXFkNEVFOFpLeVd4TkU4VmxZa05OOEs1TFBFYlRBVFNKbnR1ZUp1ZXR5QnBjeC1PRmc?oc=5",
+      "source": "BBC",
+      "published": "2026-11-07T00:31:54+00:00"
+    }
+  ]
 }
