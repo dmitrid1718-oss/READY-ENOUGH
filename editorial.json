@@ -1,9 +1,29 @@
 {
-  "edition": "2026-11-08",
-  "edition_title": "Sunday · November 8, 2026",
+  "edition": "2026-11-09",
+  "edition_title": "Monday morning · November 9, 2026",
   "byline": "UI News Desk",
-  "updated_at": "2026-11-08",
+  "updated_at": "2026-11-09",
   "items": [
+    {
+      "id": "ready-20261109-winter",
+      "title": "Illinois Winter Preparedness Week Begins",
+      "category": "WINTER / PRACTICAL",
+      "body": "The National Weather Service preparedness calendar lists Illinois winter awareness week beginning November 9. It is an education campaign, not a storm warning. Check heat, flashlights, batteries, essential medications, water and a small vehicle kit while conditions are calm.",
+      "source": "National Weather Service · November 2026",
+      "url": "https://www.weather.gov/safety/events_calendar",
+      "date": "2026-11-09",
+      "byline": "UI News Desk"
+    },
+    {
+      "id": "ready-20261109-energy",
+      "title": "Ukraine Energy Infrastructure: Prepare for Disruption, Avoid Rumor",
+      "category": "MILITARY WATCH / CIVILIAN INFRASTRUCTURE",
+      "body": "Recent reporting documents continuing Russian attacks on Ukrainian energy facilities and serious consequences for civilian electricity service. Prioritize verified local utility notices, safe backup power, charging and communication plans. This item is a preparedness context update, not a claim of a newly verified November 9 strike or imminent escalation.",
+      "source": "Reuters · Sep 30, 2026; AP peace talks reporting · Nov 9, 2026",
+      "url": "https://apnews.com/article/81537cce8daf84b24bf73a91addb6e9b",
+      "date": "2026-11-09",
+      "byline": "UI News Desk"
+    },
     {
       "id": "ready-20261108-01",
       "title": "Midwestern Winter Awareness Weeks Begin",
