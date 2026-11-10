@@ -1,9 +1,29 @@
 {
-  "edition": "2026-11-09",
-  "edition_title": "Monday morning · November 9, 2026",
+  "edition": "2026-11-10",
+  "edition_title": "Tuesday morning · November 10, 2026",
   "byline": "UI News Desk",
-  "updated_at": "2026-11-09",
+  "updated_at": "2026-11-10",
   "items": [
+    {
+      "id": "ready-20261110-eas",
+      "title": "Nationwide Emergency Alert System Test Set for Nov. 17",
+      "category": "COMMUNICATIONS / TEST",
+      "body": "FEMA and the FCC plan a nationwide Emergency Alert System test at 2:20 p.m. Eastern on November 17 (1:20 p.m. Central). Radio, television, cable, satellite, and wireline video providers will carry the test; Wireless Emergency Alerts to phones are not part of this test. It is a scheduled system test, not an emergency alert.",
+      "source": "Federal Communications Commission · 2026",
+      "url": "https://docs.fcc.gov/public/attachments/DA-26-989A1.pdf",
+      "date": "2026-11-10",
+      "byline": "UI News Desk"
+    },
+    {
+      "id": "ready-20261110-radio",
+      "title": "A Blackout Plan Built Around Radio and Offline Links",
+      "category": "COMMUNICATIONS / RESILIENCE",
+      "body": "A BBC report describes a UK emergency broadcasting plan with radio transmission sites designed to operate apart from the internet, plus backup power and supplies for staff. This is a broadcaster’s contingency plan, not a warning that a blackout is expected. The practical lesson for households is modest: know a local broadcast source and keep a battery or hand-crank radio usable.",
+      "source": "BBC News · Nov. 7, 2026",
+      "url": "https://bbc.in/4BLDC3u",
+      "date": "2026-11-10",
+      "byline": "UI News Desk"
+    },
     {
       "id": "ready-20261109-winter",
       "title": "Illinois Winter Preparedness Week Begins",
