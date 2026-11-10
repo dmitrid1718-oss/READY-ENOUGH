@@ -334,7 +334,33 @@ html,body{max-width:100%;overflow-x:clip}
 .beacon-warning{background:#fff6ec;border-left:5px solid #ad6322;padding:14px;margin:12px 0}
 @media print{.beacon-cta,.beacon-actions{display:none!important}}
 </style>
-</head>
+<style>
+/* Compact reading scale; keep the deliberately large-print emergency card unchanged. */
+.hero h1{font-size:clamp(26px,3.7vw,40px)}.hero .sub{font-size:clamp(15px,1.6vw,17px)}.promise{font-size:15px}
+.door{padding:16px 18px;min-height:104px}.door span{font-size:clamp(18px,2vw,23px)}.door small{font-size:14px}
+.printbox{font-size:14px}.printbox h2{font-size:18px}.printbox p{font-size:14px}
+.beacon-cta{padding:16px 20px}.beacon-cta strong{font-size:clamp(22px,4vw,30px)}.beacon-cta small{font-size:14px}
+.band h2{font-size:clamp(26px,3vw,32px)}
+.topic h2,.hardship h2,.nearby h2,.alert-center h2,.community h2{font-size:clamp(24px,2.8vw,30px)}
+.topic .first,.band p,.topic p,.topic li,.nearby p,.nearby li,.alert-center p{font-size:15px}
+.now-card h3{font-size:19px}.now-card ol{font-size:15px}
+@media(max-width:600px){.hero h1{font-size:clamp(26px,7vw,32px)}.hero .sub{font-size:16px}.door{min-height:88px;padding:13px 15px}.door span{font-size:20px}.beacon-cta strong{font-size:23px}}
+.community{border:2px solid var(--accent);background:var(--surface);padding:clamp(16px,2.5vw,24px);display:grid;gap:14px;margin:22px 0 28px;scroll-margin-top:14px}
+.community h2{max-width:24ch}.community-lead{max-width:76ch;color:var(--muted)}
+.community-first{background:var(--accent-soft);padding:16px 18px}.community-first h3,.community-sheet h3{font-size:19px;margin-bottom:8px}
+.community-first ol{margin:0;padding-left:23px}.community-first li+li{margin-top:6px}
+.community-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.community-grid details{border:1px solid var(--line);min-width:0}
+.community-grid summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:750;font-size:15px}
+.community-grid summary::-webkit-details-marker{display:none}.community-grid summary:after{content:"+";float:right;color:var(--accent);font-size:19px}
+.community-grid details[open] summary:after{content:"−"}
+.community-detail{padding:0 14px 14px;font-size:15px;max-width:75ch}.community-detail p+p{margin-top:8px}
+.community-sheet{border:1px solid var(--line);padding:16px 18px}.community-sheet p{font-size:14px;color:var(--muted);margin-bottom:8px}
+.community-sheet ul{list-style:none;margin:0;padding:0}.community-sheet li{padding:6px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.community-sources{font-size:14px;color:var(--muted)}.community-sources a{font-weight:650}
+@media(max-width:680px){.community-grid{grid-template-columns:1fr}.community-first{padding:14px}.community-sheet{padding:14px}}
+@media print{.community-grid{display:block}.community-grid details{break-inside:avoid-page}.community-grid .community-detail{display:block!important}.community{break-inside:avoid-page}}
+</style></head>
 <body>
 
 
@@ -359,6 +385,7 @@ html,body{max-width:100%;overflow-x:clip}
       <a class="door" href="#help-with-nothing"><span>I have nothing. I need help.</span><small>Stranded, no money, no food or nowhere to sleep.</small></a>
       <a class="door" href="#prepare"><span>I'm preparing ahead</span><small>Build up at your own pace: 3 days, 1 week, 2 weeks.</small></a>
       <a class="door now" href="#now"><span>I need help now</span><small>Power out, unsafe water, evacuation, radiation, heat or cold.</small></a>
+      <a class="door" href="#community"><span>Build your community</span><small>Make a simple plan with people nearby.</small></a>
     </nav>
 
     <div class="printbox">
@@ -458,6 +485,62 @@ html,body{max-width:100%;overflow-x:clip}
     </details>
     <p class="privacy"><strong>Privacy and safety:</strong> ReadyEnough does not collect requests, publish profiles, directly match strangers, or verify volunteers. Third-party organizations have their own rules. Do not publish addresses, phone numbers or sensitive personal stories. Ask each organization about its safeguarding practices.</p>
     <p class="privacy"><strong>Offline:</strong> save local organization numbers to your printed contact sheet in advance. These directories need an internet connection.</p>
+  </section>
+
+
+  <!-- Community readiness: practical, voluntary, privacy-conscious neighborhood planning. -->
+  <section class="community" id="community" aria-labelledby="community-title">
+    <p class="eyebrow">Prepared together · No panic, no pressure</p>
+    <h2 id="community-title">Build Your Community Before You Need It</h2>
+    <p class="community-lead"><strong>In a serious disruption, the people nearby may be the first people available.</strong> A useful neighborhood plan can start with three willing households and a few phone numbers on paper. Keep it voluntary, small, and grounded in local emergency guidance.</p>
+    <div class="community-first">
+      <h3>A simple first week</h3>
+      <ol>
+        <li><strong>Start with one conversation.</strong> Ask a neighbor you already know if they would like to make a basic check-in plan.</li>
+        <li><strong>Choose a small group.</strong> Add a few nearby households only if they want to participate. No dues, public roster, or special gear required.</li>
+        <li><strong>Agree on one scenario.</strong> For example: an overnight power outage, a boil-water notice, or a household member who needs a check-in.</li>
+        <li><strong>Write down the plan.</strong> Keep primary and backup contacts, check-in method, meeting place, and local official information on paper.</li>
+      </ol>
+    </div>
+    <div class="community-grid">
+      <details><summary>01 · Make contact before there is a crisis</summary><div class="community-detail">
+        <p>Introduce yourself in an ordinary moment. Offer a short conversation, not a commitment to join a group. Ask what would make a local plan useful to them, and accept “not now” without pressure.</p>
+        <p>Apartment buildings can start with a floor, hallway, or tenants’ association. Rural neighbors may need a wider area and a clear meeting point.</p>
+      </div></details>
+      <details><summary>02 · Agree how check-ins work</summary><div class="community-detail">
+        <p>Choose a primary and backup way to reach one another, such as text plus a paper note or a landline. Agree on when to check in, what a missed check-in means, and who will make the next attempt.</p>
+        <p>For immediate danger or urgent medical help, call 911. A neighbor check-in is not a substitute for emergency services, and nobody should promise a rescue they cannot safely provide.</p>
+      </div></details>
+      <details><summary>03 · Ask what people need and can offer</summary><div class="community-detail">
+        <p>Ask privately and with permission. Useful offers might include translation, a ride, charging a phone, pet help, a welfare check, childcare coordination, or knowledge of local services. Needs can include accessible transport, help receiving alerts, or backup power for essential equipment.</p>
+        <p>Do not label someone as vulnerable or share medical, disability, immigration, financial, or household details without their explicit permission. Needs can change; ask again rather than assuming.</p>
+      </div></details>
+      <details><summary>04 · Set clear limits for sharing help</summary><div class="community-detail">
+        <p>Agree on what is offered, for how long, and how to hand it off. Never share prescription medicines. Do not enter a home, use someone’s supplies, or share their contact details unless they have agreed. Keep any contact sheet private and give a copy only to participating households.</p>
+        <p>No one is required to provide labor, shelter, money, food, equipment, or personal information. People can pause or leave the plan at any time.</p>
+      </div></details>
+      <details><summary>05 · Practice once and connect with local responders</summary><div class="community-detail">
+        <p>Spend 15 minutes walking through one low-stress scenario: phones are down, it is dark, or a road is closed. Check whether everyone knows the meeting place, backup contact, and official source for instructions.</p>
+        <p>Ask your county or city emergency-management office about local plans, volunteer groups, accessibility resources, and Community Emergency Response Team (CERT) training. Follow official instructions; neighborhood volunteers should not self-deploy into dangerous areas.</p>
+      </div></details>
+    </div>
+    <div class="community-sheet" aria-label="Printable community plan prompts">
+      <h3>Write a one-page neighborhood plan</h3>
+      <p>Keep the completed copy with your household contact sheet. Share only with people who agreed to take part.</p>
+      <ul>
+        <li>Participating households / best contact method: __________________________________________</li>
+        <li>Primary check-in contact and backup: ____________________________________________________</li>
+        <li>When and how we check in: ______________________________________________________________</li>
+        <li>Meeting place and alternate: ____________________________________________________________</li>
+        <li>Local emergency-management website / phone: _____________________________________________</li>
+        <li>Next review date: _______________________________________________________________________</li>
+      </ul>
+    </div>
+    <p class="community-sources"><strong>Official starting points:</strong>
+      <a href="https://www.ready.gov/plan" target="_blank" rel="noopener">Ready.gov: Make a Plan ↗</a> ·
+      <a href="https://www.redcross.org/get-help/how-to-prepare-for-emergencies/older-adults/building-your-support-network.html" target="_blank" rel="noopener">American Red Cross: Build a Support Network ↗</a> ·
+      <a href="https://training.fema.gov/programs/independent-study/courseoverview.aspx?code=IS-317.a&amp;lang=en" target="_blank" rel="noopener">FEMA: Introduction to CERT ↗</a>
+    </p>
   </section>
 
   <!-- Emergency alerts: official feed online; instructions and saved snapshot offline. -->
