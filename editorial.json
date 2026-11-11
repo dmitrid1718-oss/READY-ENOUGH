@@ -1,9 +1,31 @@
 {
-  "edition": "2026-11-10",
-  "edition_title": "Tuesday morning · November 10, 2026",
+  "edition": "2026-11-11",
+  "edition_title": "Wednesday morning · November 11, 2026",
   "byline": "UI News Desk",
-  "updated_at": "2026-11-10",
+  "updated_at": "2026-11-11",
   "items": [
+    {
+      "id": "ready-20261111-ukraine-grid",
+      "title": "Ukraine's Winter Grid Risks Reinforce Backup Basics",
+      "category": "POWER / PRACTICAL PREPAREDNESS",
+      "date": "2026-11-04",
+      "edition_date": "2026-11-11",
+      "source": "International Energy Agency · November 4, 2026",
+      "url": "https://www.iea.org/news/ukraine-s-energy-system-faces-significant-risks-this-winter-as-russian-threat-evolves",
+      "body": "The IEA warns Ukraine faces substantial electricity and heating risks as attacks evolve. It recommends distributed generation, storage, grid equipment connection and protecting district heating. Practical household reminder, wherever you live: keep charged lights, a safe charging plan, water, and a written contact plan. Never run fuel-burning generators indoors.",
+      "status": "Confirmed"
+    },
+    {
+      "id": "ready-20261111-infrastructure",
+      "title": "Critical Infrastructure Month: Check the Basics, Not the Rhetoric",
+      "category": "INFRASTRUCTURE / READINESS",
+      "date": "2026-11-10",
+      "edition_date": "2026-11-11",
+      "source": "White House · November 10, 2026",
+      "url": "https://www.whitehouse.gov/briefings-statements/2026/11/presidential-message-on-critical-infrastructure-security-and-resilience-month-aa39/",
+      "body": "The White House marked Critical Infrastructure Security and Resilience Month, emphasizing power, water and communications systems. The message is a policy statement, not an emergency warning. For families, make sure phone numbers, medication information, emergency radio options and short-term power plans are available offline.",
+      "status": "Confirmed"
+    },
     {
       "id": "ready-20261110-eas",
       "title": "Nationwide Emergency Alert System Test Set for Nov. 17",
