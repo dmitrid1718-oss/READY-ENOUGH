@@ -1,9 +1,42 @@
 {
-  "edition": "2026-11-11",
-  "edition_title": "Wednesday morning · November 11, 2026",
+  "edition": "2026-11-12",
+  "edition_title": "Thursday morning · November 12, 2026",
   "byline": "UI News Desk",
-  "updated_at": "2026-11-11",
+  "updated_at": "2026-11-12",
   "items": [
+    {
+      "id": "ready-20261112-grid",
+      "title": "Fresh Attacks Reinforce Winter Power Readiness",
+      "category": "UKRAINE / POWER",
+      "date": "2026-11-12",
+      "edition_date": "2026-11-12",
+      "source": "Reuters · Nov 12",
+      "url": "https://www.reuters.com/world/europe/russia-ukraine-exchange-attacks-capitals-us-envoys-head-moscow-2026-11-12/",
+      "body": "What changed: Overnight strikes affected civilian and energy infrastructure while negotiations continued. Status: Reported. Why watch: official local outage notices; charge lights and power banks, store water, keep offline contacts. Never use generators indoors.",
+      "status": "Reported"
+    },
+    {
+      "id": "ready-20261112-talks",
+      "title": "Talks Continue; No Verified General Ceasefire",
+      "category": "DIPLOMACY / RISK",
+      "date": "2026-11-12",
+      "edition_date": "2026-11-12",
+      "source": "Reuters · Nov 10",
+      "url": "https://www.reuters.com/world/russia-pounds-ukraines-power-grid-talks-open-abu-dhabi-2026-11-10/",
+      "body": "What changed: Negotiations opened in Abu Dhabi alongside continued attacks. Status: Confirmed talks, unresolved agreement. Why watch: signed terms and independently observed implementation, not predictions.",
+      "status": "Reported"
+    },
+    {
+      "id": "ready-20261112-vendor",
+      "title": "AI Vendor Exposure: Check Sensitive Credentials",
+      "category": "DIGITAL PREPAREDNESS",
+      "date": "2026-11-12",
+      "edition_date": "2026-11-12",
+      "source": "Notion · Nov 9",
+      "url": "https://www.notion.com/en-gb/security/advisories/security-incident-involving-a-third-party-ai-vendor",
+      "body": "What changed: Notion identified potentially exposed AI chat transcripts for fewer than 1% of workspaces. Status: Confirmed disclosure. Why watch: if notified and secrets were pasted into affected chats, rotate them; no blanket action for unaffected workspaces.",
+      "status": "Reported"
+    },
     {
       "id": "ready-20261111-talks",
       "title": "Abu Dhabi Talks Resume; No Ceasefire Confirmed",
