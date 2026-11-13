@@ -5,6 +5,17 @@
   "updated_at": "2026-11-13",
   "items": [
     {
+      "id": "ready-20261113-gut-feeling",
+      "title": "Just a Gut Feeling: A Wider Scan, With Evidence",
+      "category": "WORLD SCAN / FIRST EDITION",
+      "date": "2026-11-13",
+      "edition_date": "2026-11-13",
+      "source": "ReadyEnough · primary sources linked in the report",
+      "url": "https://readyenough.org/gut-feeling.html",
+      "body": "Our first weekly deep dive checks shipping, supply chains, household costs, cloud outages, weather, health and natural hazards. Short daily summary at the top; evidence, counterevidence and practical steps underneath. Several pressures deserve attention, but the sources do not establish one connected global emergency or a countdown. Includes a visible disclaimer and dated archive.",
+      "byline": "UI News Desk"
+    },
+    {
       "id": "ready-20261113-mexico-blackout-fact-check",
       "title": "November 17 Blackout Rumor: What Is Actually Scheduled",
       "category": "MEXICO / RUMOR CHECK",
