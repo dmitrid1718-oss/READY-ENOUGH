@@ -1,9 +1,21 @@
 {
-  "edition": "2026-11-12",
-  "edition_title": "Thursday morning · November 12, 2026",
+  "edition": "2026-11-13",
+  "edition_title": "Friday morning · November 13, 2026",
   "byline": "UI News Desk",
-  "updated_at": "2026-11-12",
+  "updated_at": "2026-11-13",
   "items": [
+    {
+      "id": "ready-enough-20261113-desk",
+      "title": "Notion AI vendor incident: targeted precautions",
+      "category": "DIGITAL PREPAREDNESS",
+      "date": "2026-11-13",
+      "edition_date": "2026-11-13",
+      "source": "www.notion.com",
+      "url": "https://www.notion.com/en-gb/security/advisories/security-incident-involving-a-third-party-ai-vendor",
+      "body": "What changed: Notion says fewer than 1% of workspaces were affected by AI chat transcript exposure at Fireworks. Status: Confirmed company advisory, further impact unresolved. Why watch: notified users should inspect affected chats and rotate credentials pasted into them; no blanket action for unaffected users.",
+      "status": "Reported",
+      "byline": "UI News Desk"
+    },
     {
       "id": "ready-20261112-grid",
       "title": "Fresh Attacks Reinforce Winter Power Readiness",
