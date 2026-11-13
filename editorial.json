@@ -5,6 +5,37 @@
   "updated_at": "2026-11-13",
   "items": [
     {
+      "id": "ready-20261113-mexico-blackout-fact-check",
+      "title": "November 17 Blackout Rumor: What Is Actually Scheduled",
+      "category": "MEXICO / RUMOR CHECK",
+      "date": "2026-11-13",
+      "edition_date": "2026-11-13",
+      "source": "Infodemia / Mexico’s public broadcaster; FCC; FEMA",
+      "url": "https://infodemia.mx/entrada/10208",
+      "body": "Claims circulating online predict a 72-hour worldwide blackout on Tuesday, November 17, 2026. The evidence reviewed does not support that prediction. Mexico’s public broadcaster’s fact-check, published November 11, says there is no official CFE or Mexican government report announcing such a blackout.\n\nWhat is real: FEMA and the FCC have scheduled a U.S. Emergency Alert System test for November 17 at 2:20 p.m. Eastern (1:20 p.m. Central). Participating radio and television services will briefly interrupt programming to carry a test message. This is a communications test, not a planned electricity shutdown. It does not call for cutting power in Mexico. December 3 is the backup test date if conditions require postponement.\n\nSome coverage connects the rumor to a fictional Simpsons blackout and emergency-kit advice circulating online. Neither a cartoon date nor a recommendation to keep supplies establishes that a real blackout is coming. We have not independently verified claims of widespread panic buying.\n\nThe useful response is ordinary preparedness: review your water, shelf-stable food, flashlight, phone-charging options and written contacts. Build supplies gradually within your budget. There is no verified reason in these sources to rush out or stockpile specifically for Tuesday. Check official local notices before sharing alarming posts.",
+      "disclaimer": "Fact-check reviewed November 13, 2026. ReadyEnough provides general information, not an emergency alert, a prediction, or a guarantee of uninterrupted service. Conditions and test schedules can change; unrelated local outages remain possible. Follow current instructions from your local authorities, civil protection agency and electricity provider. In an immediate emergency, contact local emergency services.",
+      "sources": [
+        {
+          "label": "Infodemia: November 11 fact-check (Spanish)",
+          "url": "https://infodemia.mx/entrada/10208"
+        },
+        {
+          "label": "FCC: official nationwide EAS test notice (PDF)",
+          "url": "https://docs.fcc.gov/public/attachments/DA-26-989A1.pdf"
+        },
+        {
+          "label": "FEMA: October 14 bulletin announcing the test",
+          "url": "https://content.govdelivery.com/accounts/USDHSFEMA/bulletins/42e7b0a"
+        },
+        {
+          "label": "Infobae: reporting on the rumor and cartoon connection",
+          "url": "https://www.infobae.com/mexico/2026/11/12/apagon-mundial-2026-autoridades-explican-que-pasara-en-noviembre-realmente/"
+        }
+      ],
+      "status": "Fact-check",
+      "byline": "UI News Desk"
+    },
+    {
       "id": "ready-enough-20261113-desk",
       "title": "Notion AI vendor incident: targeted precautions",
       "category": "DIGITAL PREPAREDNESS",
