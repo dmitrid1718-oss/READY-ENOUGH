@@ -1,9 +1,51 @@
 {
-  "edition": "2026-11-13",
-  "edition_title": "Friday · November 13, 2026",
+  "edition": "2026-11-14",
+  "edition_title": "Saturday · November 14, 2026",
   "byline": "UI News Desk",
-  "updated_at": "2026-11-13T23:00:00Z",
+  "updated_at": "2026-11-14T11:15:22Z",
   "items": [
+    {
+      "id": "ready-20261114-faa-recovery",
+      "title": "Flights Resume; Check Your Own Booking",
+      "category": "TRAVEL / OUTAGE FOLLOW-UP",
+      "date": "2026-11-14",
+      "edition_date": "2026-11-14",
+      "byline": "UI News Desk",
+      "source": "ABC News",
+      "url": "https://abcnews.com/US/nationwide-ground-stop-ordered-airports-faa/story?id=138121848",
+      "what_changed": "The FAA's nationwide departure stop has lifted.",
+      "status": "Recovery takes time; officials reported no indication of a cyberattack while investigating.",
+      "why_watch": "Check your flight directly with the airline before leaving. Save booking details and essential contact numbers offline.",
+      "body": "What changed: The FAA's nationwide departure stop has lifted.\n\nStatus: Recovery takes time; officials reported no indication of a cyberattack while investigating.\n\nWhy watch: Check your flight directly with the airline before leaving. Save booking details and essential contact numbers offline."
+    },
+    {
+      "id": "ready-20261114-ms-recovery",
+      "title": "Microsoft Services Return: Keep Offline Contacts Handy",
+      "category": "COMMUNICATIONS / RESILIENCE",
+      "date": "2026-11-14",
+      "edition_date": "2026-11-14",
+      "byline": "UI News Desk",
+      "source": "THERS university IT notice reproducing Microsoft updates",
+      "url": "https://thersac.icts.thers.ac.jp/hc/en-us/articles/64262985209881-November-13-2026-Microsoft-365-Outage-MO1550821-Restored",
+      "what_changed": "Microsoft reports restored service following a network upgrade-related failure.",
+      "status": "Technical outage; the provider says cyberattacks and AI agents were not the cause.",
+      "why_watch": "Our practical takeaway: keep important contacts and essential documents available offline. Restoration of access does not by itself confirm every delayed message arrived.",
+      "body": "What changed: Microsoft reports restored service following a network upgrade-related failure.\n\nStatus: Technical outage; the provider says cyberattacks and AI agents were not the cause.\n\nWhy watch: Our practical takeaway: keep important contacts and essential documents available offline. Restoration of access does not by itself confirm every delayed message arrived."
+    },
+    {
+      "id": "ready-20261114-nato",
+      "title": "Preparedness Watch: Contracts Versus Delivered Capability",
+      "category": "GOVERNMENT PREPAREDNESS / FOLLOW-UP",
+      "date": "2026-11-13",
+      "edition_date": "2026-11-14",
+      "byline": "UI News Desk",
+      "source": "NATO official account",
+      "url": "https://www.nato.int/en/news-and-events/articles/news/2026/11/13/nato-secretary-general-expanding-transatlantic-defence-cooperation-is-crucial",
+      "what_changed": "NATO's account of Rutte's November 12 address highlights more than $50 billion in defence procurements announced in July and the need to turn contracts into capabilities.",
+      "status": "Documented procurement and industrial-policy statement; it does not establish an imminent attack.",
+      "why_watch": "Track deliveries, dates and actual readiness measures. For households, this statement alone does not warrant changing ordinary preparations.",
+      "body": "What changed: NATO's account of Rutte's November 12 address highlights more than $50 billion in defence procurements announced in July and the need to turn contracts into capabilities.\n\nStatus: Documented procurement and industrial-policy statement; it does not establish an imminent attack.\n\nWhy watch: Track deliveries, dates and actual readiness measures. For households, this statement alone does not warrant changing ordinary preparations."
+    },
     {
       "title": "FAA Orders Nationwide Departure Stop After Communications Problems",
       "category": "AVIATION / INFRASTRUCTURE OUTAGE",
@@ -12,8 +54,8 @@
       "byline": "UI News Desk",
       "source": "Reuters; CBS News Chicago; FAA status link",
       "url": "https://www.reuters.com/world/us/faa-issues-national-ground-stop-due-extraordinary-circumstance-reasons-safety-2026-11-13/",
-      "status": "Developing outage; cyberattack not established",
-      "body": "Update checked November 13, 2026, at 6:00 p.m. Eastern / 5:00 p.m. Central (23:00 UTC).\n\nThe latest reporting reviewed still describes a nationwide departure stop, with no confirmed restart time. The FAA told WFTV that communications issues affected multiple regional Air Route Traffic Control Centers; Secretary Duffy described all centers as affected. The precise scope remains a point to clarify.\n\nAP reports that Secretary Mullin described a telecommunications outage and said there was no evidence of a cyberattack so far. Investigators will examine whether the newly introduced AI system played a role. An investigation is not a finding that AI caused the failure. AP also reports that airborne flights were continuing to land safely and all aircraft were accounted for.\n\nTiming caution: We have not independently verified the reported extension to 11:30 p.m. Eastern. An advisory’s listed end time should not be treated as a promised restart. Check current FAA and airline notices.\n\nOur assessment: A shared communications dependency is one possible explanation for disruption across several centers, but the technical cause remains unconfirmed. No connection to Microsoft’s outage has been established in the reporting reviewed. Delays could continue after departures resume as aircraft and crews recover their schedules; Saturday cancellations and particular airport impacts cannot yet be predicted reliably.\n\nEarlier report — 4:25 p.m. Eastern / 3:25 p.m. Central:\n\nReporting checked November 13, 2026, at 4:25 p.m. Eastern / 3:25 p.m. Central (21:25 UTC).\n\nConfirmed reporting: Reuters reports that the FAA ordered a nationwide halt to departing flights on Friday afternoon following serious air traffic control communications problems. The order cited safety concerns and applied until further notice; international flights were to be handled case by case.\n\nLocal detail: CBS News Chicago reports equipment outages and communications issues in advisories affecting O’Hare and Midway before the nationwide action. A ground stop holds departures on the ground; it does not mean that every aircraft already airborne has been ordered to land immediately.\n\nWhat remains unknown: The reviewed reporting does not establish the underlying technical cause, a cyberattack, or a connection to the Microsoft 365 outage or European refrigeration attacks. We could not independently confirm a lifting notice from the FAA’s live status display at this check. This article records the reported order, not a continuously updated flight-status service.\n\nPractical response: Check your airline’s flight status and the FAA status page before leaving for the airport. Save booking details and important phone numbers offline; keep essential medication and charging supplies in your carry-on. Allow for onward travel disruption and follow airline instructions on rebooking. These are general travel precautions, not evidence of a wider emergency.",
+      "status": "Historical November 13 report; superseded by November 14 recovery update",
+      "body": "FOLLOW-UP — November 14: The nationwide ground stop has lifted. See today's recovery entry above. The following is the preserved November 13 report, not current flight status.\n\nUpdate checked November 13, 2026, at 6:00 p.m. Eastern / 5:00 p.m. Central (23:00 UTC).\n\nThe latest reporting reviewed still describes a nationwide departure stop, with no confirmed restart time. The FAA told WFTV that communications issues affected multiple regional Air Route Traffic Control Centers; Secretary Duffy described all centers as affected. The precise scope remains a point to clarify.\n\nAP reports that Secretary Mullin described a telecommunications outage and said there was no evidence of a cyberattack so far. Investigators will examine whether the newly introduced AI system played a role. An investigation is not a finding that AI caused the failure. AP also reports that airborne flights were continuing to land safely and all aircraft were accounted for.\n\nTiming caution: We have not independently verified the reported extension to 11:30 p.m. Eastern. An advisory’s listed end time should not be treated as a promised restart. Check current FAA and airline notices.\n\nOur assessment: A shared communications dependency is one possible explanation for disruption across several centers, but the technical cause remains unconfirmed. No connection to Microsoft’s outage has been established in the reporting reviewed. Delays could continue after departures resume as aircraft and crews recover their schedules; Saturday cancellations and particular airport impacts cannot yet be predicted reliably.\n\nEarlier report — 4:25 p.m. Eastern / 3:25 p.m. Central:\n\nReporting checked November 13, 2026, at 4:25 p.m. Eastern / 3:25 p.m. Central (21:25 UTC).\n\nConfirmed reporting: Reuters reports that the FAA ordered a nationwide halt to departing flights on Friday afternoon following serious air traffic control communications problems. The order cited safety concerns and applied until further notice; international flights were to be handled case by case.\n\nLocal detail: CBS News Chicago reports equipment outages and communications issues in advisories affecting O’Hare and Midway before the nationwide action. A ground stop holds departures on the ground; it does not mean that every aircraft already airborne has been ordered to land immediately.\n\nWhat remains unknown: The reviewed reporting does not establish the underlying technical cause, a cyberattack, or a connection to the Microsoft 365 outage or European refrigeration attacks. We could not independently confirm a lifting notice from the FAA’s live status display at this check. This article records the reported order, not a continuously updated flight-status service.\n\nPractical response: Check your airline’s flight status and the FAA status page before leaving for the airport. Save booking details and important phone numbers offline; keep essential medication and charging supplies in your carry-on. Allow for onward travel disruption and follow airline instructions on rebooking. These are general travel precautions, not evidence of a wider emergency.",
       "disclaimer": "Developing report, checked at the time above. Operational status can change quickly. This is an infrastructure-outage report, not a confirmed hacking incident or a prediction of further failures. Follow current FAA, airport and airline instructions.",
       "sources": [
         {
