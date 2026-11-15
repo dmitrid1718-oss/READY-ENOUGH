@@ -1,8 +1,8 @@
 {
-  "edition": "2026-11-14",
-  "edition_title": "Saturday · November 14, 2026",
+  "edition": "2026-11-15",
+  "edition_title": "Sunday · November 15, 2026",
   "byline": "UI News Desk",
-  "updated_at": "2026-11-14T11:15:22Z",
+  "updated_at": "2026-11-15T11:00:00Z",
   "items": [
     {
       "id": "ready-20261114-faa-recovery",
@@ -20,17 +20,17 @@
     },
     {
       "id": "ready-20261114-ms-recovery",
-      "title": "Microsoft Services Return: Keep Offline Contacts Handy",
+      "title": "Microsoft Outage: Services Restored; Incident Report Pending",
       "category": "COMMUNICATIONS / RESILIENCE",
       "date": "2026-11-14",
-      "edition_date": "2026-11-14",
+      "edition_date": "2026-11-15",
       "byline": "UI News Desk",
-      "source": "THERS university IT notice reproducing Microsoft updates",
-      "url": "https://thersac.icts.thers.ac.jp/hc/en-us/articles/64262985209881-November-13-2026-Microsoft-365-Outage-MO1550821-Restored",
-      "what_changed": "Microsoft reports restored service following a network upgrade-related failure.",
-      "status": "Technical outage; the provider says cyberattacks and AI agents were not the cause.",
-      "why_watch": "Our practical takeaway: keep important contacts and essential documents available offline. Restoration of access does not by itself confirm every delayed message arrived.",
-      "body": "What changed: Microsoft reports restored service following a network upgrade-related failure.\n\nStatus: Technical outage; the provider says cyberattacks and AI agents were not the cause.\n\nWhy watch: Our practical takeaway: keep important contacts and essential documents available offline. Restoration of access does not by itself confirm every delayed message arrived."
+      "source": "Microsoft incident update reproduced by University of Pennsylvania IT",
+      "url": "https://mailservices.isc.upenn.edu/computing/email/penno365/alerts/ms-incidents.html?q=MO1465074",
+      "what_changed": "Microsoft marked incident MO1550821 restored and said an earlier network-capacity upgrade issue surfaced after a later network change. It classified the incident as technical, unrelated to cyber activity or AI agents.",
+      "status": "Services restored. Microsoft said a preliminary incident report would follow within two business days and a final report within five.",
+      "why_watch": "Keep essential contacts and documents available offline, and verify that delayed messages arrived. This outage alone does not call for changing ordinary household preparations.",
+      "body": "What changed: Microsoft marked incident MO1550821 restored and said an earlier network-capacity upgrade issue surfaced after a later network change. It classified the incident as technical, unrelated to cyber activity or AI agents.\n\nStatus: Services restored. Microsoft said a preliminary incident report would follow within two business days and a final report within five.\n\nWhy watch: Keep essential contacts and documents available offline, and verify that delayed messages arrived. This outage alone does not call for changing ordinary household preparations."
     },
     {
       "id": "ready-20261114-nato",
