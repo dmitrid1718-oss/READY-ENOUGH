@@ -382,7 +382,7 @@ html,body{max-width:100%;overflow-x:clip}
     </a>
     <p>No panic. Just in case.</p>
   </header>
-<nav id="quick-top-nav" aria-label="Quick navigation" style="display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0;padding:0 0 12px;border-bottom:1px solid var(--line)"><a href="#emergency-beacon">SOS</a><a href="#prepare">Prepare</a><a href="#someone-nearby">Community</a><a href="./preparedness-wall.html">Government Wall</a><a href="#earth-sky-watch">Earth &amp; Sky</a><a href="./news.html">News</a><a href="./gut-feeling.html">Gut Feeling</a><a href="./app/">Pocket App</a></nav><style>#quick-top-nav a{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:7px;text-decoration:none;font-size:13px;font-weight:700;color:var(--ink);background:var(--surface)}#quick-top-nav a:hover,#quick-top-nav a:focus-visible{border-color:var(--accent);color:var(--accent)}</style>
+<nav id="quick-top-nav" aria-label="Quick navigation" style="display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0;padding:0 0 12px;border-bottom:1px solid var(--line)"><a href="#emergency-beacon">SOS</a><a href="#prepare">Prepare</a><a href="#someone-nearby">Community</a><a href="./preparedness-wall.html">Government Wall</a><a href="#earth-sky-watch">Earth &amp; Sky</a><a href="#inner-kit">Inner Kit</a><a href="./news.html">News</a><a href="./gut-feeling.html">Gut Feeling</a><a href="./app/">Pocket App</a></nav><style>#quick-top-nav a{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:7px;text-decoration:none;font-size:13px;font-weight:700;color:var(--ink);background:var(--surface)}#quick-top-nav a:hover,#quick-top-nav a:focus-visible{border-color:var(--accent);color:var(--accent)}</style>
 
   <div class="hero">
     <h1>Start where you are. Use what you have.</h1>
@@ -585,6 +585,46 @@ async function weather(zip){e('es-count').textContent='Checking…';e('es-events
 e('es-refresh').addEventListener('click',solar);e('es-form').addEventListener('submit',ev=>{ev.preventDefault();const z=e('es-zip').value.trim();if(/^[0-9]{5}$/.test(z))weather(z)});try{const z=localStorage.getItem('re-earth-sky-zip');if(z&&/^[0-9]{5}$/.test(z))e('es-zip').value=z}catch(_){}solar();
 })();
 </script>
+
+<style id="inner-kit-style">
+#inner-kit{border-top:2px solid var(--ink);padding:34px 0;display:grid;gap:16px;scroll-margin-top:15px}
+#inner-kit h2{font-size:clamp(28px,4vw,38px)}#inner-kit .ik-lead{font-size:19px;max-width:65ch}
+.ik-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ik-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:7px}
+.ik-card h3{font-size:21px}.ik-card p{color:var(--muted)}.ik-card strong{color:var(--ink)}
+.ik-practice{background:var(--accent-soft);border-left:5px solid var(--accent);padding:20px;display:grid;gap:12px}
+.ik-practice ol{margin:0;padding-left:22px}.ik-practice li+li{margin-top:7px}
+#inner-kit details{border:1px solid var(--line);background:var(--surface);padding:14px 18px;border-radius:8px}
+#inner-kit summary{font-weight:800;cursor:pointer}
+#inner-kit .ik-small{font-size:14px;color:var(--muted)}
+@media(max-width:650px){.ik-grid{grid-template-columns:1fr}}
+</style>
+<section id="inner-kit" aria-labelledby="ik-heading">
+<p class="eyebrow">Mental readiness · whole-person health</p>
+<h2 id="ik-heading">🧭 The Inner Kit</h2>
+<p class="ik-lead"><strong>Prepare the mind and body before the moment.</strong> You cannot control every event. You can practice your next response.</p>
+<p>Inspired by the U.S. Army's <em>Psychology of Survival</em> (FM 3-05.70, Chapter 2) and the Stoic tradition. Rewritten for ordinary households, not combat. Toughness is not pretending fear doesn't exist. It is noticing fear and taking a useful step anyway.</p>
+<div class="ik-grid">
+<article class="ik-card"><h3>01 · Separate control from noise</h3><p><strong>Stoic idea:</strong> Some events are outside your control. Your next choice is closer to home.</p><p><strong>Try:</strong> Write what happened, what you know for certain, and one action you can take today.</p></article>
+<article class="ik-card"><h3>02 · Name the fear</h3><p>Fear can warn of danger. It can also narrow attention and rush decisions.</p><p><strong>Try:</strong> “I'm afraid of ___. The immediate danger is ___. My next safe step is ___.”</p></article>
+<article class="ik-card"><h3>03 · Make the next move small</h3><p>Willpower is easier to use when a problem has a manageable first step.</p><p><strong>Try:</strong> Check on one person. Fill one bottle. Charge one phone. Make one call.</p></article>
+<article class="ik-card"><h3>04 · Train before the stressful day</h3><p>Practice makes useful actions more familiar, even when conditions change.</p><p><strong>Try:</strong> Rehearse a short outage plan, emergency contact call, or finding supplies in the dark.</p></article>
+<article class="ik-card"><h3>05 · Borrow strength from people</h3><p>Isolation and exhaustion can impair judgment. Asking for help is a survival skill.</p><p><strong>Try:</strong> Choose a check-in partner and learn who nearby may need a hand.</p></article>
+<article class="ik-card"><h3>06 · Protect your physical foundation</h3><p><strong>Sleep, regular meals, safe drinking water, movement and recovery</strong> support attention, mood and decision-making. They aren't luxuries.</p><p><strong>Try:</strong> Keep a realistic sleep routine; walk or stretch within your abilities; eat enough; hydrate appropriately; take breaks. Continue prescribed treatment and keep necessary medicines and health information ready.</p></article>
+</div>
+<div class="ik-practice"><h3>The 60-second reset</h3><ol>
+<li><strong>Look:</strong> Is there immediate danger? If yes, move to safety and get help first.</li>
+<li><strong>Ground:</strong> Feel your feet, release your shoulders, and breathe comfortably without forcing or holding your breath.</li>
+<li><strong>Check:</strong> What do I know? What am I assuming?</li>
+<li><strong>Choose:</strong> What's one safe, useful action in the next minute?</li>
+<li><strong>Connect:</strong> Who needs help? Who can help me?</li>
+</ol></div>
+<details><summary>Five-minute household mental-readiness drill</summary><div class="ik-detail"><ol><li>Choose an everyday disruption such as a two-hour power outage.</li><li>Each person names a first safe action and one person they would check on.</li><li>Locate a flashlight, water, supplies and printed contacts.</li><li>Ask what felt confusing. Improve one thing, then end the drill.</li></ol><p>The goal is confidence and familiarity, not fear. Keep children's practice reassuring and age-appropriate.</p></div></details>
+<details><summary>Your health is part of the plan</summary><div class="ik-detail"><p>Before an emergency: know your medication needs, refill schedule and safe storage requirements; keep a written medication list, clinician contacts and any essential mobility, vision or hearing aids ready. Plan for access to electricity for necessary medical equipment. Build routines you can sustain rather than trying to become invulnerable.</p><p>During a disruption: prioritize safety, adequate food and water, temperature protection, hygiene, needed medication, rest and social contact. Conditions and abilities differ; use individualized medical advice where needed.</p></div></details>
+<p class="ik-small"><strong>A humane boundary:</strong> Courage is not silent suffering. If distress is overwhelming or persistent, talk to a trusted person or qualified professional. During an immediate emergency, follow local emergency instructions. This section is educational, not medical or mental-health treatment.</p>
+<p class="src"><strong>Further reading:</strong> <a href="https://www.ready.gov/plan" target="_blank" rel="noopener">Ready.gov · Make a Plan ↗</a> · <a href="https://www.ready.gov/kit" target="_blank" rel="noopener">Ready.gov · Build a Kit ↗</a> · <a href="https://www.cdc.gov/physical-activity-basics/benefits/index.html" target="_blank" rel="noopener">CDC · Benefits of physical activity ↗</a> · <a href="https://www.gutenberg.org/ebooks/45109" target="_blank" rel="noopener">Epictetus, Enchiridion ↗</a>. Reference framework: U.S. Army FM 3-05.70, Chapter 2, Psychology of Survival. This is an original civilian adaptation, not official Army guidance or a direct Stoic quotation.</p>
+</section>
+
   <!-- Emergency alerts: official feed online; instructions and saved snapshot offline. -->
   <section class="alert-center" id="alerts" aria-labelledby="alert-title">
     <div class="alert-head">
