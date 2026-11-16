@@ -382,7 +382,7 @@ html,body{max-width:100%;overflow-x:clip}
     </a>
     <p>No panic. Just in case.</p>
   </header>
-<nav id="quick-top-nav" aria-label="Quick navigation" style="display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0;padding:0 0 12px;border-bottom:1px solid var(--line)"><a href="#emergency-beacon">SOS</a><a href="#prepare">Prepare</a><a href="#someone-nearby">Community</a><a href="./preparedness-wall.html">Government Wall</a><a href="./news.html">News</a><a href="./gut-feeling.html">Gut Feeling</a><a href="./app/">Pocket App</a></nav><style>#quick-top-nav a{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:7px;text-decoration:none;font-size:13px;font-weight:700;color:var(--ink);background:var(--surface)}#quick-top-nav a:hover,#quick-top-nav a:focus-visible{border-color:var(--accent);color:var(--accent)}</style>
+<nav id="quick-top-nav" aria-label="Quick navigation" style="display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0;padding:0 0 12px;border-bottom:1px solid var(--line)"><a href="#emergency-beacon">SOS</a><a href="#prepare">Prepare</a><a href="#someone-nearby">Community</a><a href="./preparedness-wall.html">Government Wall</a><a href="#earth-sky-watch">Earth &amp; Sky</a><a href="./news.html">News</a><a href="./gut-feeling.html">Gut Feeling</a><a href="./app/">Pocket App</a></nav><style>#quick-top-nav a{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:7px;text-decoration:none;font-size:13px;font-weight:700;color:var(--ink);background:var(--surface)}#quick-top-nav a:hover,#quick-top-nav a:focus-visible{border-color:var(--accent);color:var(--accent)}</style>
 
   <div class="hero">
     <h1>Start where you are. Use what you have.</h1>
@@ -554,6 +554,37 @@ html,body{max-width:100%;overflow-x:clip}
     </p>
   </section>
 
+
+<style id="earth-sky-css">
+#earth-sky-watch{border-top:2px solid var(--ink);padding:30px 0;display:grid;gap:14px}
+#earth-sky-watch h2{font-size:clamp(26px,4vw,36px)}
+.es-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.es-box{background:var(--surface);border:1px solid var(--line);padding:18px;border-radius:12px;display:grid;gap:10px;align-content:start}
+.es-box h3{font-size:22px}.es-big{font-family:var(--font-display);font-size:30px;font-weight:900}
+.es-note{font-size:13px;color:var(--muted)}
+.es-box form{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.es-box input{width:110px;padding:10px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--ink);font-size:16px}
+.es-box button{border:0;background:var(--accent);color:var(--bg);padding:10px;border-radius:7px;font-weight:700}
+#es-events{padding-left:20px;margin:0}#es-events li{margin:6px 0}
+@media(max-width:640px){.es-grid{grid-template-columns:1fr}}
+</style>
+<section id="earth-sky-watch" aria-labelledby="es-heading">
+<p class="eyebrow">Quiet monitoring · official sources</p><h2 id="es-heading">☀️ Earth &amp; Sky Watch</h2>
+<p>Natural events that may disrupt power, travel or communications. Check the evidence, not the rumors.</p>
+<div class="es-grid">
+<article class="es-box"><h3>☀️ Solar activity</h3><div class="es-big" id="es-kp">Not checked</div><p id="es-solar-detail" role="status">Latest NOAA planetary Kp observation; not a forecast.</p><p class="es-note" id="es-solar-time">Live status unknown</p><button type="button" id="es-refresh">Refresh solar reading</button><a href="https://www.swpc.noaa.gov/" target="_blank" rel="noopener">NOAA Space Weather Prediction Center ↗</a></article>
+<article class="es-box"><h3>🌪️ Extreme weather</h3><div class="es-big" id="es-count">Enter ZIP</div><p id="es-weather-detail" role="status">Check official National Weather Service alerts near a US ZIP code.</p><form id="es-form"><label for="es-zip">ZIP</label><input id="es-zip" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code" placeholder="60061" required><button type="submit">Check alerts</button></form><p class="es-note" id="es-place">Approximate ZIP-area lookup, not your address.</p><ul id="es-events" aria-live="polite"></ul><a href="https://www.weather.gov/" target="_blank" rel="noopener">National Weather Service ↗</a></article>
+</div>
+<p class="es-note">Online checks only. Solar readings: NOAA SWPC. ZIP centroids: Zippopotam.us; active weather alerts: api.weather.gov. Saved ZIP stays on this device; lookup sends ZIP to the lookup provider and approximate coordinates to NWS. No alerts returned is not an all-clear. Follow local officials, Wireless Emergency Alerts and NOAA Weather Radio in an emergency.</p>
+</section>
+<script id="earth-sky-js">
+(()=>{const e=id=>document.getElementById(id);
+async function get(url){const c=new AbortController(),t=setTimeout(()=>c.abort(),10000);try{const r=await fetch(url,{signal:c.signal,cache:'no-store'});if(!r.ok)throw Error('Unavailable');return await r.json()}finally{clearTimeout(t)}}
+async function solar(){e('es-kp').textContent='Checking…';try{const arr=await get('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json');if(!Array.isArray(arr))throw Error('Bad feed');const x=arr.slice(1).map(r=>({time:r[0],kp:Number(r[1])})).filter(v=>Number.isFinite(v.kp)&&v.time).sort((a,b)=>Date.parse(a.time+' UTC')-Date.parse(b.time+' UTC')).pop();if(!x)throw Error('No data');const g=x.kp>=9?'G5':x.kp>=8?'G4':x.kp>=7?'G3':x.kp>=6?'G2':x.kp>=5?'G1':'Below G1';e('es-kp').textContent='Kp '+x.kp.toFixed(1)+' · '+g;e('es-solar-detail').textContent=x.kp>=5?'Storm-level geomagnetic activity reported. Check NOAA for potential impacts.':'Latest reported planetary Kp is below G1 storm level.';e('es-solar-time').textContent='Observation: '+x.time+' UTC';}catch(_){e('es-kp').textContent='Status unknown';e('es-solar-detail').textContent='NOAA live data unavailable. Not an all-clear.'}}
+async function weather(zip){e('es-count').textContent='Checking…';e('es-events').replaceChildren();try{const z=await get('https://api.zippopotam.us/us/'+encodeURIComponent(zip)),p=z.places?.[0];if(!p)throw Error('Invalid ZIP');const lat=Number(p.latitude),lon=Number(p.longitude);if(!Number.isFinite(lat)||!Number.isFinite(lon))throw Error('Invalid coordinates');const a=await get('https://api.weather.gov/alerts/active?point='+lat.toFixed(4)+','+lon.toFixed(4));if(!Array.isArray(a.features))throw Error('Bad NWS feed');e('es-count').textContent=a.features.length+' active alert'+(a.features.length===1?'':'s');e('es-weather-detail').textContent=a.features.length?'NWS alerts near the approximate ZIP location.':'No NWS alerts returned at the time checked; not an all-clear.';e('es-place').textContent=p['place name']+', '+p['state abbreviation']+' · '+new Date().toLocaleString();for(const f of a.features.slice(0,12)){const li=document.createElement('li'),b=document.createElement('strong');b.textContent=f.properties?.event||'Weather alert';li.append(b);const d=document.createElement('div');d.textContent=String(f.properties?.headline||'').slice(0,260);li.append(d);e('es-events').append(li)}try{localStorage.setItem('re-earth-sky-zip',zip)}catch(_){}}catch(_){e('es-count').textContent='Status unknown';e('es-weather-detail').textContent='Unable to verify official live alerts. Check weather.gov or weather radio.'}}
+e('es-refresh').addEventListener('click',solar);e('es-form').addEventListener('submit',ev=>{ev.preventDefault();const z=e('es-zip').value.trim();if(/^[0-9]{5}$/.test(z))weather(z)});try{const z=localStorage.getItem('re-earth-sky-zip');if(z&&/^[0-9]{5}$/.test(z))e('es-zip').value=z}catch(_){}solar();
+})();
+</script>
   <!-- Emergency alerts: official feed online; instructions and saved snapshot offline. -->
   <section class="alert-center" id="alerts" aria-labelledby="alert-title">
     <div class="alert-head">
