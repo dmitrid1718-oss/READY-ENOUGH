@@ -360,6 +360,16 @@ html,body{max-width:100%;overflow-x:clip}
 .community-sources{font-size:14px;color:var(--muted)}.community-sources a{font-weight:650}
 @media(max-width:680px){.community-grid{grid-template-columns:1fr}.community-first{padding:14px}.community-sheet{padding:14px}}
 @media print{.community-grid{display:block}.community-grid details{break-inside:avoid-page}.community-grid .community-detail{display:block!important}.community{break-inside:avoid-page}body:has(#pr-ess:checked) .community-grid,body:has(#pr-ess:checked) .community-first{display:none!important}}
+</style><style id="ui-soft-preview-style">
+.ui-soft-preview{position:fixed;z-index:10000;width:min(340px,calc(100vw - 32px));box-sizing:border-box;padding:18px 20px;border:1px solid var(--line,#32464b);border-top:2px solid var(--accent,#6fe5e1);border-radius:12px;background:var(--surface,var(--panel,#15252a));color:var(--ink,#ecf4ee);box-shadow:0 14px 38px #0003;font:14px/1.6 system-ui,sans-serif;opacity:0;visibility:hidden;transform:translateY(7px);transition:opacity .48s ease,transform .55s cubic-bezier(.2,.7,.2,1),visibility 0s .55s;pointer-events:none}
+.ui-soft-preview.is-visible{opacity:1;visibility:visible;transform:translateY(0);transition-delay:0s;pointer-events:auto}
+.ui-soft-preview b{display:block;font-size:15px;line-height:1.4;margin-bottom:8px}.ui-soft-preview p{margin:0;color:var(--muted,#aec1bf)}.ui-soft-preview small{display:block;margin-top:11px;color:var(--accent,#6fe5e1);font:11px/1.4 ui-monospace,monospace}
+@keyframes ui-soft-emerge{from{opacity:.55;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+.stages a:is(:hover,:focus-visible) p,.doors .door:is(:hover,:focus-visible) small{animation:ui-soft-emerge .65s ease both}
+}
+@media(prefers-reduced-motion:reduce){.ui-soft-preview{transition:none;transform:none}}
+@media(hover:none),(pointer:coarse),print{.ui-soft-preview{display:none!important}}
 </style></head>
 <body>
 
@@ -1765,5 +1775,42 @@ html,body{max-width:100%;overflow-x:clip}
   }).catch(function(){});
 })();
 </script>
-</body>
+<script id="ui-soft-preview-script">
+(()=>{
+ const fine=matchMedia('(hover: hover) and (pointer: fine)');
+ const box=document.createElement('aside');box.className='ui-soft-preview';box.id='ui-soft-preview';box.setAttribute('role','tooltip');box.setAttribute('aria-hidden','true');
+ const title=document.createElement('b'),body=document.createElement('p'),hint=document.createElement('small');box.append(title,body,hint);document.body.append(box);
+ let active=null,timer=null,closing=null,savedDescription=null;
+ const clean=s=>String(s||'').replace(/\s+/g,' ').trim();
+ const shorten=s=>s.length>230?s.slice(0,227).replace(/\s+\S*$/,'')+'…':s;
+ function info(a){
+  const card=a.closest('#cards .card');let description='',label=clean(a.textContent),note='';
+  if(card){description=clean(card.querySelector('.evidence-lines > div,p')?.textContent);note='Source preview · click the headline to read';}
+  else if(a.hash&&new URL(a.href).pathname===location.pathname){
+   let target;try{target=document.getElementById(decodeURIComponent(a.hash.slice(1)))}catch{}
+   if(!target)return null;description=clean(target.querySelector('.first,.lead,p')?.textContent);note='Jump to this section';
+  }else if(a.closest('.stages,.doors')){description=clean(a.querySelector('p,small')?.textContent);label=clean(a.querySelector('h3,span')?.textContent);note='Open this guide';}
+  else {
+   const known={
+    'investigations/agent-safety-file-001.html':['Agent Safety File 001','The open evidence log: what has been tested, what remains uncertain and the next review.'],
+    'investigations/editorial-standards.html':['Evidence rules','How the news desk separates reporting, interpretation, uncertainty and corrections.'],
+    'https://www.aiplanets.guide/':['Two Planets · AI field guide','Start with your first AI conversation, or explore prompts, agents and building your own tools.']
+   };
+   const key=Object.keys(known).find(k=>a.href.split('#')[0].endsWith(k));if(!key)return null;[label,description]=known[key];note='Open the guide';
+  }
+  return description?{label,description:shorten(description),note}:null;
+ }
+ function hide(){clearTimeout(timer);clearTimeout(closing);box.classList.remove('is-visible');box.setAttribute('aria-hidden','true');if(active){if(savedDescription===null)active.removeAttribute('aria-describedby');else active.setAttribute('aria-describedby',savedDescription)}active=null;}
+ function position(){if(!active)return;const r=active.getBoundingClientRect(),w=box.offsetWidth,h=box.offsetHeight;box.style.left=Math.max(16,Math.min(r.left,innerWidth-w-16))+'px';box.style.top=Math.max(16,r.bottom+h+16<innerHeight?r.bottom+10:r.top-h-10)+'px';}
+ function show(a){if(!fine.matches||active===a)return;const data=info(a);if(!data)return;hide();active=a;savedDescription=a.getAttribute('aria-describedby');timer=setTimeout(()=>{title.textContent=data.label;body.textContent=data.description;hint.textContent=data.note;position();box.setAttribute('aria-hidden','false');a.setAttribute('aria-describedby',[savedDescription,box.id].filter(Boolean).join(' '));box.classList.add('is-visible')},180);}
+ const selector='#cards .card h2 a,.nav a,.desk-links a,#follow a,.index a,.stages a,.doors a';
+ document.addEventListener('pointerover',e=>{const a=e.target.closest(selector);if(a)show(a)});
+ document.addEventListener('pointerout',e=>{if(active&&active.contains(e.target)&&!active.contains(e.relatedTarget)&&!box.contains(e.relatedTarget))closing=setTimeout(hide,140)});
+ box.addEventListener('pointerenter',()=>clearTimeout(closing));box.addEventListener('pointerleave',hide);
+ document.addEventListener('focusin',e=>{const a=e.target.closest(selector);if(a)show(a)});
+ document.addEventListener('focusout',e=>{if(active===e.target)hide()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')hide()});
+ document.addEventListener('click',hide);addEventListener('scroll',hide,{passive:true});addEventListener('resize',hide);fine.addEventListener('change',hide);
+})();
+</script></body>
 </html>
