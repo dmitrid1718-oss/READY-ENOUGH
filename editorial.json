@@ -1,9 +1,37 @@
 {
-  "edition": "2026-11-15",
-  "edition_title": "Sunday · November 15, 2026",
+  "edition": "2026-11-16",
+  "edition_title": "Monday · November 16, 2026",
   "byline": "UI News Desk",
-  "updated_at": "2026-11-15T11:00:00Z",
+  "updated_at": "2026-11-16T11:05:23.951Z",
   "items": [
+    {
+      "id": "ready-enough-20261116-noaa",
+      "title": "November 17–18 Space Weather: Minor Forecast, No Global-Blackout Finding",
+      "category": "SPACE WEATHER / RUMOR CONTEXT",
+      "date": "2026-11-16",
+      "edition_date": "2026-11-16",
+      "byline": "UI News Desk",
+      "source": "NOAA / Space Weather Prediction Center",
+      "url": "https://forecast.weather.gov/product.php?issuedby=OUT&product=ADV&site=CTP",
+      "what_changed": "NOAA forecasts G1 minor geomagnetic activity November 17–18 and no other likely space-weather storms during November 16–22.",
+      "status": "This forecast does not substantiate the circulating global-blackout claim. Forecasts can change.",
+      "why_watch": "Our assessment: no unusual household purchases are justified by this outlook. Follow local utilities and fresh official alerts.",
+      "body": "What changed: NOAA forecasts G1 minor geomagnetic activity November 17–18 and no other likely space-weather storms during November 16–22.\n\nStatus: This forecast does not substantiate the circulating global-blackout claim. Forecasts can change.\n\nWhy watch: Our assessment: no unusual household purchases are justified by this outlook. Follow local utilities and fresh official alerts."
+    },
+    {
+      "id": "ready-enough-20261116-cursor",
+      "title": "Cursor Incident: Targeted Notices, Not a General Household Alert",
+      "category": "DIGITAL PREPAREDNESS / FOLLOW-UP",
+      "date": "2026-11-13",
+      "edition_date": "2026-11-16",
+      "byline": "UI News Desk",
+      "source": "Cursor",
+      "url": "https://cursor.com/blog/security-incident-update",
+      "what_changed": "Cursor says it directly notified affected customers after its vendor-linked incident.",
+      "status": "Targeted exposure; not every user was affected.",
+      "why_watch": "Use the provider's notice if affected. Our standing household practice remains keeping essential contacts and documents accessible offline.",
+      "body": "What changed: Cursor says it directly notified affected customers after its vendor-linked incident.\n\nStatus: Targeted exposure; not every user was affected.\n\nWhy watch: Use the provider's notice if affected. Our standing household practice remains keeping essential contacts and documents accessible offline."
+    },
     {
       "id": "ready-20261114-ms-recovery",
       "title": "Microsoft Outage: Services Restored; Incident Report Pending",
