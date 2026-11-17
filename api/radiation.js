@@ -28,7 +28,7 @@ async function handler(req,res){
  const year=new Date().getUTCFullYear();
  const source=station.source.replace('/2026/','/'+year+'/');
  try{
-  const upstream=await fetch(source,{signal:AbortSignal.timeout(18000),headers:{Accept:'text/csv,text/plain'}});
+  const upstream=await fetch(source,{signal:AbortSignal.timeout(18000),headers:{Accept:'*/*'}});
   if(!upstream.ok)throw Error('EPA HTTP '+upstream.status);
   const text=await upstream.text();if(text.length>4000000)throw Error('Unexpected response size');
   const data=parseCSV(text);
