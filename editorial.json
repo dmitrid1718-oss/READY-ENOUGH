@@ -2,8 +2,22 @@
   "edition": "2026-11-17",
   "edition_title": "Tuesday · November 17, 2026",
   "byline": "UI News Desk",
-  "updated_at": "2026-11-17T10:54:22.486314+00:00",
+  "updated_at": "2026-11-17T23:46:00+00:00",
   "items": [
+    {
+      "id": "ready-20261117-evening-incidents",
+      "title": "Different Outages, Different Causes: A Household Takeaway",
+      "category": "RESILIENCE / INFRASTRUCTURE",
+      "date": "2026-11-17",
+      "edition_date": "2026-11-17",
+      "byline": "UI News Desk",
+      "source": "Associated Press",
+      "url": "https://apnews.com/article/22dc6be1bf1d1f5f86a7167f016e9526",
+      "what_changed": "Recent disruptions affected federal internal systems and consumer services; NSA describes maintenance-related degradation, while Apple points to an internal update.",
+      "status": "Not evidence of one coordinated attack. Equinor separately disclosed a confirmed cyberattack affecting its IT systems, without production impact reported.",
+      "why_watch": "Practice a short communications fallback: charged power bank, written contacts, offline maps and a family check-in plan.",
+      "body": "What changed: Recent disruptions affected federal internal systems and consumer services; NSA describes maintenance-related degradation, while Apple points to an internal update.\n\nStatus: Not evidence of one coordinated attack. Equinor separately disclosed a confirmed cyberattack affecting its IT systems, without production impact reported.\n\nWhy watch: Practice a short communications fallback: charged power bank, written contacts, offline maps and a family check-in plan."
+    },
     {
       "id": "ready-20261117-germany",
       "title": "Germany · Planning ahead for crises and disasters",
