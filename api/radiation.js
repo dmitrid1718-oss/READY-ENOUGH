@@ -29,14 +29,14 @@ async function handler(req,res){
  const source=station.source.replace('/2026/','/'+year+'/');
  try{
   const upstream=await fetch(source,{signal:AbortSignal.timeout(18000),headers:{Accept:'text/csv,text/plain'}});
-  if(!upstream.ok)throw Error('EPA unavailable');
+  if(!upstream.ok)throw Error('EPA HTTP '+upstream.status);
   const text=await upstream.text();if(text.length>4000000)throw Error('Unexpected response size');
   const data=parseCSV(text);
   res.setHeader('Cache-Control','public, max-age=0, s-maxage=3600');
   return res.status(200).json({...data,station:station.id,source,sourceYear:year,retrievedAt:new Date().toISOString()});
- }catch{
+ }catch(error){
   res.setHeader('Cache-Control','no-store');
-  return res.status(502).json({error:'EPA readings are unavailable here. Open the official dashboard below; missing data is not an all-clear.'});
+  return res.status(502).json({sourceYear:year,reason:error.name==='TimeoutError'?'EPA request timed out':error.message==='Unsupported EPA data format'?'EPA data format unavailable':error.message.startsWith('EPA HTTP')?error.message:'EPA connection unavailable',error:'EPA readings are unavailable here. Open the official dashboard below; missing data is not an all-clear.'});
  }
 }
 module.exports=handler;
