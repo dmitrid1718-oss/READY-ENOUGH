@@ -19,7 +19,18 @@ function parseCSV(text,now=Date.now()){
  }
  rows.sort((a,b)=>a.time.localeCompare(b.time));
  const latest=rows.at(-1)||null;
- return {latest,unit:'nSv/h',records:rows.length};
+ let baseline=null;
+ if(latest){
+  const end=Date.parse(latest.time)-86400000,start=end-30*86400000;
+  const history=rows.filter(r=>r.dose!==null&&Date.parse(r.time)>=start&&Date.parse(r.time)<=end);
+  const days=new Set(history.map(r=>r.time.slice(0,10))).size;
+  if(history.length>=168&&days>=7){
+   const values=history.map(r=>r.dose).sort((a,b)=>a-b);
+   const quantile=p=>{const i=(values.length-1)*p,a=Math.floor(i);return values[a]+(values[Math.ceil(i)]-values[a])*(i-a);};
+   baseline={low:Math.round(quantile(.05)*10)/10,high:Math.round(quantile(.95)*10)/10,start:history[0].time,end:history.at(-1).time,samples:history.length,days};
+  }
+ }
+ return {latest,baseline,unit:'nSv/h',records:rows.length};
 }
 async function handler(req,res){
  if(req.method!=='GET'){res.setHeader('Allow','GET');return res.status(405).json({error:'Use GET'});}
