@@ -393,7 +393,7 @@ html,body{max-width:100%;overflow-x:clip}
 #rad-result:not(:empty){padding:16px;border-left:3px solid var(--accent);background:var(--bg);margin:16px 0}
 #rad-result .rad-value{font-size:28px;font-weight:800;line-height:1.2}#rad-result .rad-monitor-name{font-weight:800;font-size:18px}#rad-result .rad-caution{font-weight:800;color:var(--warn)}
 @media print{.rad-tool{display:none}}
-</style></head>
+</style><style id="radiation-scale-style">.rad-scale{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:5px;margin:12px 0}.rad-scale span{padding:9px 7px;background:var(--surface);border:1px solid var(--line);border-radius:5px;font-size:12px;text-align:center}.rad-scale .rad-scale-selected{border:2px solid var(--accent);font-weight:800;color:var(--ink)}#rad-result details summary{font-size:13px;cursor:pointer;color:var(--accent)}@media(max-width:440px){.rad-scale{grid-template-columns:1fr}.rad-scale span{text-align:left}}</style></head>
 <body>
 
 
@@ -1965,5 +1965,5 @@ e('es-refresh').addEventListener('click',solar);e('es-form').addEventListener('s
   catch(error){if(error.name!=='AbortError'){status.textContent='Sharing is unavailable here. Use Copy link or Email.';}}
  });
 })();
-</script><script src="./radiation-tool.js" defer></script></body>
+</script><script src="./radiation-tool.js?v=2" defer></script></body>
 </html>
