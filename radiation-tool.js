@@ -18,7 +18,7 @@
   const station=stations.find(s=>s.id===choose.value);if(!station)return;
   const token=++request;result.replaceChildren();status.textContent='Checking EPA’s published readings…';check.disabled=true;
   try{
-   const response=await fetch('./api/radiation?station='+encodeURIComponent(station.id),{signal:AbortSignal.timeout(25000)});
+   const response=await fetch('./api/radiation?comparison=1&station='+encodeURIComponent(station.id),{signal:AbortSignal.timeout(25000)});
    const data=await response.json();if(token!==request)return;
    if(!response.ok)throw Error(data.error||'Readings unavailable.');
    paragraph(station.city+', '+station.state,'rad-monitor-name');
@@ -27,6 +27,19 @@
     const age=(Date.now()-Date.parse(data.latest.time))/3600000;
     paragraph(age>24?'OLD DATA — not a current reading':'Latest available sample — not a safety assessment','rad-caution');
     paragraph(data.latest.dose===null?'Dose rate unavailable for the latest sample.':data.latest.dose.toLocaleString()+' nSv/h','rad-value');
+    if(data.latest.dose!==null){
+     if(data.baseline){
+      const b=data.baseline,v=data.latest.dose,index=v<b.low?0:v>b.high?2:1;
+      paragraph('Usual recorded range for this monitor: '+b.low+'–'+b.high+' nSv/h.');
+      const scale=document.createElement('div');scale.className='rad-scale';scale.setAttribute('role','group');scale.setAttribute('aria-label','Historical comparison, not safety thresholds');
+      ['Below usual','Usual recorded range','Above usual'].forEach((label,i)=>{const segment=document.createElement('span');segment.textContent=(index===i?'● This sample: ':'')+label;if(index===i)segment.className='rad-scale-selected';scale.append(segment);});result.append(scale);
+      paragraph('Historical comparison only — not a safe/unsafe rating.'+(age>24?' This sample is old; current conditions are unknown.':''));
+      const details=document.createElement('details'),summary=document.createElement('summary'),note=document.createElement('p');
+      summary.textContent='How this range is calculated';
+      note.textContent='ReadyEnough calculates the middle 90% (5th–95th percentiles) of '+b.samples+' approved dose readings on '+b.days+' dates, from '+date(b.start)+' to '+date(b.end)+'. We use the preceding 30-day window ending 24 hours before the latest sample, with at least 168 readings across 7 dates. This describes recorded variation, not an EPA normal range or health limit. Sustained changes or gaps can affect it. Weather, altitude and local geology change background levels. Check the EPA dashboard and official guidance if concerned.';
+      details.append(summary,note);result.append(details);
+     }else paragraph('Usual range unavailable: not enough recent dose measurements to make a reliable comparison.');
+    }
     paragraph('Sample: '+date(data.latest.time)+' ('+data.latest.time.replace('T',' ').replace('.000Z',' UTC')+').');
     paragraph('Sample age: '+(age>=48?Math.floor(age/24)+' days':Math.max(0,Math.floor(age))+' hours')+'.');
     if(age>24)paragraph('Do not use this old measurement to assess present conditions. Check EPA’s dashboard for newer information.');
