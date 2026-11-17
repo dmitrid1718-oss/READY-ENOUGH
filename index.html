@@ -381,6 +381,18 @@ html,body{max-width:100%;overflow-x:clip}
 #family-share-status:not(:empty),#family-share-manual{margin-top:10px}
 #family-share-url{max-width:100%;width:310px;padding:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
 @media print{.family-share{display:none}}
+</style><style id="radiation-tool-style">
+.rad-tool{border:1px solid var(--line);border-radius:9px;background:var(--surface);margin:22px 0}
+.rad-tool>summary{padding:16px;cursor:pointer;font-weight:800;color:var(--accent)}
+.rad-tool-body{padding:0 18px 20px}.rad-tool-body h3{margin:8px 0 14px}.rad-tool-body p{margin:12px 0;font-size:14px;line-height:1.6}
+.rad-tool-body label{display:block;font-size:14px;font-weight:700;margin-top:14px}
+.rad-row{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0}
+.rad-tool input,.rad-tool select,.rad-tool button{padding:10px 12px;border:1px solid var(--line);border-radius:6px;font:inherit;background:var(--bg);color:var(--ink);max-width:100%;min-height:44px}
+.rad-tool input{width:140px}.rad-tool select{width:100%;margin:8px 0}.rad-tool button{cursor:pointer;color:var(--accent);font-weight:700}
+.rad-tool button:disabled{opacity:.6;cursor:default}.rad-tool-body>details{margin-top:18px}.rad-tool-body>details>summary{cursor:pointer;color:var(--accent);font-size:14px}
+#rad-result:not(:empty){padding:16px;border-left:3px solid var(--accent);background:var(--bg);margin:16px 0}
+#rad-result .rad-value{font-size:28px;font-weight:800;line-height:1.2}#rad-result .rad-monitor-name{font-weight:800;font-size:18px}#rad-result .rad-caution{font-weight:800;color:var(--warn)}
+@media print{.rad-tool{display:none}}
 </style></head>
 <body>
 
@@ -413,7 +425,7 @@ html,body{max-width:100%;overflow-x:clip}
 
     <aside class="family-share" aria-labelledby="family-share-title">
       <div><h2 id="family-share-title">Share with your family</h2>
-      <p>A useful guide to keep handy, before anyone needs it. No panic. Just in case.</p></div>
+      <p>A little preparation now can make a difficult day easier. Share this guide before someone needs it.</p></div>
       <div class="family-share-actions">
         <button type="button" id="family-share-native" hidden>Share this guide</button>
         <button type="button" id="family-share-copy" hidden>Copy link</button>
@@ -1454,6 +1466,34 @@ e('es-refresh').addEventListener('click',solar);e('es-form').addEventListener('s
   <section class="topic" id="radiation">
     <header><p class="eyebrow">Radiation emergencies</p><h2>Radiation</h2></header>
     <p class="first"><b>Do this first</b>Remember three words: <strong>Get inside. Stay inside. Stay tuned.</strong></p>
+    <details id="rad-panel" class="rad-tool">
+      <summary>Radiation readings near you · find a monitoring city</summary>
+      <div class="rad-tool-body">
+        <h3>Nearby radiation monitoring</h3>
+        <p>Find a nearby EPA RadNet monitoring city by ZIP code, or choose a city. This shows the latest approved sample available in EPA’s downloadable data—not a measurement at your home.</p>
+        <form id="rad-lookup" autocomplete="off">
+          <label for="rad-zip">U.S. ZIP code</label>
+          <div class="rad-row"><input id="rad-zip" type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="e.g. 60601" autocomplete="off" aria-describedby="rad-privacy"><button id="rad-find" type="submit">Find nearby cities</button></div>
+        </form>
+        <p id="rad-near"></p>
+        <label for="rad-city">Monitoring city (or choose without a ZIP)</label>
+        <select id="rad-city" disabled><option value="">Open this panel while online to load cities</option></select>
+        <div class="rad-row"><button type="button" id="rad-check" disabled>Check latest available reading</button><button type="button" id="rad-clear">Clear</button></div>
+        <p id="rad-status" role="status" aria-live="polite">No reading checked. This is not an emergency alert service.</p>
+        <div id="rad-result" aria-live="polite"></div>
+        <p><a href="https://www.epa.gov/radnet/radnet-near-real-time-air-data" target="_blank" rel="noopener noreferrer">Open EPA’s official live dashboard ↗</a> · Select the same monitoring city there to view charts and compare dates.</p>
+        <details><summary>What the reading means, privacy and limitations</summary>
+          <p><strong>Reading:</strong> nSv/h means nanosieverts per hour. EPA’s dose-equivalent rate estimates gamma radiation near the monitor. It is not a personal dose, indoor radon test, food/water test or a measurement of every type of radiation. Filter “gross count” readings are different and are not converted into dose by this tool.</p>
+          <p><strong>Freshness:</strong> EPA publishes after review; exports and the dashboard can differ in freshness. Gaps may reflect maintenance or communications problems. We mark samples older than 24 hours as old data; this is a display rule, not a health threshold. Natural background varies, and a single reading cannot establish safety or danger.</p>
+          <p><strong>Coverage:</strong> The directory covers 131 monitoring locations listed for the 50 states and D.C. as checked November 16, 2026. Some ZIP codes may be missing. Distances are approximate city-center distances; the nearest city may be far away, and the nearest monitor may not have usable dose data. Try another nearby monitoring city when data are unavailable.</p>
+          <p id="rad-privacy"><strong>Privacy:</strong> Your ZIP stays in this page’s memory: it is not sent, saved in browser storage or added to a URL. No GPS permission or account is needed. Checking a reading sends only the selected public station ID to ReadyEnough’s server, which retrieves public EPA data. We do not create a lookup history or store ZIP codes. Hosting services can keep ordinary request logs (including IP addresses and the station request); the site’s existing visit counter still operates. Opening EPA links is subject to EPA’s privacy practices.</p>
+          <p><strong>Disclaimer:</strong> General information only, not a warning system, medical advice, an evacuation recommendation or an all-clear. In a radiation emergency, follow official instructions. Do not delay sheltering or other protective action while checking a reading. A missing, old or apparently ordinary reading does not mean your location is safe.</p>
+          <p>Sources: <a href="https://www.epa.gov/radnet/radnet-csv-file-downloads" target="_blank" rel="noopener noreferrer">EPA station directory and downloadable readings</a> · <a href="https://www.epa.gov/radnet/how-use-radnet-near-real-time-air-data-dashboard" target="_blank" rel="noopener noreferrer">EPA definitions</a> · <a href="https://www.epa.gov/radnet/frequent-questions-radnet-near-real-time-air-monitoring" target="_blank" rel="noopener noreferrer">EPA data limitations</a>. Approximate ZIP and city-center coordinates derived from <a href="https://www.geonames.org/" target="_blank" rel="noopener noreferrer">GeoNames</a>, used with attribution; downloaded November 16, 2026.</p>
+        </details>
+        <noscript><p>Enable JavaScript for the private ZIP lookup, or use the EPA dashboard link above and select your monitoring city.</p></noscript>
+      </div>
+    </details>
+
     <div class="trio" role="list">
       <div role="listitem"><b>Get inside</b><span>The nearest sturdy building. Basement or the middle, away from doors and windows. Brick or concrete is best.</span></div>
       <div role="listitem"><b>Stay inside</b><span>After a nuclear explosion, at least 24 hours unless officials say otherwise. Radiation levels drop quickly in that time.</span></div>
@@ -1925,5 +1965,5 @@ e('es-refresh').addEventListener('click',solar);e('es-form').addEventListener('s
   catch(error){if(error.name!=='AbortError'){status.textContent='Sharing is unavailable here. Use Copy link or Email.';}}
  });
 })();
-</script></body>
+</script><script src="./radiation-tool.js" defer></script></body>
 </html>
