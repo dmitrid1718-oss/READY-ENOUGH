@@ -370,6 +370,17 @@ html,body{max-width:100%;overflow-x:clip}
 }
 @media(prefers-reduced-motion:reduce){.ui-soft-preview{transition:none;transform:none}}
 @media(hover:none),(pointer:coarse),print{.ui-soft-preview{display:none!important}}
+</style><style id="family-share-style">
+.family-share{margin:24px 0;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.family-share h2{font-size:20px;margin-bottom:7px}
+.family-share p{font-size:14px;color:var(--muted)}
+.family-share-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:12px}
+.family-share-actions button{background:var(--surface);color:var(--accent);border:1px solid var(--line);border-radius:6px;padding:9px 13px;font:600 14px var(--font-body);cursor:pointer}
+.family-share-actions a{font-size:14px}
+.family-share [hidden]{display:none!important}
+#family-share-status:not(:empty),#family-share-manual{margin-top:10px}
+#family-share-url{max-width:100%;width:310px;padding:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
+@media print{.family-share{display:none}}
 </style></head>
 <body>
 
@@ -398,6 +409,19 @@ html,body{max-width:100%;overflow-x:clip}
       <a class="door now" href="#now"><span>I need help now</span><small>Power out, unsafe water, evacuation, radiation, heat or cold.</small></a>
       <a class="door" href="#community"><span>Build your community</span><small>Make a simple plan with people nearby.</small></a>
     </nav>
+
+
+    <aside class="family-share" aria-labelledby="family-share-title">
+      <div><h2 id="family-share-title">Share with your family</h2>
+      <p>A useful guide to keep handy, before anyone needs it. No panic. Just in case.</p></div>
+      <div class="family-share-actions">
+        <button type="button" id="family-share-native" hidden>Share this guide</button>
+        <button type="button" id="family-share-copy" hidden>Copy link</button>
+        <a href="mailto:?subject=ReadyEnough%20%E2%80%94%20no%20panic%2C%20just%20in%20case&body=A%20practical%20guide%20for%20power%20outages%2C%20water%2C%20food%20and%20staying%20in%20touch.%20Worth%20keeping%20handy%3A%20https%3A%2F%2Fwww.readyenough.org%2F">Email</a>
+      </div>
+      <p id="family-share-status" role="status" aria-live="polite"></p>
+      <div id="family-share-manual" hidden><label for="family-share-url">Copy this link:</label> <input id="family-share-url" readonly value="https://www.readyenough.org/"></div>
+    </aside>
 
     <div class="printbox">
       <h2>Print first</h2>
@@ -1882,6 +1906,24 @@ e('es-refresh').addEventListener('click',solar);e('es-form').addEventListener('s
  document.addEventListener('focusout',e=>{if(active===e.target)hide()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape')hide()});
  document.addEventListener('click',hide);addEventListener('scroll',()=>{if(active===document.activeElement)position();else hide()},{passive:true});addEventListener('resize',hide);fine.addEventListener('change',hide);
+})();
+</script><script id="family-share-script">
+(()=>{
+ const url='https://www.readyenough.org/';
+ const share=document.getElementById('family-share-native'),copy=document.getElementById('family-share-copy'),status=document.getElementById('family-share-status'),manual=document.getElementById('family-share-manual'),input=document.getElementById('family-share-url');
+ function fallback(){manual.hidden=false;status.textContent='Select and copy the link below.';input.focus();input.select();}
+ copy.hidden=false;
+ if(typeof navigator.share==='function')share.hidden=false;
+ copy.addEventListener('click',async()=>{
+  status.textContent='';
+  try{if(!navigator.clipboard?.writeText){fallback();return;}await navigator.clipboard.writeText(url);manual.hidden=true;status.textContent='Link copied. Ready to send to someone you care about.';}
+  catch{fallback();}
+ });
+ share.addEventListener('click',async()=>{
+  status.textContent='';
+  try{await navigator.share({title:'ReadyEnough — No panic. Just in case.',text:'A practical household guide for power outages, water, food and staying in touch. Worth keeping handy.',url});}
+  catch(error){if(error.name!=='AbortError'){status.textContent='Sharing is unavailable here. Use Copy link or Email.';}}
+ });
 })();
 </script></body>
 </html>
