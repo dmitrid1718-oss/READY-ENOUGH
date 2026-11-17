@@ -393,7 +393,19 @@ html,body{max-width:100%;overflow-x:clip}
 #rad-result:not(:empty){padding:16px;border-left:3px solid var(--accent);background:var(--bg);margin:16px 0}
 #rad-result .rad-value{font-size:28px;font-weight:800;line-height:1.2}#rad-result .rad-monitor-name{font-weight:800;font-size:18px}#rad-result .rad-caution{font-weight:800;color:var(--warn)}
 @media print{.rad-tool{display:none}}
-</style><style id="radiation-scale-style">.rad-scale{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:5px;margin:12px 0}.rad-scale span{padding:9px 7px;background:var(--surface);border:1px solid var(--line);border-radius:5px;font-size:12px;text-align:center}.rad-scale .rad-scale-selected{border:2px solid var(--accent);font-weight:800;color:var(--ink)}#rad-result details summary{font-size:13px;cursor:pointer;color:var(--accent)}@media(max-width:440px){.rad-scale{grid-template-columns:1fr}.rad-scale span{text-align:left}}</style></head>
+</style><style id="radiation-scale-style">.rad-scale{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:5px;margin:12px 0}.rad-scale span{padding:9px 7px;background:var(--surface);border:1px solid var(--line);border-radius:5px;font-size:12px;text-align:center}.rad-scale .rad-scale-selected{border:2px solid var(--accent);font-weight:800;color:var(--ink)}#rad-result details summary{font-size:13px;cursor:pointer;color:var(--accent)}@media(max-width:440px){.rad-scale{grid-template-columns:1fr}.rad-scale span{text-align:left}}
+/* Quiet, print-friendly power outage timeframe cards */
+#lights-out .outage-safety{border-left:3px solid var(--warn);padding:14px 17px;background:var(--warn-soft);border-radius:4px;line-height:1.65;margin:18px 0 22px}
+#lights-out .outage-grid{display:grid;gap:9px}
+#lights-out .outage-grid details{background:var(--surface);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+#lights-out .outage-grid summary{cursor:pointer;padding:16px 18px;font-weight:700;display:flex;gap:14px;align-items:center}
+#lights-out .outage-grid summary span{font-family:var(--font-mono);font-size:12px;white-space:nowrap;color:var(--accent);min-width:75px}
+#lights-out .outage-body{border-top:1px solid var(--line);padding:5px 19px 16px;line-height:1.75}
+#lights-out .outage-body ul{padding-left:22px}
+#lights-out .outage-body li{margin:9px 0}
+#lights-out .outage-note{padding:15px 18px;border:1px solid var(--line);border-radius:8px;line-height:1.7;margin-top:16px}
+@media print{#lights-out .outage-grid details{break-inside:avoid}#lights-out .outage-body{display:block!important}}
+</style></head>
 <body>
 
 
@@ -405,7 +417,7 @@ html,body{max-width:100%;overflow-x:clip}
     </a>
     <p>No panic. Just in case.</p>
   </header>
-<nav id="quick-top-nav" aria-label="Quick navigation" style="display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0;padding:0 0 12px;border-bottom:1px solid var(--line)"><a href="#emergency-beacon">SOS</a><a href="#prepare">Prepare</a><a href="#someone-nearby">Community</a><a href="./preparedness-wall.html">Government Wall</a><a href="#earth-sky-watch">Earth &amp; Sky</a><a href="#inner-kit">Inner Kit</a><a href="./news.html">News</a><a href="./gut-feeling.html">Gut Feeling</a><a href="./app/">Pocket App</a></nav><style>#quick-top-nav a{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:7px;text-decoration:none;font-size:13px;font-weight:700;color:var(--ink);background:var(--surface)}#quick-top-nav a:hover,#quick-top-nav a:focus-visible{border-color:var(--accent);color:var(--accent)}</style>
+<nav id="quick-top-nav" aria-label="Quick navigation" style="display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0;padding:0 0 12px;border-bottom:1px solid var(--line)"><a href="#emergency-beacon">SOS</a><a href="#prepare">Prepare</a><a href="#lights-out">Lights Out</a><a href="#someone-nearby">Community</a><a href="./preparedness-wall.html">Government Wall</a><a href="#earth-sky-watch">Earth &amp; Sky</a><a href="#inner-kit">Inner Kit</a><a href="./news.html">News</a><a href="./gut-feeling.html">Gut Feeling</a><a href="./app/">Pocket App</a></nav><style>#quick-top-nav a{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:7px;text-decoration:none;font-size:13px;font-weight:700;color:var(--ink);background:var(--surface)}#quick-top-nav a:hover,#quick-top-nav a:focus-visible{border-color:var(--accent);color:var(--accent)}</style>
 
   <div class="hero">
     <h1>Start where you are. Use what you have.</h1>
@@ -1158,6 +1170,45 @@ e('es-refresh').addEventListener('click',solar);e('es-form').addEventListener('s
     </ol>
     <p class="have"><b>Remember:</b> No internet does not automatically mean no compass or GPS. <strong>Prepare the maps while online; use them offline.</strong></p>
     <p class="src">Background: <a href="https://www.gps.gov/systems/gps/" target="_blank" rel="noopener">GPS.gov: GPS system</a> · <a href="https://support.google.com/maps/answer/6291838" target="_blank" rel="noopener">Google Maps offline maps</a> · <a href="https://support.apple.com/guide/iphone/download-offline-maps-iphcfb79b2c8/ios" target="_blank" rel="noopener">Apple Maps offline maps</a></p>
+  </section>
+
+
+  <!-- POWER OUTAGE TIMEFRAMES / practical household guide -->
+  <section class="topic" id="lights-out" aria-labelledby="lights-out-title">
+    <header><p class="eyebrow">Power outage · household guide</p><h2 id="lights-out-title">If the lights go out.</h2></header>
+    <p class="first"><b>Start here</b>One day and four months need different plans. Choose how long the outage may last, and act on what matters now. This is a planning guide, not a forecast of an outage.</p>
+    <div class="outage-safety"><strong>Always: prevent carbon monoxide poisoning.</strong> Never run generators, grills, camp stoves, or fuel-burning heaters indoors, in garages, or in tents. Keep a generator outdoors, at least 20 feet from doors, windows, and vents, with exhaust directed away. Use working battery-backed carbon monoxide alarms. If someone has symptoms or an alarm sounds, get outside into fresh air and call 911.</div>
+    <div class="outage-grid">
+      <details open><summary><span>01 DAY</span> First 24 hours</summary><div class="outage-body">
+        <p><strong>Priority: safety, light, information.</strong> Charge phones and power banks if power is still available; locate flashlights, prescriptions, water, and a radio. Set aside drinking water and check on anyone needing electrical medical equipment.</p>
+        <ul><li>Keep refrigerator and freezer doors closed. An unopened fridge usually protects food for about 4 hours; a full freezer about 48 hours (half-full, about 24), if doors stay shut. Check temperatures and discard unsafe perishables; never taste food to judge safety.</li>
+        <li>Use flashlights instead of candles. Unplug sensitive electronics if practical; leave one light switched on to know when power returns.</li>
+        <li>Check utility updates and local alerts; preserve phone battery. Check nearby older adults and people with medical needs.</li></ul>
+      </div></details>
+      <details><summary><span>07 DAYS</span> A week without power</summary><div class="outage-body">
+        <p><strong>Priority: safe temperature, drinking water, medicine.</strong> If the house cannot stay safely warm or cool, relocate to an official warming/cooling center, shelter, or trusted home. Blankets and clothing help, but cannot replace safe heat in severe cold.</p>
+        <ul><li>Keep an emergency supply of at least 1 gallon of safe water per person per day for drinking and basic needs, with more for heat, illness, pets, and hygiene. Follow local water advisories.</li>
+        <li>For potentially contaminated water, use bottled water first. Where public guidance permits, bring clear water to a rolling boil for 1 minute (3 minutes above 6,500 feet). Use the EPA's bleach directions only when appropriate for the bleach concentration; boiling or bleach does not remove chemicals or radioactive contamination.</li>
+        <li>If freezing threatens plumbing, consult utility/plumbing guidance on shutting off and draining lines. Plan medication refrigeration, pharmacy access, food safety, and safe sanitation.</li>
+        <li>Coordinate check-ins and resources with neighbors without sharing private medical or supply inventories publicly.</li></ul>
+      </div></details>
+      <details><summary><span>30 DAYS</span> An extended regional emergency</summary><div class="outage-body">
+        <p><strong>Priority: decide whether home remains safe.</strong> Do not wait until transport, fuel, or essential services are unavailable to consider leaving. Follow local evacuation and shelter guidance.</p>
+        <ul><li>Confirm a reliable, safe water supply and sanitation plan. Never use water from a suspected chemical spill or radiological contamination merely because it has been boiled or filtered.</li>
+        <li>Track food, medications, fuel, and necessary supplies. Use tested shelf-stable foods and safe cooking methods; do not assume previously refrigerated food is still safe.</li>
+        <li>Use approved toilets or local public-health guidance if sewage service fails. Handwashing and clean water are high priorities.</li>
+        <li>Set up simple check-ins with neighbors, a shared information source, and a fallback meeting place.</li></ul>
+      </div></details>
+      <details><summary><span>120 DAYS</span> Long-term displacement or disruption</summary><div class="outage-body">
+        <p><strong>Priority: dependable shelter and essential services.</strong> Months without reliable power exceed what most households can safely manage alone. A stable location with safe water, sanitation, food, healthcare, and community support matters more than owning extra gear.</p>
+        <ul><li>Move to safer housing or organized assistance if basic needs cannot be met. Follow public-health and emergency-management information as available.</li>
+        <li>Plan for continuity of prescriptions, mobility needs, communications, finances, documents, and schooling or work.</li>
+        <li>Use only properly installed, vented heating systems; never improvise an indoor fire or stove.</li>
+        <li>Keep a daily routine, share appropriate skills, and maintain family and neighbor check-ins. Long-duration scenarios are planning exercises, not predictions.</li></ul>
+      </div></details>
+    </div>
+    <p class="outage-note"><strong>Before an outage:</strong> charge devices, store safe water, gather lights and batteries, keep prescriptions current, save important contacts on paper, and know your utility's outage-reporting number. A car can help with radio and charging, but never idle it inside a garage, even with the door open.</p>
+    <p class="source">Sources: <a href="https://www.ready.gov/power-outages" target="_blank" rel="noopener">Ready.gov: Power Outages</a> · <a href="https://www.cdc.gov/natural-disasters/response/what-to-do-protect-yourself-during-a-power-outage.html" target="_blank" rel="noopener">CDC: Power Outage Safety</a> · <a href="https://www.fda.gov/food/buy-store-serve-safe-food/food-and-water-safety-during-power-outages-and-floods" target="_blank" rel="noopener">FDA: Food and Water Safety</a> · <a href="https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water" target="_blank" rel="noopener">EPA: Emergency Water Disinfection</a></p>
   </section>
 
   <!-- POWER -->
