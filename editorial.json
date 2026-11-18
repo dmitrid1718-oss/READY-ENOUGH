@@ -1,9 +1,23 @@
 {
-  "edition": "2026-11-17",
-  "edition_title": "Tuesday · November 17, 2026",
+  "edition": "2026-11-18",
+  "edition_title": "Wednesday · November 18, 2026",
   "byline": "UI News Desk",
-  "updated_at": "2026-11-17T23:46:00+00:00",
+  "updated_at": "2026-11-18T11:22:57.428Z",
   "items": [
+    {
+      "id": "ready-20261118-uk-survey",
+      "title": "UK Preparedness Survey: Confidence and Practical Readiness Still Diverge",
+      "category": "HOUSEHOLD PREPAREDNESS / SURVEY",
+      "date": "2026-11-18",
+      "edition_date": "2026-11-18",
+      "byline": "UI News Desk",
+      "source": "UK Government · Cabinet Office",
+      "url": "https://www.gov.uk/government/statistics/uk-public-survey-of-risk-perception-resilience-and-preparedness-2026/uk-public-survey-of-risk-perception-resilience-and-preparedness-2026-headline-findings-html",
+      "what_changed": "A review of the UK's 2026 preparedness survey finds 74% believe effective personal preparation is possible, but only 29% report having important numbers written down and 19% have a grab bag.",
+      "status": "Survey ran February–May and was published in August 2026: a baseline revisited today, not an overnight emergency warning or new release.",
+      "why_watch": "Offer a low-cost household action: write down key contacts, choose a family rendezvous and check essential supplies without panic buying.",
+      "body": "What changed: A review of the UK's 2026 preparedness survey finds 74% believe effective personal preparation is possible, but only 29% report having important numbers written down and 19% have a grab bag.\n\nStatus: Survey ran February–May and was published in August 2026: a baseline revisited today, not an overnight emergency warning or new release.\n\nWhy watch: Offer a low-cost household action: write down key contacts, choose a family rendezvous and check essential supplies without panic buying."
+    },
     {
       "id": "ready-20261117-evening-incidents",
       "title": "Different Outages, Different Causes: A Household Takeaway",
