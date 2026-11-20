@@ -1,9 +1,35 @@
 {
-  "edition": "2026-11-18",
-  "edition_title": "Wednesday · November 18, 2026",
+  "edition": "2026-11-20",
+  "edition_title": "Friday · November 20, 2026",
   "byline": "UI News Desk",
-  "updated_at": "2026-11-18T11:22:57.428Z",
+  "updated_at": "2026-11-20T13:30:00Z",
   "items": [
+    {
+      "date": "2026-11-20",
+      "edition_date": "2026-11-20",
+      "byline": "UI News Desk",
+      "id": "ready-20261120-resilience",
+      "title": "Communications Outages: Build Household Backups, Not Panic",
+      "category": "PREPAREDNESS / COMMUNICATIONS",
+      "source": "Cybersecurity Dive",
+      "url": "https://www.cybersecuritydive.com/news/technology-outages-infrastructure-failures-week/806103/",
+      "what_changed": "Recent service disruptions underscore how quickly households can lose access to payment terminals, real-time updates, and ordinary communications.",
+      "status": "Preparedness advisory, not a public emergency declaration. No demonstrated common malicious cause for the reported outages.",
+      "why_watch": "Keep printed emergency contacts, charging options, offline maps, some cash, water and a carbon-monoxide-safe heating plan. Check official local alerts for actual danger."
+    },
+    {
+      "date": "2026-11-20",
+      "edition_date": "2026-11-20",
+      "byline": "UI News Desk",
+      "id": "ready-20261120-solar",
+      "title": "Solar Watch: NOAA Forecast Below G1 Threshold",
+      "category": "SPACE WEATHER / MONITOR",
+      "source": "NOAA / National Weather Service",
+      "url": "https://marine.weather.gov/product.php?format=ci&glossary=0&issuedby=TDF&product=DAY&site=APX&version=1",
+      "what_changed": "NOAA's November 20–22 outlook forecasts a maximum three-hour Kp of 3.67, below the Kp 5 threshold for a G1 geomagnetic storm.",
+      "status": "Forecast, not a measurement of local radiation and not a guarantee conditions cannot change.",
+      "why_watch": "Review official alerts if the forecast changes; no special solar emergency action is indicated by this forecast alone."
+    },
     {
       "id": "ready-20261118-uk-survey",
       "title": "UK Preparedness Survey: Confidence and Practical Readiness Still Diverge",
