@@ -405,6 +405,19 @@ html,body{max-width:100%;overflow-x:clip}
 #lights-out .outage-body li{margin:9px 0}
 #lights-out .outage-note{padding:15px 18px;border:1px solid var(--line);border-radius:8px;line-height:1.7;margin-top:16px}
 @media print{#lights-out .outage-grid details{break-inside:avoid}#lights-out .outage-body{display:block!important}}
+</style><style id="ready-status-css">
+.ready-status{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:10px 0 14px}
+.ready-status h2{font-size:clamp(20px,2.2vw,25px);margin:2px 0 5px}
+.ready-status .status-intro,.ready-status .status-foot{color:var(--muted);font-size:13px;line-height:1.5}
+.ready-status-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:13px 0}
+.ready-status-item{border:1px solid var(--line);padding:11px 12px;border-radius:8px;min-width:0}
+.ready-status-item strong{display:block;font-size:14px}.ready-status-item p{font-size:13px;margin:5px 0}.ready-status-item a{font-size:12px}
+.ready-status-label{display:inline-flex;align-items:center;gap:7px;font:800 11px var(--font-mono);text-transform:uppercase;letter-spacing:.04em}
+.ready-status-label::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:currentColor}
+.ready-status-label.green{color:#348451}.ready-status-label.yellow{color:#ae7c23}.ready-status-label.red{color:#c04e4e}.ready-status-label.gray{color:var(--muted)}
+@media(prefers-color-scheme:dark){.ready-status-label.green{color:#89d49a}.ready-status-label.yellow{color:#f3c573}.ready-status-label.red{color:#ff9696}}
+@media(max-width:700px){.ready-status-grid{grid-template-columns:1fr}}
+@media print{.ready-status{break-inside:avoid}}
 </style></head>
 <body>
 
@@ -424,6 +437,17 @@ html,body{max-width:100%;overflow-x:clip}
     <p class="sub">A practical household guide for people who have never prepared for anything. Take one step at a time. You don't need everything today.</p>
     <p class="promise"><strong>Our promise:</strong> we don't predict disasters, sell gear, or try to scare you. Every fact on this page links to the official source it came from.</p>
 
+    <section class="ready-status" aria-labelledby="ready-status-heading">
+      <div class="eyebrow">SOURCE-CHECKED STATUS · NOV 20, 2026</div>
+      <h2 id="ready-status-heading">What needs attention?</h2>
+      <p class="status-intro">Color shows the status of each topic, not a nationwide threat score. Dated information, not a live emergency alert.</p>
+      <div class="ready-status-grid">
+        <div class="ready-status-item"><span class="ready-status-label green">Normal</span><strong>Solar / geomagnetic</strong><p>NOAA forecasts a maximum Kp of 3.67 for Nov 20–22, below G1 storm conditions.</p><a href="https://www.swpc.noaa.gov/" target="_blank" rel="noopener noreferrer">NOAA Space Weather →</a></div>
+        <div class="ready-status-item"><span class="ready-status-label yellow">Watch</span><strong>Service resilience</strong><p>Recent infrastructure disruptions are a reason to review communications and household backups, not evidence of a coordinated attack.</p><a href="./news.html">Read the evidence →</a></div>
+        <div class="ready-status-item"><span class="ready-status-label gray">Unknown locally</span><strong>Your immediate area</strong><p>No location-specific emergency status is established by this panel. For active incidents, check local alerts.</p><a href="https://www.ready.gov/alerts" target="_blank" rel="noopener noreferrer">Find official alerts →</a></div>
+      </div>
+      <p class="status-foot"><strong>Legend:</strong> Green = normal · Yellow = watch/prep · Red = verified urgent action · Gray = unknown/stale. Red is reserved for a verified hazard with actionable official instructions. Always confirm local emergency directions with authorities. Last editorial review: Nov 20, 2026. This panel does not auto-refresh.</p>
+    </section>
     <a class="beacon-cta" href="#emergency-beacon"><strong>● I NEED HELP — LOCATION</strong><small>Get GPS coordinates · Prepare emergency text · Copy or send</small></a>
     <p><a href="./app/index.html" style="display:inline-block;padding:11px 16px;background:#135b60;color:white;font-weight:850;border-radius:8px;text-decoration:none">Open ReadyEnough Pocket App →</a></p>
     <nav class="doors" aria-label="Choose where to start">
