@@ -1,9 +1,33 @@
 {
-  "edition": "2026-11-20",
-  "edition_title": "November 20, 2026 · Afternoon follow-up",
+  "edition": "2026-11-21",
+  "edition_title": "November 21, 2026 · Verified morning follow-up",
   "byline": "UI News Desk",
-  "updated_at": "2026-11-20T21:17:00Z",
+  "updated_at": "2026-11-21",
   "items": [
+    {
+      "date": "2026-11-21",
+      "edition_date": "2026-11-21",
+      "byline": "UI News Desk",
+      "id": "ready-20261121-food-cyber-context",
+      "title": "Food-Sector Cybersecurity: A Real Gap, Not a Shortage Forecast",
+      "category": "DIGITAL RESILIENCE / FOOD SYSTEMS",
+      "url": "https://www.gao.gov/products/gao-27-108656",
+      "source": "U.S. GAO · November 19, 2026",
+      "what_changed": "GAO reports remaining gaps in federal efforts to strengthen food-and-agriculture cybersecurity. Separately, reporting on USDA application outages makes the issue newly concrete. Today's detailed Gut Feeling edition is already committed.",
+      "status": "GAO report is an official audit. The USDA incident's full impact remains under investigation; neither source establishes a nationwide food disruption.",
+      "why_watch": "For households, maintain normal essentials and official notification channels, not panic buying. Affected producers should check USDA and Farm Service Agency notices directly.",
+      "sources": [
+        {
+          "label": "GAO audit",
+          "url": "https://www.gao.gov/products/gao-27-108656"
+        },
+        {
+          "label": "Daily Gut Feeling",
+          "url": "https://readyenough.org/gut-feeling.html"
+        }
+      ],
+      "body": "What changed: GAO reports remaining gaps in federal efforts to strengthen food-and-agriculture cybersecurity. Separately, reporting on USDA application outages makes the issue newly concrete. Today's detailed Gut Feeling edition is already committed.\n\nStatus: GAO report is an official audit. The USDA incident's full impact remains under investigation; neither source establishes a nationwide food disruption.\n\nWhy watch: For households, maintain normal essentials and official notification channels, not panic buying. Affected producers should check USDA and Farm Service Agency notices directly."
+    },
     {
       "date": "2026-11-20",
       "edition_date": "2026-11-20",
